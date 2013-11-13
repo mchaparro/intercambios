@@ -1,0 +1,90 @@
+@font-face {
+    font-family: 'GoodDog'; /*a name to be used later*/
+    src: url('../fonts/GoodDog.otf'); /*URL to font*/
+}
+
+@font-face {
+    font-family: 'Adornos'; /*a name to be used later*/
+    src: url('../fonts/KerstKaart.ttf'); /*URL to font*/
+}
+
+@font-face {
+    font-family: 'Navidad'; /*a name to be used later*/
+    src: url('../fonts/Kingthings Christmas.ttf'); /*URL to font*/
+}
+
+.navidad *{
+	font-family: 'Navidad' !important;
+}
+
+.adornos *{
+	font-family: 'adornos' !important;
+}
+
+.gooddog-font *{
+	font-family: 'GoodDog' !important;
+}
+
+.scaled{
+	max-width:100%;
+ 	max-height:100%;
+}
+
+.titulo h1{
+	font-size:90px;
+}
+
+.red{
+	color:#D5405B;
+}
+ 
+/****** Login *******/
+.titulo-login{	
+	margin-top:-55px;
+	margin-bottom:50px;
+}
+
+.row-nomargin{
+	margin:0px; !important;
+}
+
+.jumbotron.login  { 
+	padding:20px !important;
+}
+.jumbotron.login *{ 
+	font-family: 'GoodDog';
+}
+
+.jumbotron.login h2{
+	font-size:70px;
+	margin-top:-10px;
+}
+.jumbotron.login label{	
+	font-size:30px;
+}
+
+.jumbotron.login input{
+	letter-spacing:5px;	
+	font-size:35px;
+	height:62px;
+	width:100% !important;
+	line-height:40px;
+	border-radius:10px !important;
+	text-align:center;
+}
+
+.jumbotron.login span{
+	margin-top:0px;	
+	font-size:40px;
+	color:#D5405B;
+}
+
+.jumbotron.login button{
+	font-size:30px;
+	width: 80% !important;
+	border-radius:10px;
+}
+
+.jumbotron .form-control{
+	margin-bottom:30px;
+}

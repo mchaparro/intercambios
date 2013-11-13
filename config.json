@@ -1,0 +1,9 @@
+{
+	"DEFAULT_DATABASE_ENGINE" : "django.db.backends.mysql",	
+	"DEFAULT_DATABASE_NAME" : "intercambios",
+	"DEFAULT_DATABASE_USER" : "root",
+	"DEFAULT_DATABASE_PASS" : "",
+	"DEFAULT_DATABASE_HOST" : "localhost",
+	"DEFAULT_DATABASE_PORT" : "3306"		
+}
+

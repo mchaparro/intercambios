@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+		<div class="jumbotron" style="border: 10px solid #cccccc; border-radius:15px;">		
+			<div class="row">    
+	
+				<div class="col-md-4 visible-lg">
+						<div style="margin-top:40px;" class="row3">
+						 	<img alt="LeForbici" src="{% static "img/menu_logo.png" %}" class="span3 offset1">
+					 	</div>
+				</div>   
+				<div class="col-lg-7 ">
+						<div class="menu-home"><h2><span class="glyphicon glyphicon-home"></span> Menu Principal</h2></div>
+						<div align="center" class="row">
+							<a href="/caja/"><div class="btn btn-menu btn-large">Caja</div></a>
+							<a class="colorbox-link" title="Agregar Proveedor" href="/add/proveedores/"><div class="btn btn-menu btn-large span3">Proveedores</div></a>
+						</div>
+						<div align="center" class="row">
+							<a href="/list/clientes/"><div class="btn btn-menu btn-large span3">Clientes</div></a>
+							<a href="/reportes/"><div class="btn btn-menu btn-large span3">
+							<span class="glyphicon glyphicon-usd"></span>Reportes</div></a>
+						</div>
+						<div align="center" class="row">
+							<a class="colorbox-link" title="Agregar Producto" href="/add/producto/"><div class="btn-menu btn btn-large span3">Agregar Producto</div></a>
+							<div class="btn-menu btn btn-large span3">Citas</div>
+						</div>
+						<div align="center"class="row">
+							<a href="/list/empleados/"><div class="btn-menu btn btn-large span3">Empleados</div></a>
+							<a href="/list/productos/"><div class="btn-menu btn btn-large span3">Productos Sucursal</div></a>
+							
+						</div>
+						
+				
+				</div>
+				</div> 
+			</div>
+			
+{% endblock %}

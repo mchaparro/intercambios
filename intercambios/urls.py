@@ -1,17 +1,20 @@
 from django.conf.urls import patterns, include, url
+from django.contrib.auth.views import login, logout
+from django.core.urlresolvers import reverse_lazy
+from django.views.generic import TemplateView, ListView
+from views import *
+from django.views import generic
+from django.contrib.auth.decorators import login_required
+from django.conf import settings
 
 # Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+from django.contrib import admin
+admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'intercambios.views.home', name='home'),
-    # url(r'^intercambios/', include('intercambios.foo.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', login_required(TemplateView.as_view(template_name='index.html')), name="index"),
+    (r'^login/$', login_user, {}, 'user_login'),
+    (r'^logout/$', logout_user, {}, 'user_logout'),
+    (r'^admin/', include(admin.site.urls)),
+    
 )

@@ -1,4 +1,26 @@
 # Django settings for intercambios project.
+import os
+import json
+from django.contrib.messages import constants as messages
+
+#cambiar el nombre de messages.info a que sea message.information
+#de esta forma los mensajes son compatibles con el API que trae por default noty.js
+# 20 : es el numero de peso que tiene ese mensaje (importancia)
+MESSAGE_TAGS = {
+    messages.INFO: '',
+    20: 'information',
+}
+
+#se cargan la configuracion de la base de datos del config.json
+      
+os.chdir(os.path.dirname(__file__))
+SETTINGS = json.loads(open('../../config.json').read())
+
+#Se especifica el nombre del modelo custom de usuario
+AUTH_USER_MODEL = 'intercambios.Usuario'
+PROJECT_PATH = os.path.dirname(__file__)
+
+LOGIN_URL = '/login/'
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -9,31 +31,35 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+INTERNAL_IPS = (
+    '127.0.0.1',
+                )
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
+        'ENGINE': SETTINGS['DEFAULT_DATABASE_ENGINE'], 
+        'NAME': SETTINGS['DEFAULT_DATABASE_NAME'],                   
+        'USER': SETTINGS['DEFAULT_DATABASE_USER'],
+        'PASSWORD': SETTINGS['DEFAULT_DATABASE_PASS'],
+        'HOST': SETTINGS['DEFAULT_DATABASE_HOST'],            
+        'PORT': SETTINGS['DEFAULT_DATABASE_PORT'],
     }
 }
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'America/Chihuahua'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-MX'
 
 SITE_ID = 1
 
@@ -61,7 +87,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = os.path.join(PROJECT_PATH, 'static_files')
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -83,8 +109,18 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '&7t&cqabo$usc3=peobic-$8(_+6m4vrnu@!ts7(9!4+&c&^@_'
+SECRET_KEY = '00@k_)-*$7%(c1584!m%7vuc)$)+x%y6lz6qv@&45mz%3$@y07'
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.contrib.messages.context_processors.messages',
+    'django.core.context_processors.request',
+                               )
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
@@ -114,6 +150,8 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
+    'django.contrib.humanize',
+    'django_admin_bootstrapped',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -121,9 +159,13 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+#     'django.contrib.admindocs',
+    'django_extensions',
+    'intercambios',
+    'south',
+    
 )
 
 # A sample logging configuration. The only tangible logging
@@ -154,3 +196,33 @@ LOGGING = {
         },
     }
 }
+
+## Heroku necessary configuration ####
+
+if(os.environ.get('DATABASE_URL')):
+
+    INSTALLED_APPS.append('gunicorn')
+    
+# Parse database configuration from $DATABASE_URL
+
+    import dj_database_url
+
+    DATABASES['default'] =  dj_database_url.config()
+
+    # Honor the 'X-Forwarded-Proto' header for request.is_secure()
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+    # Allow all host headers
+    ALLOWED_HOSTS = ['*']
+
+    # Static asset configuration
+    import os
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    STATIC_ROOT = 'staticfiles'
+    STATIC_URL = '/static/'
+
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, 'static'),
+    )
+
+

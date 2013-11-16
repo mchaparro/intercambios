@@ -11,10 +11,7 @@ MESSAGE_TAGS = {
     20: 'information',
 }
 
-#se cargan la configuracion de la base de datos del config.json
-      
-os.chdir(os.path.dirname(__file__))
-SETTINGS = json.loads(open('../../config.json').read())
+
 
 #Se especifica el nombre del modelo custom de usuario
 AUTH_USER_MODEL = 'intercambios.Usuario'
@@ -35,17 +32,22 @@ INTERNAL_IPS = (
     '127.0.0.1',
                 )
 
+#se cargan la configuracion de la base de datos del config.json
+#solo si no es desde heroku
+if not (os.environ.get('DATABASE_URL')):      
+    os.chdir(os.path.dirname(__file__))
+    SETTINGS = json.loads(open('../../config.json').read())
 
-DATABASES = {
-    'default': {
-        'ENGINE': SETTINGS['DEFAULT_DATABASE_ENGINE'], 
-        'NAME': SETTINGS['DEFAULT_DATABASE_NAME'],                   
-        'USER': SETTINGS['DEFAULT_DATABASE_USER'],
-        'PASSWORD': SETTINGS['DEFAULT_DATABASE_PASS'],
-        'HOST': SETTINGS['DEFAULT_DATABASE_HOST'],            
-        'PORT': SETTINGS['DEFAULT_DATABASE_PORT'],
+    DATABASES = {
+        'default': {
+            'ENGINE': SETTINGS['DEFAULT_DATABASE_ENGINE'], 
+            'NAME': SETTINGS['DEFAULT_DATABASE_NAME'],                   
+            'USER': SETTINGS['DEFAULT_DATABASE_USER'],
+            'PASSWORD': SETTINGS['DEFAULT_DATABASE_PASS'],
+            'HOST': SETTINGS['DEFAULT_DATABASE_HOST'],            
+            'PORT': SETTINGS['DEFAULT_DATABASE_PORT'],
+        }
     }
-}
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts

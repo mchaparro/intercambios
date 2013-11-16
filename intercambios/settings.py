@@ -151,7 +151,7 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'django.contrib.humanize',
     'django_admin_bootstrapped',
     'django.contrib.auth',
@@ -168,7 +168,7 @@ INSTALLED_APPS = (
     'intercambios',
     'south',
     
-)
+]
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

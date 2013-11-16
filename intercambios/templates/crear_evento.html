@@ -2,5 +2,25 @@
 {% load static %}
 
 {% block content %}
-<h1>Crear Evento</h1>
+<div class="col-lg-6 jumbotron  col-lg-offset-3">
+    <h2 class="titulo-eventos text-center">Crear Evento</h2> 
+    <table class="table-evento text center">
+        <tr>
+            <td style="width: 30px;"> <span class="glyphicon glyphicon-gift"></span></td>
+            <td> <input type="text" placeholder="Nombre del Evento"/></td>
+        </tr>
+        <tr>
+            <td><span class="glyphicon glyphicon-calendar"></span></td>
+            <td> <input type="text" placeholder="Fecha del Intercambio"/></td>
+        </tr>
+        <tr>
+            <td><span class="glyphicon glyphicon-user"></span></td>
+            <td> <input type="text" placeholder="Numero de Participantes"/></td>
+        </tr>
+        <tr>
+            <td><span class="glyphicon glyphicon-usd"></span></td>
+            <td> <input type="text" placeholder="Rango de Precio"/></td>
+        </tr>
+    </table>
+</div>
 {% endblock %}

@@ -97,3 +97,17 @@
 margin-top: -15px;
 margin-bottom: 30px;           
 }
+.table-evento{
+width:100%;
+} 
+.jumbotron{
+border:4px solid #cccccc;
+}
+input{
+border-radius:8px;
+border:1px solid #cccccc;
+text-align:center;
+font-size:15px;
+padding:5px;
+width:400px;    
+}

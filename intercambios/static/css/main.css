@@ -99,15 +99,24 @@ margin-bottom: 30px;
 }
 .table-evento{
 width:100%;
+border-collapse:separate; 
+border-spacing:5px;
 } 
+.table-evento tr{
+	padding:10px;
+}
 .jumbotron{
 border:4px solid #cccccc;
+border-radius:10px !important;
 }
+
 input{
-border-radius:8px;
-border:1px solid #cccccc;
-text-align:center;
-font-size:15px;
-padding:5px;
-width:400px;    
+	border-radius:8px;
+	border:1px solid #cccccc;
+	text-align:center;
+	font-size:23px;
+	padding:5px;
+	width:100%;   
+	height:50px; 
+	line-height:20px;
 }

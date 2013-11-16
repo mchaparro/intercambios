@@ -56,60 +56,22 @@
 		    </button>
 	  	  </div>
 		  <div class="navbar-collapse collapse">
-		    <ul class="nav navbar-nav">
-		      <li class="dropdown">
-		        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Empleados<b class="caret"></b></a>
-		        <ul class="dropdown-menu">
-		          <li><a href="/list/empleados/">Empleados</a></li>
-		          <li><a class="colorbox-link" title="Agregar Empleado" href="/add/empleado/">Agregar Empleado</a></li>
-		          <li><a href="#">Comisi&oacute;nes</a></li>
-		        </ul>
-		      </li>
-		      <li class="dropdown">
-		        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Clientes <b class="caret"></b></a>
-		        <ul class="dropdown-menu">
-		          <li><a href="/list/clientes/">Clientes</a></li>
-		          <li>
-		          <a class="colorbox-link" title="Agregar Cliente" href="/add/cliente/">Agregar Cliente</a>
-				  </li>
-		        </ul>
-		      </li>
-		      <li class="dropdown">
-		        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Productos<b class="caret"></b></a>
-		        <ul class="dropdown-menu">
-		          <li><a href="/list/productos/">Productos en Sucursal</a></li>
-		          <li><a class="colorbox-link" title="Nuevo Producto" href="/add/producto/">Nuevo Producto</a></li>
-		          <li><a class="colorbox-link" title="Nuevo Proveedor" href="/add/proveedor/">Nuevo Proveedor</a></li>
-		          <li><a href="/entrada/">Ingresar Productos en Sucursal</a></li>
-		        </ul>
-		      </li>
-		      <li class="dropdown">
-		        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Servicios<b class="caret"></b></a>
-		        <ul class="dropdown-menu">
-		          <li><a href="/list/servicios/">Lista de Servicios</a></li>
-		          <li><a class="colorbox-link" title="Nuevo Servicio" href="/add/servicio/">Nuevo Servicio</a></li>
-		        </ul>
-		      </li>
-		       <li class=""><a href="/caja/">Caja</a></li>
-		    </ul>
 		    <div class="navbar-header navbar-right">
 			  	<ul class="nav navbar-nav">
-			      <li class=""><a href="/list/ventas/">Reportes</a></li>
-			      <li class=""><a href="/list/ventas/">Ventas</a></li>
-			      <li><a href="/caja/">Caja</a></li>
-			      <li class="dropdown">
+			   		<li>
 			        <a data-toggle="dropdown" style="margin-top:-7px;"class="dropdown-toggle" href="#"><span style="color:white;" class="glyphicon glyphicon-user"></span>  {{ user }} <b class="caret"></b></a>
 			        <ul class="dropdown-menu">
 			          <li><a href="/logout/">Cerrar sessi&oacute;n</a></li>
-			          <li><a href="#">Ventas</a></li>
-			          <li><a href="#">Editar Datos</a></li>
-			          <li><a href="#">Cambiar contrase&ntilde;a</a></li>
+			          <li><a href="#">Mis Eventos</a></li>
 			        </ul>
 			      </li>
 			    </ul>
 		  	</div>
 		  </div>
 	    </nav>
+	    <div class="titulo adornos text-center" >
+			<h1 class="titulo-login">Intercambios <span class="red">2013</span></h1>
+		</div>
 	
 		<div class="container">
 		    {% block content %}

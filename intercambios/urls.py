@@ -16,5 +16,6 @@ urlpatterns = patterns('',
     (r'^login/$', login_user, {}, 'user_login'),
     (r'^logout/$', logout_user, {}, 'user_logout'),
     (r'^admin/', include(admin.site.urls)),
-    
+    #crear nuevo evento
+    (r'^crear/evento/$', crear_evento, {}, 'crear_evento'),
 )

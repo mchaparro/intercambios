@@ -8,6 +8,7 @@ South==0.8.2
 django-admin-bootstrapped==0.4.2
 wsgiref==0.1.2
 django-extensions==1.2.2
+pytz==2013.7
 
 #### heroku requirements ####
 dj-database-url==0.2.1

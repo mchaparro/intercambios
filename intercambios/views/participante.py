@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 import datetime
 import pytz
 
-def crear_evento(request):
+def agregar_participante(request, id):
     if request.method == 'POST':
         local_TZ = pytz.timezone(settings.TIME_ZONE)
         

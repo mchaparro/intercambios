@@ -33,11 +33,18 @@
 .titulo h1{
 	font-size:90px;
 }
-
+.titulo-evento{
+    font-size:45px;              
+}
 .red{
 	color:#D5405B;
 }
- 
+.rojo{
+    color:#C00000;
+}
+.marron{
+    color:#800000 !important;
+ }
 /****** Login *******/
 .titulo-login{	
 	margin-top:-55px;

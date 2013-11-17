@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_head %}
+	<script type="text/javascript" src="{% static "js/intercambios/crear_evento.js" %}"></script>
+{% endblock %}
+{% block content %}
+<div class="col-lg-10 jumbotron  col-lg-offset-1">
+    <h1 class="titulo-eventos text-center marron titulo-evento">Evento<span class="rojo" > {{ nuevo_evento }} </span>Creado</h1>
+    <h2>Enviar invitacion a contactos:</h2> 
+    <form action="/crear/evento/" method="post">
+		{% csrf_token %}
+	    <table class="table-evento text center">
+	        <tr>
+	            <td style="width: 30px;"> <span class="glyphicon glyphicon-envelope"></span></td>
+	            <td> <input name="correo" type="text" placeholder="Introduce Correo Electronico"/></td>
+	        </tr>
+	        <tr>
+	           <td style="width: 30px;"> <span class="glyphicon glyphicon-envelope"></span></td>
+	            <td> <input name="correo" type="text" placeholder="Introduce Correo Electronico"/></td>
+	        </tr>
+	        <tr>
+	           <td style="width: 30px;"> <span class="glyphicon glyphicon-envelope"></span></td>
+	            <td> <input name="correo" type="text" placeholder="Introduce Correo Electronico"/></td>
+	        </tr>
+	        <tr>
+	           <td style="width: 30px;"> <span class="glyphicon glyphicon-envelope"></span></td>
+	            <td> <input name="correo" type="text" placeholder="Introduce Correo Electronico"/></td>
+	        </tr>
+	         <tr>
+	         <td></td>
+	            <td class="text-center" text-center">
+	            <input type="submit" style="margin-top:15px; width:100%;"class="btn btn-default btn-primary btn-lg" value="Enviar Invitacion"/>
+	            </td>
+	        </tr>
+	       <tr>
+	         <td></td>
+	            <td class="text-center" text-center">
+	            Pagina de tu evento:
+	            </td>
+	        </tr>  
+	         <tr>
+	         <td></td>
+	            <td  class="text-center" text-center">
+	            <input name="url" type="text" readonly="true" value="{{ nuevo_evento }}"/>
+	            </td>
+	        </tr>
+	    </table>
+    </form>
+</div>
+{% endblock %}

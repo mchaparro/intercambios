@@ -18,4 +18,7 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     #crear nuevo evento
     (r'^crear/evento/$', crear_evento, {}, 'crear_evento'),
+    #agregar participante al evento
+    (r'^evento/(?P<id>\d+)/agregar/participante/$', agregar_participante, {}, 'agregar_participante'),
+    
 )

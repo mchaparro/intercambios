@@ -2,17 +2,20 @@
 {% load static %}
 
 {% block extra_head %}
+	<script type="text/javascript" src="{% static "js/qtip2/jquery.qtip.js" %}"></script>
 	<script type="text/javascript" src="{% static "js/intercambios/crear_evento.js" %}"></script>
+
+	<link rel="stylesheet" type="text/css" href="{% static "js/qtip2/jquery.qtip.css" %}" />
 {% endblock %}
 {% block content %}
 <div class="col-lg-6 jumbotron  col-lg-offset-3">
-    <h1 class="titulo-eventos text-center">Crear Evento</h1> 
+    <h1 class="titulo-eventos text-center marron">Crear Evento</h1> 
     <form action="/crear/evento/" method="post">
 		{% csrf_token %}
 	    <table class="table-evento text center">
 	        <tr>
 	            <td style="width: 30px;"> <span class="glyphicon glyphicon-gift"></span></td>
-	            <td> <input name="nombre_evento" type="text" placeholder="Nombre del Evento"/></td>
+	            <td> <input id="nombre_evento" name="nombre_evento" type="text" placeholder="Nombre del Evento"/></td>
 	        </tr>
 	        <tr>
 	            <td><span class="glyphicon glyphicon-calendar"></span></td>
@@ -20,16 +23,16 @@
 	        </tr>
 	        <tr>
 	            <td><span class="glyphicon glyphicon-user"></span></td>
-	            <td> <input name="participantes" type="text" placeholder="Numero de Participantes"/></td>
+	            <td> <input id="participantes" name="participantes" type="text" placeholder="Numero de Participantes"/></td>
 	        </tr>
 	        <tr>
 	            <td><span class="glyphicon glyphicon-usd"></span></td>
-	            <td> <input name="precio" type="text" placeholder="Precio"/></td>
+	            <td> <input id="precio" name="precio" type="text" placeholder="Precio"/></td>
 	        </tr>
 	         <tr>
 	         <td></td>
 	            <td class="text-center" text-center">
-	            <input type="submit" style="margin-top:15px; width:100%;"class="btn btn-default btn-primary btn-lg" value="Crear Evento"/>
+	            <input type="submit" id="crear_evento" style="margin-top:15px; width:100%;"class="btn btn-default btn-primary btn-lg" value="Crear Evento"/>
 	            </td>
 	        </tr>
 	    </table>

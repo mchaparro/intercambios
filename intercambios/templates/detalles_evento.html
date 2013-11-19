@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_head %}
+	<script type="text/javascript" src="{% static "js/intercambios/crear_evento.js" %}"></script>
+{% endblock %}
+{% block content %}
+<div class="col-lg-12 jumbotron  col-lg-offset-1">
+    <h1 class="titulo-eventos text-center marron titulo-evento">Bienvenido al Evento<span class="rojo" > " {{ nuevo_evento }} "</span></h1>
+    <h3 class="titulo-eventos marron titulo-evento">Creado por: <span class="rojo" > " {{ nuevo_evento }} "</span></h3>
+    <h3 class="titulo-eventos marron titulo-evento">Fecha del Evento: <span class="rojo" > " {{ nuevo_evento }} "</span></h3>
+    <h3 class="titulo-eventos marron titulo-evento">Numero de Participantes: <span class="rojo" > " {{ nuevo_evento }} "</span></h3>
+    <h3 class="titulo-eventos marron titulo-evento">Faltan: <span class="rojo" > " {{ nuevo_evento }} " participantes por confirmar</span></h3>
+    
+    <form action="/evento/evento/" method="post">
+		{% csrf_token %}
+	    <table class="table-evento text center">
+	        <tr>
+	            
+	        </tr>
+	        
+	    </table>
+    </form>
+</div>
+{% endblock %}

@@ -15,11 +15,12 @@ def crear_evento(request):
         fecha = request.POST['fecha']
         participantes = request.POST['participantes']
         precio = request.POST['precio']
-        
+    
+  
         fecha_evento = datetime.datetime.strptime(fecha, '%m/%d/%Y')
         fecha_evento_TZ = local_TZ.localize(fecha_evento)
         
-        evento = Evento(nombre=nombre_evento, precio=precio, participantes=participantes, fecha_evento=fecha_evento_TZ, admin=request.user)
+        evento = Evento(admin=request.user, nombre=nombre_evento, precio=precio, numero_participantes=participantes, fecha_evento=fecha_evento_TZ)
         evento.save()
         
         data={

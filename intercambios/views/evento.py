@@ -17,7 +17,7 @@ def crear_evento(request):
         fecha = request.POST['fecha']
         participantes = request.POST['participantes']
         precio = request.POST['precio']
-    
+        precio = precio.replace("$", "")
   
         fecha_evento = datetime.datetime.strptime(fecha, '%m/%d/%Y')
         fecha_evento_TZ = local_TZ.localize(fecha_evento)
@@ -30,7 +30,7 @@ def crear_evento(request):
         }
         
         
-        return render_to_response('evento_creado.html' , data , context_instance=RequestContext(request))
+        return render_to_response('detalles_evento.html' , data , context_instance=RequestContext(request))
         
     return render_to_response('crear_evento.html', context_instance=RequestContext(request))
 
@@ -39,3 +39,13 @@ def crear_evento(request):
 def detalles_evento(request):
         
     return render_to_response('detalles_evento.html', context_instance=RequestContext(request))
+
+@login_required
+def mis_eventos(request):
+    mis_eventos = Evento.objects.filter(admin = request.user)
+    data={
+        'mis_eventos':mis_eventos     
+        }
+    return render_to_response('index.html',data, context_instance=RequestContext(request))
+
+

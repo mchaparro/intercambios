@@ -12,7 +12,8 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', login_required(TemplateView.as_view(template_name='index.html')), name="index"),
+    (r'^$',mis_eventos ,{} , 'mis_eventos'),
+    #url(r'^$', login_required(TemplateView.as_view(template_name='index.html')), name="index"),
     (r'^login/$', login_user, {}, 'user_login'),
     (r'^logout/$', logout_user, {}, 'user_logout'),
     (r'^admin/', include(admin.site.urls)),

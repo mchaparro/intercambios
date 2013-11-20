@@ -3,11 +3,16 @@
 
 {% block content %}
 		<div class="col-lg-6 col-lg-offset-1">
-			<div class="jumbotron text-center">
-			<h1 class="titulo-eventos">Mis Eventos</h1>
-			<div class="btn btn-default btn-lg btn-custom"> Evento 1</div></br>
-			<div class="btn btn-default btn-lg btn-custom"> Evento 2</div></br>
-			<div class="btn btn-default btn-lg btn-custom"> Evento 3</div></br>
+			<div class="jumbotron ">
+			<h1 class="titulo-eventos text-center marron navidad">Mis Eventos</h1>
+			<table>
+			{% for evento in mis_eventos %}
+			<tr>
+			<td style="width:500px"><div style="width:100%" class="btn btn-default btn-lg btn-custom glyphicon btn-rosita probando" > {{ evento.nombre }}</div></td>
+			<td style="width:100px; text-align:right;"><div style="width:50px" class="btn btn-default btn-custom btn-lg btn-verde glyphicon glyphicon-trash rojo "></div></td>
+			</tr>
+			{% endfor %}
+			</table>
 			</div>
 		</div>
 		

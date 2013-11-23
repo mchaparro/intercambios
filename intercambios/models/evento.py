@@ -19,7 +19,7 @@ class Evento(models.Model):
 class ParticipantesEvento(models.Model):
     fecha = models.DateTimeField(auto_now_add=True)
     usuario = models.ForeignKey('Usuario', related_name='eventos')
-    intercambio = models.IntegerField(blank=True, null=True)
+    intercambio = models.CharField(max_length=100, blank=True, null=True)
     evento = models.ForeignKey('Evento')
     
     class Meta:

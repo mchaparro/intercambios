@@ -20,7 +20,7 @@ urlpatterns = patterns('',
     #crear nuevo evento
     (r'^crear/evento/$', crear_evento, {}, 'crear_evento'),
     #agregar participante al evento
-    (r'^evento/(?P<id>\d+)/agregar/participante/$', agregar_participante, {}, 'agregar_participante'),
+    (r'^participar/evento/(?P<id>\d+)/$', participar_evento, {}, 'participar_evento'),
     #pruba
     (r'^detalles/evento/(?P<id>\d+)/$', detalles_evento, {}, 'detalles_evento'),
 )

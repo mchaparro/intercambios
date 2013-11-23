@@ -2,8 +2,9 @@ from django.http import *
 from django.shortcuts import render_to_response,redirect
 from django.template import RequestContext
 from django.conf import settings
-from intercambios.models import Evento
+from intercambios.models import Evento, ParticipantesEvento
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 import datetime
 import pytz
 
@@ -30,3 +31,11 @@ def agregar_participante(request, id):
         return render_to_response('evento_creado.html' , data , context_instance=RequestContext(request))
         
     return render_to_response('crear_evento.html', context_instance=RequestContext(request))
+
+
+@login_required
+def participar_evento(request,id):
+    evento = Evento.objects.get(id=id)
+    ParticipantesEvento.objects.get_or_create(usuario = request.user, evento = evento)
+    messages.success(request, 'Se agrego con exito el suaruiso!!!!')
+    return HttpResponseRedirect('/detalles/evento/%s/' % evento.id)

@@ -13,31 +13,43 @@
 	<h3><span class="Diamond color-esperanza" style="font-size: 40px">Detalles del Evento:</span></h3>
 	   <ul style="margin-top:0px;"class="list-group fondo-verde detalle-evento Diamond ">
 	    <li class="list-group-item ">Creado por: <span class="rojo" > {{ nuevo_evento.admin }}</span></li>
-	    <li class="list-group-item ">Fecha del Evento: <span class="rojo" > {{ nuevo_evento.fecha_evento }}</span></li>
+	    <li class="list-group-item ">Fecha: <span class="rojo" > {{ nuevo_evento.fecha_evento }}</span></li>
 	    <li class="list-group-item ">Precio del Regalo: <span class="rojo"> ${{ nuevo_evento.precio }}</span></li>
 	    <li class="list-group-item ">Numero de Participantes: <span class="rojo" > {{ nuevo_evento.numero_participantes }}</span></li>
-	    <li class="list-group-item ">Faltan: <span class="rojo" > 2 </span>participantes por confirmar</li>
+	    <li class="list-group-item ">Faltan: <span class="rojo" > 2 </span>participantes por confirmar</li><br>
+    <a class="no-title" href = "/detalles/evento/ " ><div class=" btn btn-default btn-lg btn-custom glyphicon btn-rosita Secrets colorbox-link" style="width:100%; font-size:30px; font-weight:bold;"title="Invita a quienes quieras que participen en este evento" > Invitar Participantes</a>
 	   </ul>
   	</div> 
+   	<div class="col-lg-3">
    	<h3><span class="Diamond color-esperanza" style="font-size: 40px">Participantes:</span></h3>
-   	<table class="table fondo-tabla ">
+   	<table style="width:250px;" class="table fondo-tabla  ">
    	{% for participante in participantes %}
    	<tr class="fondo-tabla">
-   		<td><span class="glyphicon glyphicon-ok  "> </span></td>
-   		<td>{{ participante.nombre }}</td>
+   		<td><span class="glyphicon glyphicon-ok " text="Ver Regalos" style="color: #D11D59"> </span></td>
+   		<td style="width:500px"><span class="Secrets" style="color: #333333;">{{ participante.nombre }}</span></td>
    		
    		<td><span class="glyphicon glyphicon-gift  rojo"></span></td>
+   		<td><span class="glyphicon glyphicon-trash  rojo"></span></td>
    	</tr>
    	{% endfor %}
-   
-   		
     </table>
-    
-    
-    
+    </div>
+    <div clas="col-lg-3" style="margin-top: 73px">
+    <table style="width:250px;" class="table fondo-tabla ">
+   	{% for participante in participantes %}
+   	<tr class="fondo-tabla">
+   		<td><span class="glyphicon glyphicon-ok  " style="color: #D11D59"> </span></td>
+   		<td style="width:500px"><span class="Secrets" style="color: #333333;">{{ participante.nombre }}</span></td>
+   		
+   		<td><span class="glyphicon glyphicon-gift  rojo"></span></td>
+   		<td><span class="glyphicon glyphicon-trash  rojo"></span></td>
+   	</tr>
+   	{% endfor %}
+    </table>
+    </div>
    
-    <a href = "/detalles/evento/ "  class="colorbox-link" title="invitar" > Invitar Participantes</a>
-   </div> 
+   <div>
+   <h1 style="padding:8px; border-radius:29px; background-color:white;"  class="titulo-eventos text-center marron titulo-evento"><span class="btn btn-default btn-lg btn-esperanza2 Secrets" style="padding-left: 5px; border-radius:13px !important; padding-right: 10px; width:100%; font-size:40px; font-weight:bold;">Iniciar Rifa</span></h1> 
 	</div>
 
 

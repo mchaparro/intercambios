@@ -6,7 +6,7 @@
 {% endblock %}
 {% block content %}
 
-<div class="col-lg-12 jumbotron  ">
+<div class="col-lg-12 jumbotron " style="padding-left: 10px; padding-right: 10px;">
 		<h1 class="titulo-eventos text-center marron titulo-evento">Bienvenido al Evento<span class="rojo" > {{nuevo_evento.nombre}}</span></h1>
 	
 	   <ul class="list-group fondo-verde detalle-evento Diamond col-lg-6">
@@ -16,34 +16,30 @@
 	    <li class="list-group-item ">Numero de Participantes: <span class="rojo" > {{ nuevo_evento.numero_participantes }}</span></li>
 	    <li class="list-group-item ">Faltan: <span class="rojo" > 2 </span>participantes por confirmar</li>
 	   </ul>
-  	 <div class="jumbotron col-lg-6" style="background-color: white; padding-top:0px;">
-  	 <h2>Lista de participantes</h2>
-   	<table class="table">
-   	<tr class="success">
-   		<td>Isis</td>
+  	 
+  	 
+   	<table class="table fondo-tabla ">
+   	<h3><span class="Diamond color-esperanza" style="font-size: 40px">Participantes:</span></h3>
+   	<tr class="fondo-tabla">
+   		<td><span class="glyphicon glyphicon-ok  "> Isis</span></td>
    		<td><span class="glyphicon glyphicon-gift  rojo"></span></td>
    	</tr>
-   	<tr class="success">
-   		<td>Miky</td>
+   	<tr class="fondo-tabla">
+   		<td><span class="glyphicon glyphicon-ok  ">  Miky</td>
    		<td><span class="glyphicon glyphicon-gift  rojo"></span></td>
    	</tr>
-   	<tr class="success">
-   		<td>Mike</td>
+   	<tr class="fondo-tabla">
+   		<td><span class="glyphicon glyphicon-ok  ">  Mike</td>
    		<td><span class="glyphicon glyphicon-gift  rojo"></span></td>
    	</tr>
-   	<tr class="success">
-   		<td>Amor</td>
-   		<td><span class="glyphicon glyphicon-gift  rojo"></span></td>
-   	</tr>
+   
    		
     </table>
-    </div>
     
     
-   <ul class="list-group fondo-verde detalle-evento Diamond col-lg-6">
-   	
-   </ul>
-    <a href = "/detalles/evento/ "  class="colorbox-link" title="invitar" > Invitar amigos</a>
+    
+   
+    <a href = "/detalles/evento/ "  class="colorbox-link" title="invitar" > Invitar Participantes</a>
     
 	</div>
 

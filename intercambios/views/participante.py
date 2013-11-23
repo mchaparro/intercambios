@@ -5,6 +5,7 @@ from django.conf import settings
 from intercambios.models import Evento, ParticipantesEvento
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 import datetime
 import pytz
 

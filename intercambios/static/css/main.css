@@ -237,7 +237,7 @@ input{
 	background-color: #92CD35;
 }
 .fondo-tabla td{
-	background-color: #8FA3AA;
+	background-color: #FEBC1D; 
 }
 .fondo-tabla {
 	width: 50%;
@@ -249,3 +249,8 @@ ul {
 	font-size: 30px;
     line-height: 30px;
 }
+.color-esperanza{
+	color: #00D501;
+}
+table > :last-child > tr:last-of-type > :only-child { border-radius: 0 0 0 25px }
+table > :first-child > tr:first-of-type > :last-child[rowspan="2"]{border-radius: 0 25px 25px 0}                                   

@@ -233,3 +233,19 @@ input{
 .jumbotron.mis-eventos {
 	height:470px !important;
 }
+.fondo-verde li{
+	background-color: #92CD35;
+}
+.fondo-tabla td{
+	background-color: #8FA3AA;
+}
+.fondo-tabla {
+	width: 50%;
+}
+ul {
+	list-style-type: none;
+}
+.detalle-evento li, .detalle-evento{
+	font-size: 30px;
+    line-height: 30px;
+}

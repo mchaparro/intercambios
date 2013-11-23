@@ -41,9 +41,12 @@ def crear_evento(request):
 
 
 @login_required
-def detalles_evento(request):
+def detalles_evento(request, id):
+    data={
+          'nuevo_evento':Evento.objects.get(id=id)
+          }
         
-    return render_to_response('detalles_evento.html', context_instance=RequestContext(request))
+    return render_to_response('detalles_evento.html',data, context_instance=RequestContext(request))
 
 @login_required
 def mis_eventos(request):

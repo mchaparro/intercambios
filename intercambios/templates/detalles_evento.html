@@ -5,25 +5,47 @@
 	<script type="text/javascript" src="{% static "js/intercambios/crear_evento.js" %}"></script>
 {% endblock %}
 {% block content %}
-<div class="col-lg-12 jumbotron  col-lg-offset-1">
-	<h1 class="titulo-eventos text-center marron titulo-evento">Bienvenido al Evento<span class="rojo" > " {{ nuevo_evento }} "</span></h1>
-   <ul >
-   <li>Isis  <span class="glyphicon glyphicon-gift  rojo"></span></li>
-   
-    <li> class="titulo-eventos marron titulo-evento">Creado por: <span class="rojo" > </span></li>
-    <li> class="titulo-eventos marron titulo-evento">Fecha del Evento: <span class="rojo" > " {{ nuevo_evento }} "</span></li>
-    <li> class="titulo-eventos marron titulo-evento">Numero de Participantes: <span class="rojo" > " {{ nuevo_evento }} "</span></li>
-   <ul>
-    <li> class="titulo-eventos marron titulo-evento">Faltan: <span class="rojo" > " {{ nuevo_evento }} " participantes por confirmar</span></li>
-    <a href = "/detalles/evento/ "  class="colorbox-link" title="jiji" > jiji</a>
-    <form action="/evento/evento/" method="post">
-		{% csrf_token %}
-	    <table class="table-evento text center">
-	        <tr>
-	            
-	        </tr>
-	        
-	    </table>
-    </form>
-</div>
+
+<div class="col-lg-12 jumbotron  ">
+		<h1 class="titulo-eventos text-center marron titulo-evento">Bienvenido al Evento<span class="rojo" > {{nuevo_evento.nombre}}</span></h1>
+	
+	   <ul class="list-group fondo-verde detalle-evento Diamond col-lg-6">
+	    <li class="list-group-item ">Creado por: <span class="rojo" > {{ nuevo_evento.admin }}</span></li>
+	    <li class="list-group-item ">Fecha del Evento: <span class="rojo" > {{ nuevo_evento.fecha_evento }}</span></li>
+	    <li class="list-group-item ">Precio del Regalo: <span class="rojo"> ${{ nuevo_evento.precio }}</span></li>
+	    <li class="list-group-item ">Numero de Participantes: <span class="rojo" > {{ nuevo_evento.numero_participantes }}</span></li>
+	    <li class="list-group-item ">Faltan: <span class="rojo" > 2 </span>participantes por confirmar</li>
+	   </ul>
+  	 <div class="jumbotron col-lg-6" style="background-color: white; padding-top:0px;">
+  	 <h2>Lista de participantes</h2>
+   	<table class="table">
+   	<tr class="success">
+   		<td>Isis</td>
+   		<td><span class="glyphicon glyphicon-gift  rojo"></span></td>
+   	</tr>
+   	<tr class="success">
+   		<td>Miky</td>
+   		<td><span class="glyphicon glyphicon-gift  rojo"></span></td>
+   	</tr>
+   	<tr class="success">
+   		<td>Mike</td>
+   		<td><span class="glyphicon glyphicon-gift  rojo"></span></td>
+   	</tr>
+   	<tr class="success">
+   		<td>Amor</td>
+   		<td><span class="glyphicon glyphicon-gift  rojo"></span></td>
+   	</tr>
+   		
+    </table>
+    </div>
+    
+    
+   <ul class="list-group fondo-verde detalle-evento Diamond col-lg-6">
+   	
+   </ul>
+    <a href = "/detalles/evento/ "  class="colorbox-link" title="invitar" > Invitar amigos</a>
+    
+	</div>
+
+
 {% endblock %}

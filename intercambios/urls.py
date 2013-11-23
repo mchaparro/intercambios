@@ -22,5 +22,5 @@ urlpatterns = patterns('',
     #agregar participante al evento
     (r'^evento/(?P<id>\d+)/agregar/participante/$', agregar_participante, {}, 'agregar_participante'),
     #pruba
-    (r'^detalles/evento/$', detalles_evento, {}, 'detalles_evento'),
+    (r'^detalles/evento/(?P<id>\d+)/$', detalles_evento, {}, 'detalles_evento'),
 )

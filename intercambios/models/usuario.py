@@ -24,7 +24,6 @@ class UsuariosManager(BaseUserManager):
         Creates and saves a superuser with the given username
         """
         usuario = self.create_user(email=email,nombre=nombre,password=password)
-        
         usuario.is_superuser = True
         usuario.is_admin = True
         usuario.save(using=self._db)
@@ -35,8 +34,6 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     nombre = models.CharField(max_length=100)
     fecha = models.DateTimeField(auto_now_add=True)
     fecha_mod = models.DateTimeField(auto_now=True)
-    intercambio = models.ForeignKey('self', related_name='regala_a',null=True, blank=True, default = None)
-
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 

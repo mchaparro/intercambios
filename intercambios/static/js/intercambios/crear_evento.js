@@ -3,7 +3,7 @@ $(document).ready(function() {
 		$('#participantes').keypress(function(e){
 		var longitud= $(this).val().length;
 		console.log(longitud);
-		if (e.keyCode < 48 || e.keyCode > 57)
+		if (e.charCode < 48 || e.charCode > 57)
 		        return false;
 		if (longitud > 2)
 			return false;
@@ -13,7 +13,7 @@ $(document).ready(function() {
 		$(this).formatCurrency({ roundToDecimalPlace: -2 });
 		var longitud= $(this).val().length;
 		console.log(longitud);
-		if (e.keyCode < 48 || e.keyCode > 57)
+		if (e.charCode < 48 || e.charCode > 57)
 		        return false;
 		if (longitud > 8)
 			return false;

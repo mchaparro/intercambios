@@ -30,7 +30,7 @@
 			<script type="text/javascript">
 			$(document).ready(function(){
 			    {% for message in messages %}
-			    	noty({text: '{{ message|safe }}' , type: '{{ message.tags }}',timeout: 8000,});
+			    	noty({text: '{{ message|safe }}' , type: '{{ message.tags }}',timeout: 10000,});
 			    {% endfor %}
 		    });
 		    </script>

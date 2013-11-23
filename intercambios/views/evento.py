@@ -52,12 +52,12 @@ def detalles_evento(request, id):
 
 @login_required
 def mis_eventos(request):
-#     mis_eventos = Evento.objects.filter(admin = request.user)
+    mis_eventos = Evento.objects.filter(admin = request.user)
 
-    url = 'http://localhost:1212/get/eventos/usuario/%s/' % request.user.id
-    raw = urllib.urlopen(url)
-    mis_eventos = raw.readlines()
-    mis_eventos = json.loads(mis_eventos[0])
+#     url = 'http://localhost:1212/get/eventos/usuario/%s/' % request.user.id
+#     raw = urllib.urlopen(url)
+#     mis_eventos = raw.readlines()
+#     mis_eventos = json.loads(mis_eventos[0])
     
     data={
         'mis_eventos':mis_eventos     

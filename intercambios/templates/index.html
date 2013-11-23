@@ -9,9 +9,18 @@
 			<table>
 			{% for evento in mis_eventos %}
 			<tr>
-			<td style="width:800px; text-align:left;"><div style="width:95%; font-size:30px; font-weight:bold;" class="btn btn-default btn-lg btn-custom glyphicon btn-rosita probando" > {{ evento.nombre }}</div></td>
-			<td style="width:100px; text-align:center;"><div style="font-size:30px; width:63px" class="btn btn-default btn-custom btn-lg btn-verdecito glyphicon glyphicon-trash rojo"></div></td>
-			<td style="width:100px; text-align:left;"><div style="font-size:30px; width:63px" class=" btn btn-default btn-custom btn-lg btn-verdecito glyphicon glyphicon-pencil rojo"></div></td>
+			<td style="width:800px; text-align:left;">
+				<a class="no-title" href="/detalles/evento/{{ evento.id }}/"><div style="width:95%; font-size:30px; font-weight:bold;" class="btn btn-default btn-lg btn-custom glyphicon btn-rosita probando" >
+				 {{ evento.nombre }}
+				</a>
+				 </div>
+				</td>
+			<td style="width:100px; text-align:center;">
+				<div style="font-size:30px; width:63px" class="btn btn-default btn-custom btn-lg btn-verdecito glyphicon glyphicon-trash rojo"></div>
+				</td>
+			<td style="width:100px; text-align:left;">
+				<div style="font-size:30px; width:63px" class=" btn btn-default btn-custom btn-lg btn-verdecito glyphicon glyphicon-pencil rojo"></div>
+				</td>
 			</tr>
 			{% endfor %}
 			</table>

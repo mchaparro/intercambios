@@ -254,3 +254,12 @@ ul {
 }
 table > :last-child > tr:last-of-type > :only-child { border-radius: 0 0 0 25px }
 table > :first-child > tr:first-of-type > :last-child[rowspan="2"]{border-radius: 0 25px 25px 0}                                   
+
+.no-title, .no-title:hover{
+text-decoration: none;
+color: inherit;
+}
+
+.btn-rosita:hover a{
+color:yellow;
+}

@@ -5,13 +5,13 @@
 <div>
 		<div class="col-lg-6">
 			<div class="jumbotron text-center mis-eventos">
-			<h1 style="color: #68AA5A !important;" class="titulo-eventos text-center marron navidad">Mis Eventos</h1>
+			<h1  class="titulo-eventos text-center marron Diamond">Mis Eventos</h1>
 			<table>
 			{% for evento in mis_eventos %}
 			<tr>
 			<td style="width:800px; text-align:left;"><div style="width:95%; font-size:30px; font-weight:bold;" class="btn btn-default btn-lg btn-custom glyphicon btn-rosita probando" > {{ evento.nombre }}</div></td>
 			<td style="width:100px; text-align:center;"><div style="font-size:30px; width:63px" class="btn btn-default btn-custom btn-lg btn-verdecito glyphicon glyphicon-trash rojo"></div></td>
-			<td style="width:100px; text-align:left;"><div style="font-size:30px; width:63px" class="btn btn-default btn-custom btn-lg btn-verdecito glyphicon glyphicon-pencil rojo"></div></td>
+			<td style="width:100px; text-align:left;"><div style="font-size:30px; width:63px" class=" btn btn-default btn-custom btn-lg btn-verdecito glyphicon glyphicon-pencil rojo"></div></td>
 			</tr>
 			{% endfor %}
 			</table>

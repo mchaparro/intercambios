@@ -19,20 +19,16 @@
 	    <li class="list-group-item ">Faltan: <span class="rojo" > 2 </span>participantes por confirmar</li>
 	   </ul>
   	</div> 
-   	<table class="table fondo-tabla ">
    	<h3><span class="Diamond color-esperanza" style="font-size: 40px">Participantes:</span></h3>
+   	<table class="table fondo-tabla ">
+   	{% for participante in participantes %}
    	<tr class="fondo-tabla">
-   		<td><span class="glyphicon glyphicon-ok  "> Isis</span></td>
+   		<td><span class="glyphicon glyphicon-ok  "> </span></td>
+   		<td>{{ participante.nombre }}</td>
+   		
    		<td><span class="glyphicon glyphicon-gift  rojo"></span></td>
    	</tr>
-   	<tr class="fondo-tabla">
-   		<td><span class="glyphicon glyphicon-ok  ">  Miky</td>
-   		<td><span class="glyphicon glyphicon-gift  rojo"></span></td>
-   	</tr>
-   	<tr class="fondo-tabla">
-   		<td><span class="glyphicon glyphicon-ok  ">  Mike</td>
-   		<td><span class="glyphicon glyphicon-gift  rojo"></span></td>
-   	</tr>
+   	{% endfor %}
    
    		
     </table>

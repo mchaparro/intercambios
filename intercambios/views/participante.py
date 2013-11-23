@@ -38,5 +38,5 @@ def agregar_participante(request, id):
 def participar_evento(request,id):
     evento = Evento.objects.get(id=id)
     ParticipantesEvento.objects.get_or_create(usuario = request.user, evento = evento)
-    messages.success(request, 'Se agrego con exito el suaruiso!!!!')
+    messages.success(request, '<h1 class="Diamond">%s!! ahora ya eres parte del evento %s :)</h1>' % (request.user.nombre,evento.nombre))
     return HttpResponseRedirect('/detalles/evento/%s/' % evento.id)

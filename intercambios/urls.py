@@ -19,8 +19,12 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     #crear nuevo evento
     (r'^crear/evento/$', crear_evento, {}, 'crear_evento'),
+    #editar evento
+    (r'^editar/evento/(?P<id>\d+)/$', editar_evento, {}, 'editar_evento'),
+    #cancelar evento
+    (r'^cancelar/evento/(?P<id>\d+)/$', cancelar_evento, {}, 'cancelar_evento'),
     #agregar participante al evento
     (r'^participar/evento/(?P<id>\d+)/$', participar_evento, {}, 'participar_evento'),
-    #pruba
+    #detalles evento
     (r'^detalles/evento/(?P<id>\d+)/$', detalles_evento, {}, 'detalles_evento'),
 )

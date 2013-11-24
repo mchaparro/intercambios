@@ -11,7 +11,7 @@
 	<div style="background-color:white; padding: 5px 30px 5px 30px; border-radius:30px; min-height: 380px;">
 	<div class="col-lg-6">
 	<h3><span class="Diamond color-esperanza" style="font-size: 40px">Detalles del Evento:</span></h3>
-	   <ul style="margin-top:0px;"class="list-group fondo-verde detalle-evento Diamond ">
+	   <ul style="margin-top:0px;"class="list-group  detalle-evento Diamond ">
 	    <li class="list-group-item ">Creado por: <span class="rojo" > {{ nuevo_evento.admin }}</span></li>
 	    <li class="list-group-item ">Fecha: <span class="rojo" > {{ nuevo_evento.fecha_evento }}</span></li>
 	    <li class="list-group-item ">Precio del Regalo: <span class="rojo"> ${{ nuevo_evento.precio }}</span></li>
@@ -34,7 +34,7 @@
    	{% endfor %}
     </table>
     </div>
-    <div clas="col-lg-3" style="margin-top: 73px">
+    <div clas="col-lg-3" style="margin-top: 74px">
     <table style="width:250px;" class="table fondo-tabla ">
    	{% for participante in participantes %}
    	<tr class="fondo-tabla">

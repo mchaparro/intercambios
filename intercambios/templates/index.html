@@ -1,26 +1,48 @@
 {% extends "base.html" %}
 {% load static %}
-
+{% block extra_head %}
+	<script type="text/javascript" src="{% static "js/intercambios/index.js" %}"></script>
+{% endblock %}
 {% block content %}
 <div>
 		<div class="col-lg-6">
 			<div class="jumbotron text-center mis-eventos">
 			<h1 class="titulo-eventos text-center marron Diamond">Mis Eventos</h1>
-			<table>
-			{% for evento in mis_eventos %}
+			{% if not eventos_participa %}
+				<div>
+					<h2 class="Diamond">No tienes ningun evento registrado :(</h2>
+				</div>
+				<div style="margin-top:70px;">
+					<h2 class="Diamond">Puedes empezar creando un evento con</br>el bot&oacute;n de la derecha -></h2>
+				</div>
+			{% endif %}
+			<table style="width:100%;">
+			{% for evento_participa in eventos_participa %}
 			<tr>
-			<td style="width:800px; text-align:left;">
-				<a class="no-title" href="/detalles/evento/{{ evento.id }}/"><div style="width:95%; font-size:30px; font-weight:bold;" class="btn btn-default btn-lg btn-custom glyphicon btn-rosita probando" >
-				 {{ evento.nombre }}
-				</a>
+			
+			<td style="width:100%;">
+				<a class="no-title" href="/detalles/evento/{{ evento_participa.evento.id }}/">
+				<div style="width:100%; height:53px; font-size:30px; font-weight:bold;" class="btn btn-default btn-lg btn-custom glyphicon btn-rosita probando" >
+				{% if evento_participa.evento.admin == user %}
+					<span class="nombre-evento" style="width:100%; margin-left:30px; line-height:35px; text-align:center;">
+					{{ evento_participa.evento.nombre }}
+					</span>
+					<div style="float:right; margin-top:-5px; margin-left:-40px;">
+						<a onclick="return confirm('¿Estas seguro de cancelar el evento?');" class="cancelar-evento no-title colorbox-link" href="/cancelar/evento/{{ evento_participa.evento.id }}/">
+							<span style=" margin-right:10px;"class="glyphicon glyphicon-trash"></span>
+						</a>
+						<a class="no-title colorbox-link" href="/editar/evento/{{ evento_participa.evento.id }}/">
+						 	<span  class=" glyphicon glyphicon-pencil"></span>
+						</a>
+					</div>
+				{% else %}
+				<span class="nombre-evento" style="width:100%; line-height:35px; text-align:center;">
+				{{ evento_participa.evento.nombre }}
+				</span>
+				{% endif %}
 				 </div>
-				</td>
-			<td style="width:100px; text-align:center;">
-				<div style="font-size:30px; width:63px" class="btn btn-default btn-custom btn-lg btn-verdecito glyphicon glyphicon-trash rojo"></div>
-				</td>
-			<td style="width:100px; text-align:left;">
-				<div style="font-size:30px; width:63px" class=" btn btn-default btn-custom btn-lg btn-verdecito glyphicon glyphicon-pencil rojo"></div>
-				</td>
+				</a>
+			</td>
 			</tr>
 			{% endfor %}
 			</table>

@@ -255,12 +255,12 @@ input{
 }
 
 .jumbotron.mis-eventos {
-	height:470px !important;
+	min-height:470px !important;
 }
 .fondo-verde li{
 	background-color: #92CD35;
 }
-.fondo-tabla td{
+.fondo-amarillo{
 	background-color: #FEBC1D; 
 }
 .fondo-tabla {
@@ -284,6 +284,14 @@ text-decoration: none;
 color: inherit;
 }
 
-.btn-rosita:hover a{
-color:yellow;
+.btn-rosita:hover span.nombre-evento{
+	color:yellow;
+}
+
+.btn-rosita span.glyphicon-trash:hover{
+	color:#4ABDF8;
+}
+
+.btn-rosita span.glyphicon-pencil:hover{
+	color:#4ABDF8;
 }

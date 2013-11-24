@@ -1,0 +1,45 @@
+{% load static %}
+
+{% block extra_head %}
+	<script type="text/javascript" src="{% static "js/qtip2/jquery.qtip.js" %}"></script>
+	<script type="text/javascript" src="{% static "js/intercambios/crear_evento.js" %}"></script>
+	<script type="text/javascript" src="{% static "js/jquery.formatCurrency.js" %}"></script>
+
+	<link rel="stylesheet" type="text/css" href="{% static "js/qtip2/jquery.qtip.css" %}" />
+	<script>
+	var fecha = "{{ evento.fecha_evento|date:"m/d/Y" }}";
+	
+	</script>
+{% endblock %}
+<div class="container">
+<div class="col-lg-12 jumbotron" style="margin-bottom:0px;">
+    <h1 class="titulo-eventos text-center marron">{{ evento.nombre }}</h1> 
+    <form action="/editar/evento/{{ evento.id }}/" method="post">
+		{% csrf_token %}
+	    <table class="table-evento text center">
+	        <tr>
+	            <td style="width: 30px;"> <span class="glyphicon glyphicon-gift"></span></td>
+	            <td> <input id="nombre_evento" name="nombre_evento" type="text" value="{{ evento.nombre }}" placeholder="Nombre del Evento"/></td>
+	        </tr>
+	        <tr>
+	            <td><span class="glyphicon glyphicon-calendar"></span></td>
+	            <td><input id="fecha" name="fecha" type="text" value="{{ evento.fecha_evento|date:"m/d/Y" }}" placeholder="Fecha del Intercambio"/></td>
+	        </tr>
+	        <tr>
+	            <td><span class="glyphicon glyphicon-user"></span></td>
+	            <td> <input id="participantes" name="participantes" value={{ evento.numero_participantes }} type="text" placeholder="Numero de Participantes"/></td>
+	        </tr>
+	        <tr>
+	            <td><span class="glyphicon glyphicon-usd"></span></td>
+	            <td><input id="precio" name="precio" type="text" value={{ evento.precio }} placeholder="Precio del Regalo"/></td>
+	        </tr>
+	         <tr>
+	         <td></td>
+	            <td class="text-center" text-center">
+	            <input type="submit" id="crear_evento" style="margin-top:15px; width:100%;"class="btn btn-default btn-primary btn-lg" value="Crear Evento"/>
+	            </td>
+	        </tr>
+	    </table>
+    </form>
+</div>
+</div>

@@ -20,7 +20,7 @@ class ParticipantesEvento(models.Model):
     fecha = models.DateTimeField(auto_now_add=True)
     usuario = models.ForeignKey('Usuario', related_name='eventos')
     intercambio = models.CharField(max_length=100, blank=True, null=True)
-    evento = models.ForeignKey('Evento')
+    evento = models.ForeignKey('Evento', related_name='participantes_evento')
     
     class Meta:
         app_label = 'intercambios'

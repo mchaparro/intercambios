@@ -16,12 +16,13 @@
 	    <li class="list-group-item ">Fecha: <span class="rojo" > {{ nuevo_evento.fecha_evento }}</span></li>
 	    <li class="list-group-item ">Precio del Regalo: <span class="rojo"> ${{ nuevo_evento.precio }}</span></li>
 	    <li class="list-group-item ">Numero de Participantes: <span class="rojo" > {{ nuevo_evento.numero_participantes }}</span></li>
-	    <li class="list-group-item ">Faltan: <span class="rojo" > 2 </span>participantes por confirmar</li><br>
-    <a class="no-title" href = "/detalles/evento/ " ><div class=" btn btn-default btn-lg btn-custom glyphicon btn-rosita Secrets colorbox-link" style="width:100%; font-size:30px; font-weight:bold;"title="Invita a quienes quieras que participen en este evento" > Invitar Participantes</a>
+	    <li class="list-group-item ">Faltan: <span class="rojo" > {{ participantes_faltantes }} </span>participantes por confirmar</li><br>
+    	<a class="no-title colorbox-link " href = "/invitar/evento/{{ nuevo_evento.id }}/ " ><div class=" btn btn-default btn-lg btn-custom glyphicon btn-rosita Secrets " style="width:100%; font-size:30px; font-weight:bold;" > Invitar Participantes</div></a><br>
+	    <a class="no-title colorbox-link " href = "/elegir/regalo/{{ nuevo_evento.id }}/ " ><div class=" btn btn-default btn-lg btn-custom glyphicon btn-rosita Secrets " style="width:100%; font-size:30px; font-weight:bold;" > Elegir Regalo</div></a>
 	   </ul>
   	</div> 
+   	<h3><span class="Diamond color-esperanza" style="font-size: 40px">Participantes Registrados:  <span class="rojo">{{ participantes.count }}</span></span></h3>
    	<div class="col-lg-3">
-   	<h3><span class="Diamond color-esperanza" style="font-size: 40px">Participantes:</span></h3>
    	<table style="width:250px;" class="table fondo-tabla  ">
    	{% for participante in participantes %}
    	<tr class="fondo-tabla">
@@ -34,7 +35,7 @@
    	{% endfor %}
     </table>
     </div>
-    <div clas="col-lg-3" style="margin-top: 74px">
+    <div clas="col-lg-3" >
     <table style="width:250px;" class="table fondo-tabla ">
    	{% for participante in participantes %}
    	<tr class="fondo-tabla">

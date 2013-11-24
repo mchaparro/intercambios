@@ -37,6 +37,32 @@ def agregar_participante(request, id):
 @login_required
 def participar_evento(request,id):
     evento = Evento.objects.get(id=id)
+    participantes_max = evento.numero_participantes
+    participantes_actuales = evento.participantes.all().count()
+    disponibles = participantes_max-participantes_actuales
+    if(disponibles>0):
+        ParticipantesEvento.objects.get_or_create(usuario = request.user, evento = evento)
+        messages.success(request, '<h1 class="Diamond">%s!! ahora ya eres parte del evento %s :)</h1>' % (request.user.nombre,evento.nombre))
+        return HttpResponseRedirect('/detalles/evento/%s/' % evento.id)
+    else:
+        messages.error(request, '<h1 class="Diamond">%s!! El numero maximo de participantes del evento ha llegado a su limite :( </h1>' % (request.user.nombre))
+        return HttpResponseRedirect('/' )
+        
+@login_required
+def invitar_evento(request,id):
+    evento = Evento.objects.get(id=id)
     ParticipantesEvento.objects.get_or_create(usuario = request.user, evento = evento)
-    messages.success(request, '<h1 class="Diamond">%s!! ahora ya eres parte del evento %s :)</h1>' % (request.user.nombre,evento.nombre))
-    return HttpResponseRedirect('/detalles/evento/%s/' % evento.id)
+    
+    data={
+    'evento':evento    
+    }
+    return render_to_response('invitar_evento.html' , data , context_instance=RequestContext(request))
+@login_required
+def elegir_regalo(request,id):
+    evento = Evento.objects.get(id=id)
+    ParticipantesEvento.objects.get_or_create(usuario = request.user, evento = evento)
+    
+    data={
+    'evento':evento    
+    }
+    return render_to_response('elegir_regalo.html' , data , context_instance=RequestContext(request))

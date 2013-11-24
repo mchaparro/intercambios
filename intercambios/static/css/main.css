@@ -295,3 +295,17 @@ color: inherit;
 .btn-rosita span.glyphicon-pencil:hover{
 	color:#4ABDF8;
 }
+.titulo-circular{
+	padding: 15px;
+    background-color: white;
+    border-radius: 25px;
+    font-size: 35px;
+    cursor: pointer;
+}
+.linea-pekis{
+    line-heigth: 2px;
+}
+.titulo-circular textarea{
+    border-radius: 15px;
+    resize: none; 
+}

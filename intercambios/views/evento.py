@@ -47,7 +47,8 @@ def detalles_evento(request, id):
     
     data={
           'nuevo_evento':evento,
-          'participantes':participantes
+          'participantes':participantes,
+          'participantes_faltantes':evento.numero_participantes-participantes.count()
           }
         
     return render_to_response('detalles_evento.html',data, context_instance=RequestContext(request))
@@ -93,5 +94,7 @@ def editar_evento(request, id):
           'evento':evento,
           }
         
+    return render_to_response('editar_evento.html',data, context_instance=RequestContext(request))
+def cancelar_evento(request):
     return render_to_response('editar_evento.html',data, context_instance=RequestContext(request))
 

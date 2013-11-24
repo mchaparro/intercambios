@@ -1,0 +1,18 @@
+{% load static %}
+
+{% block extra_head %}
+	<script type="text/javascript" src="{% static "js/intercambios/invitar_evento.js" %}"></script>
+	<script>
+	var fecha = "{{ evento.fecha_evento|date:"m/d/Y" }}";
+	
+	</script>
+{% endblock %}
+<div class="container">
+	<div class="col-lg-12 jumbotron" style="margin-bottom:0px;">
+	<h2>Tipo de Regalo que te gustaria recibir:</h2>
+		<div class="titulo-circular" style="font-size: 20px">
+		<div><input type="checkbox" name="libros" value="libros"> Libros<br></div>
+		Detalles:<textarea name="comentarios" rows="1" cols="30">Escribe aqui tus comentarios</textarea>
+		</div>
+	</div>
+</div>

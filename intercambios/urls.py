@@ -27,4 +27,9 @@ urlpatterns = patterns('',
     (r'^participar/evento/(?P<id>\d+)/$', participar_evento, {}, 'participar_evento'),
     #detalles evento
     (r'^detalles/evento/(?P<id>\d+)/$', detalles_evento, {}, 'detalles_evento'),
+    #pop-invitar participantes
+    (r'^invitar/evento/(?P<id>\d+)/$', invitar_evento, {}, 'invitar_evento'),
+    #pop-elegir regalo
+    (r'^elegir/regalo/(?P<id>\d+)/$', elegir_regalo, {}, 'elegir_regalo'),
+    
 )

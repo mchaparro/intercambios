@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load partition %}
 {% load static %}
 
 {% block extra_head %}
@@ -7,7 +8,7 @@
 {% block content %}
 
 <div class="col-lg-12 jumbotron " style="padding-left: 10px; border-radius:30px !important; padding-right: 10px;">
-		<h1 style="padding:8px; border-radius:29px; background-color:white;"  class="titulo-eventos text-center marron titulo-evento">Bienvenido al Evento<span class="rojo" > {{nuevo_evento.nombre}}</span></h1>
+		<h1 style="padding:8px; border-radius:29px; background-color:white;"  class="titulo-eventos text-center marron titulo-evento">Bienvenido al Evento</br><span class="rojo" > {{nuevo_evento.nombre}}</span></h1>
 	<div style="background-color:white; padding: 5px 30px 5px 30px; border-radius:30px; min-height: 380px;">
 	<div class="col-lg-6">
 	<h3><span class="Diamond color-esperanza" style="font-size: 40px">Detalles del Evento:</span></h3>
@@ -22,33 +23,23 @@
 	   </ul>
   	</div> 
    	<h3><span class="Diamond color-esperanza" style="font-size: 40px">Participantes Registrados:  <span class="rojo">{{ participantes.count }}</span></span></h3>
-   	<div class="col-lg-3">
-   	<table style="width:250px;" class="table fondo-tabla  ">
-   	{% for participante in participantes %}
+   	<div class="col-lg-6">
+   	<table style="width:110%;" class="table fondo-tabla  ">
+   	
+   	
+   	{% for participante_tupla in participantes|columns:2 %}
    	<tr class="fondo-tabla">
-   		<td><span class="glyphicon glyphicon-ok " text="Ver Regalos" style="color: #D11D59"> </span></td>
-   		<td style="width:500px"><span class="Secrets" style="color: #333333;">{{ participante.nombre }}</span></td>
-   		
+   	{% for participante in participante_tupla %}
+   		<td style="border-left:3px solid black;"><span class="glyphicon glyphicon-ok " text="Ver Regalos" style="color: #D11D59"> </span></td>
+   		<td><span class="Secrets" style="color: #333333;">{{ participante.nombre }}</span></td>
    		<td><span class="glyphicon glyphicon-gift  rojo"></span></td>
    		<td><span class="glyphicon glyphicon-trash  rojo"></span></td>
+   		<td style="border-right:3px solid black;"></td>
+   	{% endfor %}
    	</tr>
    	{% endfor %}
     </table>
     </div>
-    <div clas="col-lg-3" >
-    <table style="width:250px;" class="table fondo-tabla ">
-   	{% for participante in participantes %}
-   	<tr class="fondo-tabla">
-   		<td><span class="glyphicon glyphicon-ok  " style="color: #D11D59"> </span></td>
-   		<td style="width:500px"><span class="Secrets" style="color: #333333;">{{ participante.nombre }}</span></td>
-   		
-   		<td><span class="glyphicon glyphicon-gift  rojo"></span></td>
-   		<td><span class="glyphicon glyphicon-trash  rojo"></span></td>
-   	</tr>
-   	{% endfor %}
-    </table>
-    </div>
-   
    <div>
    <h1 style="padding:8px; border-radius:29px; background-color:white;"  class="titulo-eventos text-center marron titulo-evento"><span class="btn btn-default btn-lg btn-esperanza2 Secrets" style="padding-left: 5px; border-radius:13px !important; padding-right: 10px; width:100%; font-size:40px; font-weight:bold;">Iniciar Rifa</span></h1> 
 	</div>

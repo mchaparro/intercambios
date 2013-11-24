@@ -32,6 +32,6 @@ urlpatterns = patterns('',
     #pop-elegir regalo
     (r'^elegir/regalo/(?P<id>\d+)/$', elegir_regalo, {}, 'elegir_regalo'),
     #random
-    (r'^random/evento/(?P<id>\d+)/$', random, {}, 'random'),
+    (r'^generar/intercambio/evento/(?P<id>\d+)/$', generar_intercambio, {}, 'generar_intercambio'),
     
 )

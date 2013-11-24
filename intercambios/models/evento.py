@@ -22,6 +22,9 @@ class ParticipantesEvento(models.Model):
     intercambio = models.CharField(max_length=100, blank=True, null=True)
     evento = models.ForeignKey('Evento', related_name='participantes_evento')
     
+    def __unicode__(self):
+        return "%s" % self.id
+    
     class Meta:
         app_label = 'intercambios'
         unique_together = ['usuario','evento']

@@ -10,17 +10,21 @@ import datetime
 import pytz
 import random
 
-def random(request, id):
+def generar_intercambio(request, id):
     evento =  Evento.objects.get(id=id)
+    print(dir(random))
     participantes = list(evento.participantes_evento.all())
     temporal = []
     for participante in participantes:
-        tempo = participantes
+        tempo = list(evento.participantes_evento.all())
         tempo.remove(participante)
-        for temp in temporal:
-            tempo.remove(temp)
+        
+        #magia de python
+        tempo = list(set([x for x in tempo if x not in temporal]))
+        
+        
         intercambio = random.choice(tempo)
-        participante.intercambio = intercambio.usuario.nombre
+        participante.intercambio = "%s - %s" % (intercambio.usuario.nombre,intercambio.usuario.id)
         participante.save()
         temporal.append(intercambio) 
         

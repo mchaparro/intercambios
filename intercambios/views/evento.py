@@ -44,11 +44,13 @@ def crear_evento(request):
 def detalles_evento(request, id):
     evento = Evento.objects.get(id=id)
     participantes = evento.participantes.all()
-    
+    regala_a = ParticipantesEvento.objects.get(evento_id=id,usuario=request.user)
+    regala_a = regala_a.intercambio
     data={
           'nuevo_evento':evento,
           'participantes':participantes,
-          'participantes_faltantes':evento.numero_participantes-participantes.count()
+          'participantes_faltantes':evento.numero_participantes-participantes.count(),
+          'regala_a': regala_a
           }
         
     return render_to_response('detalles_evento.html',data, context_instance=RequestContext(request))

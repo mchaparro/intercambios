@@ -55,15 +55,15 @@ def detalles_evento(request, id):
 
 @login_required
 def mis_eventos(request):
-    eventos_participa = request.user.eventos.all()
+    #eventos_participa = request.user.eventos.all()
                   
-#     url = 'http://localhost:1212/get/eventos/usuario/%s/' % request.user.id
-#     raw = urllib.urlopen(url)
-#     mis_eventos = raw.readlines()
-#     mis_eventos = json.loads(mis_eventos[0])
+    url = 'http://localhost:5000/get/eventos/usuario/%s/' % request.user.id
+    raw = urllib.urlopen(url)
+    mis_eventos = raw.readlines()
+    mis_eventos = json.loads(mis_eventos[0])
     
     data={
-        'eventos_participa':eventos_participa     
+        'eventos_participa':mis_eventos     
         }
     return render_to_response('index.html',data, context_instance=RequestContext(request))
     

@@ -23,9 +23,9 @@
 			<td style="width:100%;">
 				<a class="no-title" href="/detalles/evento/{{ evento_participa.evento.id }}/">
 				<div style="width:100%; height:53px; font-size:30px; font-weight:bold;" class="btn btn-default btn-lg btn-custom glyphicon btn-rosita probando" >
-				{% if evento_participa.evento.admin == user %}
+				{% if evento_participa.admin_id == user.id %}
 					<span class="nombre-evento" style="width:100%; margin-left:30px; line-height:35px; text-align:center;">
-					{{ evento_participa.evento.nombre }}
+					{{ evento_participa.nombre }}
 					</span>
 					<div style="float:right; margin-top:-5px; margin-left:-40px;">
 						<a onclick="return confirm('¿Estas seguro de cancelar el evento?');" class="cancelar-evento no-title colorbox-link" href="/cancelar/evento/{{ evento_participa.evento.id }}/">
@@ -37,7 +37,7 @@
 					</div>
 				{% else %}
 				<span class="nombre-evento" style="width:100%; line-height:35px; text-align:center;">
-				{{ evento_participa.evento.nombre }}
+				{{ evento_participa.nombre }}
 				</span>
 				{% endif %}
 				 </div>

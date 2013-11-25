@@ -3,7 +3,8 @@
 {% load static %}
 
 {% block extra_head %}
-	<script type="text/javascript" src="{% static "js/intercambios/crear_evento.js" %}"></script>
+	<script type="text/javascript" src="{% static "js/intercambios/detalles_evento.js" %}"></script>
+	<script type="text/javascript" src="{% static "js/scratch/wScratchPad.js" %}"></script>
 {% endblock %}
 {% block content %}
 
@@ -39,9 +40,15 @@
    	</tr>
    	{% endfor %}
     </table>
+    Te toco regalarle a:{{ participante.id }}
+    <div id="regalo">
+    
+    
     </div>
+    </div>
+    
    <div>
-   <h1 style="padding:8px; border-radius:29px; background-color:white;"  class="titulo-eventos text-center marron titulo-evento"><span class="btn btn-default btn-lg btn-esperanza2 Secrets" style="padding-left: 5px; border-radius:13px !important; padding-right: 10px; width:100%; font-size:40px; font-weight:bold;">Iniciar Rifa</span></h1> 
+   <a  class="no-title" href="/generar/intercambio/evento/{{ nuevo_evento.id }}/"><h1 style="padding:8px; border-radius:29px; background-color:white;"  class="titulo-eventos text-center marron titulo-evento"><span class="btn btn-default btn-lg btn-esperanza2 Secrets" style="padding-left: 5px; border-radius:13px !important; padding-right: 10px; width:100%; font-size:40px; font-weight:bold;">Iniciar Rifa</span></h1></a> 
 	</div>
 
 

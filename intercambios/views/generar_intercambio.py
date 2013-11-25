@@ -29,4 +29,4 @@ def generar_intercambio(request, id):
         temporal.append(intercambio) 
         
         
-    return HttpResponseRedirect('/') 
+    return HttpResponseRedirect('/detalles/evento/%s/' % evento.id) 

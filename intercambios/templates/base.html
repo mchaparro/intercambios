@@ -60,17 +60,22 @@
 	  	  </div>
 		  <div class="navbar-collapse collapse">
 		    <div class="navbar-header navbar-right">
-			  	<ul class="nav navbar-nav">
-			   		<li>
-			   		<a data-toggle="dropdown" style="margin-top:-7px;" class="dropdown-toggle" href="#"><span style="color:white;" class="glyphicon glyphicon-user"></span>  {{user}} <b class="caret"></b></a>			        
-					   <ul class="dropdown-menu">
-			          <li><a href="/logout/">Cerrar sessi&oacute;n</a></li>
-			          <li><a href="#">Mis Eventos</a></li>
-			        </ul>
-			      </li>
-			    </ul>
-		  	</div>
-		  </div>
+  			 <ul class="nav navbar-nav">
+  			 {% if user.is_authenticated %}
+   				<li class="dropdown">
+  				 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+	  				 <span style="color:white;" class="glyphicon glyphicon-user"> </span>  
+	  				  {{ user }} <b class="caret"></b>
+  				 </a>
+       			 <ul class="dropdown-menu">
+        		  <li><a href="/logout/">Cerrar sessi&oacute;n</a></li>
+        		  <li><a href="#">Cambiar contrase&ntilde;a</a></li>
+      		    </ul>
+               </li>
+             {% endif %}
+            </ul>
+  	      </div>
+		 </div>
 	    </nav>
 	    <div class="titulo adornos text-center" >
 			<h1 class="titulo-login">Intercambios <span class="red">2013</span></h1>

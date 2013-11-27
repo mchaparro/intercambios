@@ -57,7 +57,7 @@ def detalles_evento(request, id):
 
 @login_required
 def mis_eventos(request):
-    #mis_eventos = request.user.eventos.all().filter(evento__estado="activo")
+    #mis_eventos = request.user.mis_eventos.all().filter(estado="activo")
                   
     url = 'http://intercambios-node.herokuapp.com/get/eventos/usuario/%s/' % request.user.id
     raw = urllib.urlopen(url)

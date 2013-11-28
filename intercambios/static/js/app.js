@@ -39,7 +39,7 @@ function ListCtrl($scope, Restangular) {
 
 function CreateCtrl($scope, $location, Restangular) {
   $scope.save = function() {
-    Restangular.all('eventos').post($scope.evento).then(function(project) {
+    Restangular.all('evento').post($scope.evento).then(function(project) {
       $location.path('/list');
     });
   }

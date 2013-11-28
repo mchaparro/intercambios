@@ -270,13 +270,31 @@ text-shadow: -3px -3px 0 #000, 1px -3px 0 #000, -3px 3px 0 #000, 3px 3px 0 #000;
 	   <ul style="margin-top:0px;"class="list-group  detalle-evento Diamond ">
 	    <li class="list-group-item ">Creado por: <span class="rojo" > {{ nuevo_evento.admin }}</span></li>
 	    <li class="list-group-item ">Fecha: <span class="rojo" > {{ nuevo_evento.fecha_evento }}</span>
-	    <a class="no-title colorbox-link" href="/editar/evento/{{ nuevo_evento.id }}/"><span  class=" glyphicon glyphicon-pencil"></span</a>
+		    {% if nuevo_evento.admin == user %}
+		    <div class="pull-right">
+			    <a  class=" no-title colorbox-link" href="/editar/evento/{{ nuevo_evento.id }}/">
+			   	 <span  class=" glyphicon glyphicon-pencil"></span
+			    </a>
+		    </div>
+		    {% endif %}
 	    </li>
 	    <li class="list-group-item ">Precio del Regalo: <span class="rojo"> ${{ nuevo_evento.precio }}</span>
-	    <a class="no-title colorbox-link" href="/editar/evento/{{ nuevo_evento.id }}/"><span  class=" glyphicon glyphicon-pencil"></span</a>
+	   		 {% if nuevo_evento.admin == user %}
+	   		 <div class="pull-right">
+			    <a  class=" no-title colorbox-link" href="/editar/evento/{{ nuevo_evento.id }}/">
+			   	 <span  class=" glyphicon glyphicon-pencil"></span
+			    </a>
+		    </div>
+		    {% endif %}
 	    </li>
 	    <li class="list-group-item ">Numero de Participantes: <span class="rojo" > {{ nuevo_evento.numero_participantes }}</span>
-	    <a class="no-title colorbox-link" href="/editar/evento/{{ nuevo_evento.id }}/"><span style="float: rigth"></span><span  class=" glyphicon glyphicon-pencil"></span</a>
+	    	 {% if nuevo_evento.admin == user %}
+	    	 <div class="pull-right">
+			    <a  class=" no-title colorbox-link" href="/editar/evento/{{ nuevo_evento.id }}/">
+			   	 <span class="glyphicon glyphicon-pencil"></span
+			    </a>
+		    </div>
+		    {% endif %}
 	    </li>
 	    <li class="list-group-item ">Faltan: <span class="rojo" > {{ participantes_faltantes }} </span>participantes por confirmar</li><br>
     	<a class="no-title colorbox-link " href = "/invitar/evento/{{ nuevo_evento.id }}/ " ><div class=" btn btn-default btn-lg btn-custom glyphicon btn-rosita Secrets " style="width:100%; font-size:30px; font-weight:bold;" > Invitar Participantes</div></a><br>

@@ -42,10 +42,18 @@ def crear_evento(request):
 
 @login_required
 def detalles_evento(request, id):
-    evento = Evento.objects.get(id=id)
+    try:
+        evento = Evento.objects.get(id=id)
+    except:
+        messages.warning(request, '<h2 class="Diamond">No existe el evento seleccionado :(</h2>')
+        return HttpResponseRedirect('/')
     participantes = evento.participantes.all()
-    regala_a = ParticipantesEvento.objects.get(evento_id=id,usuario=request.user)
-    regala_a = regala_a.intercambio
+    try:
+        regala_a = ParticipantesEvento.objects.get(evento_id=id,usuario=request.user)
+        regala_a = regala_a.intercambio
+    except:
+        messages.warning(request, '<h2 class="Diamond">No puedes acceder al evento: <b>"%s"</b> </br>es necesario solicitar una invitacion a %s</h2>' % (evento.nombre, evento.admin.nombre))
+        return HttpResponseRedirect('/')
     data={
           'nuevo_evento':evento,
           'participantes':participantes,
@@ -57,7 +65,7 @@ def detalles_evento(request, id):
 
 @login_required
 def mis_eventos(request):
-    #mis_eventos = request.user.mis_eventos.all().filter(estado="activo")
+#     mis_eventos = request.user.mis_eventos.all().filter(estado="activo")
                   
     url = 'http://intercambios-node.herokuapp.com/get/eventos/usuario/%s/' % request.user.id
     raw = urllib.urlopen(url)
@@ -90,12 +98,11 @@ def editar_evento(request, id):
         evento.fecha_evento=fecha_evento
         evento.save()
         
-        messages.warning(request, '<h2 class="Diamong">Se edito correctamente el evento %s</h2>' % evento.nombre)
-        return HttpResponseRedirect('/')
+        messages.warning(request, '<h2 class="Diamond">Se edito correctamente el evento %s</h2>' % evento.nombre)
+        return HttpResponseRedirect('/detalles/evento/%s/' % evento.id) 
     data={
           'evento':evento,
           }
-        
     return render_to_response('editar_evento.html',data, context_instance=RequestContext(request))
 def cancelar_evento(request):
     return render_to_response('editar_evento.html',data, context_instance=RequestContext(request))

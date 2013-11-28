@@ -64,6 +64,7 @@
   			 {% if user.is_authenticated %}
    				<li class="dropdown">
   				 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+	  				 <span class="badge">{{ user.id }}</span>
 	  				 <span style="color:white;" class="glyphicon glyphicon-user"> </span>  
 	  				  {{ user }} <b class="caret"></b>
   				 </a>

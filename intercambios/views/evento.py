@@ -73,7 +73,7 @@ def mis_eventos(request):
     mis_eventos = json.loads(mis_eventos[0])
     
     data={
-        'eventos_participa':mis_eventos     
+        'eventos_participa':list(mis_eventos)     
         }
     return render_to_response('index.html',data, context_instance=RequestContext(request))
     

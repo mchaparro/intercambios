@@ -2,8 +2,113 @@
 {% load static %}
 {% block extra_head %}
 	<script type="text/javascript" src="{% static "js/intercambios/index.js" %}"></script>
+	
+    
+    <script src="http://code.angularjs.org/1.1.4/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+    <script type="text/javascript" src="{% static "js/restangular.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/app.js" %}"></script>
+	
 {% endblock %}
 {% block content %}
+
+
+<script>
+	var usuario_actual = {{ user.id }};
+
+</script>
+
+
+
+{% verbatim %}
+
+   <div ng-app="project" >
+    <h1> Intercambios Angular </h1>
+    <div ng-view></div>
+  
+  
+  
+    <!-- CACHE FILE: list.html -->
+    <script type="text/ng-template" id="list.html">
+      <input type="text" ng-model="search" class="search-query" placeholder="Search">
+      <table>
+        <thead>
+        <tr>
+          <th>Project</th>
+          <th>Description</th>
+          <th><a href="#/new"><i class="icon-plus-sign"></i></a></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="project in projects | filter:search | orderBy:'nombre'">
+          <td><a href="{{project.nombre}}" target="_blank">{{project.nombre}}</a></td>
+          <td>{{project.nombre}}</td>
+          <td>
+            <a href="#/editar/evento/{{project.id}}"><span  class=" glyphicon glyphicon-pencil"></span></a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </script>
+  
+  
+  
+   <!-- CACHE FILE: detail.html -->
+    <script type="text/ng-template" id="detail.html">
+    
+      <form name="myForm">
+        <div class="control-group" ng-class="{error: myForm.nombre.$invalid}">
+          <label>Nombre del Evento:</label>
+          <input type="text" name="nombre" ng-model="evento.nombre" required>
+          <span ng-show="myForm.nombre.$error.required" class="help-inline">
+              Required</span>
+        </div>
+      
+        <div class="control-group" ng-class="{error: myForm.numero_participantes.$invalid}">
+          <label>Numero de Participantes</label>
+          <input type="text" name="numero_participantes" ng-model="evento.numero_participantes" required>
+          <span ng-show="myForm.numero_participantes.$error.required" class="help-inline">
+              Required</span>
+          
+        </div>
+        
+        <div class="control-group">
+          <label>Fecha del evento:</label>
+          <input id="fecha" type="text" name="fecha_evento" ng-model="evento.fecha_evento">
+        
+          
+        </div>
+
+        <div class="control-group" ng-class="{error: myForm.precio.$invalid}">
+          <label>Precio del regalo:</label>
+          <input type="text" name="precio" ng-model="evento.precio" required>
+          <span ng-show="myForm.precio.$error.required" class="help-inline">
+              Required</span>
+          
+        </div>
+      
+        <br>
+        <a href="#/" class="btn">Cancel</a>
+        <button ng-click="save()" ng-disabled="isClean() || myForm.$invalid"
+                class="btn btn-primary">Save</button>
+        <button ng-click="destroy()"
+                ng-show="evento.id" class="btn btn-danger">Delete</button>
+      </form>
+    </script>
+  </div>
+
+
+
+
+{% endverbatim %}
+
+
+
+
+
+
+
 <div>
 		<div class="col-lg-6">
 			<div class="jumbotron text-center mis-eventos">

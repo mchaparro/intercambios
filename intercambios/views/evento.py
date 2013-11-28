@@ -67,7 +67,7 @@ def detalles_evento(request, id):
 def mis_eventos(request):
 #     mis_eventos = request.user.mis_eventos.all().filter(estado="activo")
                   
-    url = 'http://intercambios-node.herokuapp.com/get/eventos/usuario/%s/' % request.user.id
+    url = 'http://intercambios-node.herokuapp.com/eventos/usuario/%s/' % request.user.id
     raw = urllib.urlopen(url)
     mis_eventos = raw.readlines()
     mis_eventos = json.loads(mis_eventos[0])

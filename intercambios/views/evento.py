@@ -27,6 +27,7 @@ def crear_evento(request):
         participantes = request.POST['participantes']
         precio = request.POST['precio']
         precio = precio.replace("$", "")
+        precio = precio.replace(",", "")
         
         
         fecha_evento = datetime.datetime.strptime(fecha, '%m/%d/%Y').date()

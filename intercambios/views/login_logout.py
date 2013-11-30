@@ -17,19 +17,19 @@ def login_user(request):
     email = ''
     password = ''
     if request.POST:
-        email = request.POST['email']
+        username = request.POST['username']
         password = request.POST['password']
         try:
             nombre = request.POST['nombre']
-            user = Usuario(nombre=nombre,email=email)
+            user = Usuario(nombre=nombre,username=username)
             user.set_password(password)
             user.save()
-            user = authenticate(email=email, password=password)
+            user = authenticate(username=username, password=password)
             login(request,user)
             messages.warning(request, '<h1 class="Diamond">%s!! bienvenido al sistema de intercambios navideños :)</br> para iniciar sesi&oacute deberas usar tu e-mail: %s </h1>' % (user.nombre,user.email))
             return HttpResponseRedirect(next)
         except:
-            user = authenticate(email=email, password=password)
+            user = authenticate(username=username, password=password)
             if user is not None:
                 if user.is_active:
                     login(request, user)

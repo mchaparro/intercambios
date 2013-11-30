@@ -6,11 +6,11 @@ from intercambios.models import Evento, ParticipantesEvento, Usuario
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-import datetime
 import pytz
 import json
 from django.conf import settings
 import urllib
+import datetime
 
 
 def _json_object_hook(d): return namedtuple('object', d.keys())(*d.values())
@@ -35,11 +35,25 @@ def crear_evento(request):
         evento.save()
         
         ParticipantesEvento.objects.get_or_create(usuario = request.user, evento = evento)
-        messages.success(request, '<h1 class="Diamond">%s!! ahora eres el administrador del evento %s :)</br>debes mandar el link de tu evento a los dem&aacute;s participantes</h1>' % (request.user.nombre,evento.nombre))
+        messages.success(request, '<h1 class="Diamond">%s!! ahora eres el administrador del evento <b>%s</b></br>debes mandar el link de tu evento a los dem&aacute;s participantes</h1>' % (request.user.nombre,evento.nombre))
         return HttpResponseRedirect('/detalles/evento/%s/' % evento.id)
         
     return render_to_response('crear_evento.html', context_instance=RequestContext(request))
 
+
+def format_fecha_delta(td):
+    dias = abs(td.days)
+    horas, remainder = divmod(td.seconds, 3600)
+    minutos, segundos = divmod(remainder, 60)
+    
+    fecha_delta = {
+      'dias' : "%02d" % dias,
+      'horas' : "%02d" % horas,
+      'minutos' : "%02d" % minutos,
+      'segundos' : "%02d" % segundos
+     
+     }
+    return fecha_delta
 
 @login_required
 def detalles_evento(request, id):
@@ -55,7 +69,14 @@ def detalles_evento(request, id):
     except:
         messages.warning(request, '<h2 class="Diamond">No puedes acceder al evento: <b>"%s"</b> </br>es necesario solicitar una invitacion a %s</h2>' % (evento.nombre, evento.admin.nombre))
         return HttpResponseRedirect('/')
+    
+    fecha_evento = datetime.datetime.combine(datetime.datetime.today().date(), datetime.time.min)
+    fecha_delta = fecha_evento - datetime.datetime.today() 
+    fecha_delta = format_fecha_delta(fecha_delta)
+#     datetime.datetime.combine(evento.fecha_evento, datetime.time.min())
+    
     data={
+          'fecha_delta' : fecha_delta,
           'nuevo_evento':evento,
           'participantes':participantes,
           'participantes_faltantes':evento.numero_participantes-participantes.count(),
@@ -66,12 +87,12 @@ def detalles_evento(request, id):
 
 @login_required
 def mis_eventos(request):
-#     mis_eventos = request.user.mis_eventos.all().filter(estado="activo")
+    mis_eventos = request.user.mis_eventos.all().filter(estado="activo")
                   
-    url = 'http://intercambios-node.herokuapp.com/eventos/usuario/%s/' % request.user.id
-    raw = urllib.urlopen(url)
-    mis_eventos = raw.readlines()
-    mis_eventos = json.loads(mis_eventos[0])
+#     url = 'http://intercambios-node.herokuapp.com/eventos/usuario/%s/' % request.user.id
+#     raw = urllib.urlopen(url)
+#     mis_eventos = raw.readlines()
+#     mis_eventos = json.loads(mis_eventos[0])
     
     data={
         'eventos_participa':list(mis_eventos)     

@@ -12,6 +12,8 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+                       
+      
     (r'^$',mis_eventos ,{} , 'mis_eventos'),
     #url(r'^$', login_required(TemplateView.as_view(template_name='index.html')), name="index"),
     (r'^login/$', login_user, {}, 'user_login'),
@@ -33,5 +35,6 @@ urlpatterns = patterns('',
     (r'^elegir/regalo/(?P<id>\d+)/$', elegir_regalo, {}, 'elegir_regalo'),
     #random
     (r'^generar/intercambio/evento/(?P<id>\d+)/$', generar_intercambio, {}, 'generar_intercambio'),
+    url(r'', include('social_auth.urls')),
     
 )

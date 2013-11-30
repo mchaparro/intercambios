@@ -4,42 +4,45 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, Permis
 from django.utils import timezone
 
 class UsuariosManager(BaseUserManager):
-    def create_user(self, email, password="", nombre=""):
+    def create_user(self, username, email="",password="", nombre=""):
         """
         Creates and saves user with the given username and password.
         """
-        if not email:
-            raise ValueError('Favor de proporcionar un correo valido')
+        if not username:
+            raise ValueError('Favor de proporcionar un nombre de usuario valido')
 
         usuario = self.model(
-            email=UserManager.normalize_email(email),nombre=nombre
+            email=UserManager.normalize_email(email),username=username,nombre=nombre
         )
         
         usuario.set_password(password)
         usuario.save(using=self._db)
         return usuario
 
-    def create_superuser(self, email="",password="",nombre=""):
+    def create_superuser(self, username="",email="",password="",nombre=""):
         """
         Creates and saves a superuser with the given username
         """
-        usuario = self.create_user(email=email,nombre=nombre,password=password)
+        usuario = self.create_user(username=username, email=email,nombre=nombre,password=password)
         usuario.is_superuser = True
         usuario.is_admin = True
         usuario.save(using=self._db)
         return usuario
 
 class Usuario(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(max_length=254, unique=True, db_index=True)
+    username = models.CharField(max_length=50,db_index=True,unique=True)
+    nickname = models.CharField(max_length=100,blank=True,null=True,default=None)
+    email = models.EmailField(max_length=100, blank=True,null=True,default=None,db_index=True)
     nombre = models.CharField(max_length=100)
+    
     fecha = models.DateTimeField(auto_now_add=True)
     fecha_mod = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
-
+    
     objects = UsuariosManager()
 
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['nombre']
     
 

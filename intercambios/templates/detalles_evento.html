@@ -5,6 +5,7 @@
 {% block extra_head %}
 	<script type="text/javascript" src="{% static "js/intercambios/detalles_evento.js" %}"></script>
 	<script type="text/javascript" src="{% static "js/scratch/wScratchPad.js" %}"></script>
+	<script type="text/javascript" src="{% static "js/countdown/jquery.countdown.js" %}"></script>
 {% endblock %}
 {% block content %}
 
@@ -263,70 +264,130 @@ text-shadow: -3px -3px 0 #000, 1px -3px 0 #000, -3px 3px 0 #000, 3px 3px 0 #000;
     
        
 <div class="col-lg-12 jumbotron " style="padding-left: 10px; border-radius:30px !important; padding-right: 10px;">
-		<h1 style="padding:8px; border-radius:29px; background-color:white;"  class="titulo-eventos text-center marron titulo-evento">Bienvenido al Evento</br><span class="rojo" > {{nuevo_evento.nombre}}</span></h1>
+    <h1> {{ fecha_delta }} </h1>
+    
+    
+    <script>
+      $(function(){
+     
+    $('#counter').countdown({
+          image: '{% static 'js/countdown/digits.png' %}',
+          startTime: '{{ fecha_delta.dias }}:{{ fecha_delta.horas }}:{{ fecha_delta.minutos }}:{{ fecha_delta.segundos }}'
+          
+        });
+      });
+    </script>
+    
+     <style type="text/css">
+      #counter-container{
+     min-height:145px;
+      font-family:Secrets;
+    font-weight:bold;
+       font-size:50px;
+      }
+      #counter{
+      margin-top:-20px;
+      }
+      br { clear: both; }
+      .cntSeparator {
+        font-size: 71px;
+        margin: -43px 7px;
+        color: #000;
+      }
+      .desc { margin: 7px 3px; text-align:center;}
+      .desc div {
+      	float:left;
+      	margin-top:-18px;
+      	margin-left:0px;
+        width: 70px;
+        margin-right: 65px;
+        font-size:30px;
+        font-weight: bold;
+        color: #000;
+        font-family:Diamond;
+      }
+    </style>
+    
+   
+	<h1 style="padding:8px; border-radius:29px; background-color:white;"  class="titulo-eventos text-center marron titulo-evento">Bienvenido al Evento</br><span class="rojo" > {{nuevo_evento.nombre}}</span></h1>
 	<div style="background-color:white; padding: 5px 30px 5px 30px; border-radius:30px; min-height: 380px;">
-	<div class="col-lg-6">
-	<h3><span class="Diamond color-esperanza" style="font-size: 40px">Detalles del Evento:</span></h3>
-	   <ul style="margin-top:0px;"class="list-group  detalle-evento Diamond ">
-	    <li class="list-group-item ">Creado por: <span class="rojo" > {{ nuevo_evento.admin }}</span></li>
-	    <li class="list-group-item ">Fecha: <span class="rojo" > {{ nuevo_evento.fecha_evento }}</span>
-		    {% if nuevo_evento.admin == user %}
-		    <div class="pull-right">
-			    <a  class=" no-title colorbox-link" href="/editar/evento/{{ nuevo_evento.id }}/">
-			   	 <span  class=" glyphicon glyphicon-pencil"></span
-			    </a>
-		    </div>
-		    {% endif %}
-	    </li>
-	    <li class="list-group-item ">Precio del Regalo: <span class="rojo"> ${{ nuevo_evento.precio }}</span>
-	   		 {% if nuevo_evento.admin == user %}
-	   		 <div class="pull-right">
-			    <a  class=" no-title colorbox-link" href="/editar/evento/{{ nuevo_evento.id }}/">
-			   	 <span  class=" glyphicon glyphicon-pencil"></span
-			    </a>
-		    </div>
-		    {% endif %}
-	    </li>
-	    <li class="list-group-item ">Numero de Participantes: <span class="rojo" > {{ nuevo_evento.numero_participantes }}</span>
-	    	 {% if nuevo_evento.admin == user %}
-	    	 <div class="pull-right">
-			    <a  class=" no-title colorbox-link" href="/editar/evento/{{ nuevo_evento.id }}/">
-			   	 <span class="glyphicon glyphicon-pencil"></span
-			    </a>
-		    </div>
-		    {% endif %}
-	    </li>
-	    <li class="list-group-item ">Faltan: <span class="rojo" > {{ participantes_faltantes }} </span>participantes por confirmar</li><br>
-    	<a class="no-title colorbox-link " href = "/invitar/evento/{{ nuevo_evento.id }}/ " ><div class=" btn btn-default btn-lg btn-custom glyphicon btn-rosita Secrets " style="width:100%; font-size:30px; font-weight:bold;" > Invitar Participantes</div></a><br>
-	    <a class="no-title colorbox-link " href = "/elegir/regalo/{{ nuevo_evento.id }}/ " ><div class=" btn btn-default btn-lg btn-custom glyphicon btn-rosita Secrets " style="width:100%; font-size:30px; font-weight:bold;" > Elegir Regalo</div></a>
-	   </ul>
+		<div class="col-lg-6">
+		<h3><span class="Diamond color-esperanza" style="font-size: 40px">Detalles del Evento:</span></h3>
+		   <ul style="margin-top:0px;"class="list-group  detalle-evento Diamond ">
+		    <li class="list-group-item ">Creado por: <span class="rojo" > {{ nuevo_evento.admin }}</span></li>
+		    <li class="list-group-item ">Fecha: <span class="rojo" > {{ nuevo_evento.fecha_evento }}</span>
+			    {% if nuevo_evento.admin == user %}
+			    <div class="pull-right">
+				    <a  class=" no-title colorbox-link" href="/editar/evento/{{ nuevo_evento.id }}/">
+				   	 <span  class=" glyphicon glyphicon-pencil"></span
+				    </a>
+			    </div>
+			    {% endif %}
+		    </li>
+		    <li class="list-group-item ">Precio del Regalo: <span class="rojo"> ${{ nuevo_evento.precio }}</span>
+		   		 {% if nuevo_evento.admin == user %}
+		   		 <div class="pull-right">
+				    <a  class=" no-title colorbox-link" href="/editar/evento/{{ nuevo_evento.id }}/">
+				   	 <span  class=" glyphicon glyphicon-pencil"></span
+				    </a>
+			    </div>
+			    {% endif %}
+		    </li>
+		    <li class="list-group-item ">Numero de Participantes: <span class="rojo" > {{ nuevo_evento.numero_participantes }}</span>
+		    	 {% if nuevo_evento.admin == user %}
+		    	 <div class="pull-right">
+				    <a  class=" no-title colorbox-link" href="/editar/evento/{{ nuevo_evento.id }}/">
+				   	 <span class="glyphicon glyphicon-pencil"></span
+				    </a>
+			    </div>
+			    {% endif %}
+		    </li>
+		    <li class="list-group-item ">Faltan: <span class="rojo" > {{ participantes_faltantes }} </span>participantes por confirmar</li><br>
+	    	<a class="no-title colorbox-link " href = "/invitar/evento/{{ nuevo_evento.id }}/ " ><div class=" btn btn-default btn-lg btn-custom glyphicon btn-rosita Secrets " style="width:100%; font-size:30px; font-weight:bold;" > Invitar Participantes</div></a><br>
+		    <a class="no-title colorbox-link " href = "/elegir/regalo/{{ nuevo_evento.id }}/ " ><div class=" btn btn-default btn-lg btn-custom glyphicon btn-rosita Secrets " style="width:100%; font-size:30px; font-weight:bold;" > Elegir Regalo</div></a>
+		   </ul>
   	</div> 
    	<h3><span class="Diamond color-esperanza" style="font-size: 40px">Participantes Registrados:  <span class="rojo">{{ participantes.count }}</span></span></h3>
    	<div class="col-lg-6">
-   	<table style="width:100%; font-size:20px;" class="table fondo-tabla  ">
-   	
-   	
-   	{% for participante_tupla in participantes|columns:2 %}
-   	<tr class="fondo-tabla">
-   	{% for participante in participante_tupla %}
-   		<td style="border-left:3px solid black;"><span class="glyphicon glyphicon-ok " text="Ver Regalos" style="color: #D11D59"> </span></td>
-   		<td><span class="Secrets" style="color: #333333;">{{ participante.nombre }}</span></td>
-   		<td><span class="glyphicon glyphicon-gift  rojo"></span></td>
-   		<td><span class="glyphicon glyphicon-trash  rojo"></span></td>
-   		<td style="border-right:3px solid black;"></td>
-   	{% endfor %}
-   	</tr>
-   	{% endfor %}
-    </table>
-    {% if regala_a %}
-    Te toco regalarle a:   {{ regala_a }}
-    
-  {% endif %}
+	   	<table style="width:100%; font-size:20px;" class="table fondo-tabla  ">
+	   	
+	   	
+	   	{% for participante_tupla in participantes|columns:2 %}
+	   	<tr class="fondo-tabla">
+	   	{% for participante in participante_tupla %}
+	   		<td style="border-left:3px solid black;"><span class="glyphicon glyphicon-ok " text="Ver Regalos" style="color: #D11D59"> </span></td>
+	   		<td><span class="Secrets" style="color: #333333;">{{ participante.nombre }}</span></td>
+	   		<td><span class="glyphicon glyphicon-gift  rojo"></span></td>
+	   		<td><span class="glyphicon glyphicon-trash  rojo"></span></td>
+	   		<td style="border-right:3px solid black;"></td>
+	   	{% endfor %}
+	   	</tr>
+	   	{% endfor %}
+	    </table>
+	    {% if regala_a %}
+	    Te toco regalarle a:   {{ regala_a }}
+	    
+	 	{% endif %}
     </div>
     
-   <div>
-   <a  class="no-title" href="/generar/intercambio/evento/{{ nuevo_evento.id }}/"><h1 style="padding:8px; border-radius:29px; background-color:white;"  class="titulo-eventos text-center marron titulo-evento"><span class="btn btn-default btn-lg btn-esperanza2 Secrets" style="padding-left: 5px; border-radius:13px !important; padding-right: 10px; width:100%; font-size:40px; font-weight:bold;">Iniciar sorteo del Intercambio</span></h1></a> 
-	</div>
-
+	   <a  class="no-title" href="/generar/intercambio/evento/{{ nuevo_evento.id }}/">
+	   	<h1 style="padding:8px; border-radius:29px; background-color:white;"  class="titulo-eventos text-center marron titulo-evento">
+	   		<span class="btn btn-default btn-lg btn-esperanza2 Secrets" style="padding-left: 5px; border-radius:13px !important; padding-right: 10px; width:100%; font-size:40px; font-weight:bold;">
+	   			Iniciar sorteo del Intercambio
+	   		</span>
+	   	</h1>
+	   </a> 
+	   
+   <div id="counter-container" class="col-lg-12 col-lg-offset-3">
+		<div id="counter"></div>
+		  	<div class="desc">
+			    <div>Días</div>
+			    <div>Horas</div>
+			    <div>Minutos</div>
+			    <div>Segundos</div>
+	  		</div>
+	  	</div>
+  	</div>
+   </div>
 
 {% endblock %}

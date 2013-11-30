@@ -14,11 +14,12 @@ class Migration(SchemaMigration):
             ('password', self.gf('django.db.models.fields.CharField')(max_length=128)),
             ('last_login', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
             ('is_superuser', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('email', self.gf('django.db.models.fields.EmailField')(unique=True, max_length=254, db_index=True)),
+            ('username', self.gf('django.db.models.fields.CharField')(unique=True, max_length=50, db_index=True)),
+            ('nickname', self.gf('django.db.models.fields.CharField')(default=None, max_length=100, null=True, blank=True)),
+            ('email', self.gf('django.db.models.fields.EmailField')(default=None, max_length=100, null=True, db_index=True, blank=True)),
             ('nombre', self.gf('django.db.models.fields.CharField')(max_length=100)),
             ('fecha', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
             ('fecha_mod', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-            ('intercambio', self.gf('django.db.models.fields.related.ForeignKey')(default=None, related_name='regala_a', null=True, blank=True, to=orm['intercambios.Usuario'])),
             ('is_active', self.gf('django.db.models.fields.BooleanField')(default=True)),
             ('is_admin', self.gf('django.db.models.fields.BooleanField')(default=False)),
         ))
@@ -52,8 +53,37 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal('intercambios', ['OpcionRegalo'])
 
+        # Adding model 'Evento'
+        db.create_table(u'intercambios_evento', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('fecha_creacion', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+            ('fecha_evento', self.gf('django.db.models.fields.DateField')()),
+            ('nombre', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('numero_participantes', self.gf('django.db.models.fields.IntegerField')()),
+            ('precio', self.gf('django.db.models.fields.DecimalField')(max_digits=10, decimal_places=2)),
+            ('admin', self.gf('django.db.models.fields.related.ForeignKey')(related_name='eventos_admin', to=orm['intercambios.Usuario'])),
+            ('estado', self.gf('django.db.models.fields.CharField')(default='activo', max_length=20)),
+        ))
+        db.send_create_signal('intercambios', ['Evento'])
+
+        # Adding model 'ParticipantesEvento'
+        db.create_table(u'intercambios_participantesevento', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('fecha', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+            ('usuario', self.gf('django.db.models.fields.related.ForeignKey')(related_name='participa_evento', to=orm['intercambios.Usuario'])),
+            ('intercambio', self.gf('django.db.models.fields.CharField')(max_length=100, null=True, blank=True)),
+            ('evento', self.gf('django.db.models.fields.related.ForeignKey')(related_name='participantes_evento', to=orm['intercambios.Evento'])),
+        ))
+        db.send_create_signal('intercambios', ['ParticipantesEvento'])
+
+        # Adding unique constraint on 'ParticipantesEvento', fields ['usuario', 'evento']
+        db.create_unique(u'intercambios_participantesevento', ['usuario_id', 'evento_id'])
+
 
     def backwards(self, orm):
+        # Removing unique constraint on 'ParticipantesEvento', fields ['usuario', 'evento']
+        db.delete_unique(u'intercambios_participantesevento', ['usuario_id', 'evento_id'])
+
         # Deleting model 'Usuario'
         db.delete_table(u'intercambios_usuario')
 
@@ -65,6 +95,12 @@ class Migration(SchemaMigration):
 
         # Deleting model 'OpcionRegalo'
         db.delete_table(u'intercambios_opcionregalo')
+
+        # Deleting model 'Evento'
+        db.delete_table(u'intercambios_evento')
+
+        # Deleting model 'ParticipantesEvento'
+        db.delete_table(u'intercambios_participantesevento')
 
 
     models = {
@@ -88,6 +124,18 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
+        'intercambios.evento': {
+            'Meta': {'object_name': 'Evento'},
+            'admin': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'eventos_admin'", 'to': "orm['intercambios.Usuario']"}),
+            'estado': ('django.db.models.fields.CharField', [], {'default': "'activo'", 'max_length': '20'}),
+            'fecha_creacion': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'fecha_evento': ('django.db.models.fields.DateField', [], {}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'nombre': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'numero_participantes': ('django.db.models.fields.IntegerField', [], {}),
+            'participantes': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'mis_eventos'", 'symmetrical': 'False', 'through': "orm['intercambios.ParticipantesEvento']", 'to': "orm['intercambios.Usuario']"}),
+            'precio': ('django.db.models.fields.DecimalField', [], {'max_digits': '10', 'decimal_places': '2'})
+        },
         'intercambios.opcionregalo': {
             'Meta': {'object_name': 'OpcionRegalo'},
             'fecha': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
@@ -96,21 +144,30 @@ class Migration(SchemaMigration):
             'opcion_de_regalo': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'usuario': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'opcion_regalo'", 'to': "orm['intercambios.Usuario']"})
         },
+        'intercambios.participantesevento': {
+            'Meta': {'unique_together': "(['usuario', 'evento'],)", 'object_name': 'ParticipantesEvento'},
+            'evento': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'participantes_evento'", 'to': "orm['intercambios.Evento']"}),
+            'fecha': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'intercambio': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
+            'usuario': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'participa_evento'", 'to': "orm['intercambios.Usuario']"})
+        },
         'intercambios.usuario': {
             'Meta': {'object_name': 'Usuario'},
-            'email': ('django.db.models.fields.EmailField', [], {'unique': 'True', 'max_length': '254', 'db_index': 'True'}),
+            'email': ('django.db.models.fields.EmailField', [], {'default': 'None', 'max_length': '100', 'null': 'True', 'db_index': 'True', 'blank': 'True'}),
             'fecha': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'fecha_mod': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'intercambio': ('django.db.models.fields.related.ForeignKey', [], {'default': 'None', 'related_name': "'regala_a'", 'null': 'True', 'blank': 'True', 'to': "orm['intercambios.Usuario']"}),
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'is_admin': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            'nickname': ('django.db.models.fields.CharField', [], {'default': 'None', 'max_length': '100', 'null': 'True', 'blank': 'True'}),
             'nombre': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'})
+            'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
+            'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '50', 'db_index': 'True'})
         }
     }
 

@@ -92,7 +92,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = os.path.join(PROJECT_PATH, 'static_files')
+STATIC_ROOT = os.path.join(PROJECT_PATH, 'staticfiles')
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -125,6 +125,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
+    'social_auth.context_processors.social_auth_by_type_backends',
                                )
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -141,6 +142,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_auth.middleware.SocialAuthExceptionMiddleware',
 )
 
 ROOT_URLCONF = 'intercambios.urls'
@@ -170,8 +172,36 @@ INSTALLED_APPS = [
     'django_extensions',
     'intercambios',
     'south',
+    'social_auth'
     
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.google.GoogleOAuth2Backend',
+    'social_auth.backends.facebook.FacebookBackend',
+    'social_auth.backends.contrib.github.GithubBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+GOOGLE_OAUTH2_CLIENT_ID      = SETTINGS['GOOGLE_OAUTH2_CLIENT_ID']
+GOOGLE_OAUTH2_CLIENT_SECRET  = SETTINGS['GOOGLE_OAUTH2_CLIENT_SECRET']
+
+GITHUB_APP_ID = SETTINGS['GITHUB_APP_ID']
+GITHUB_API_SECRET = SETTINGS['GITHUB_API_SECRET']
+
+FACEBOOK_APP_ID = SETTINGS['FACEBOOK_APP_ID']
+FACEBOOK_API_SECRET = SETTINGS['FACEBOOK_API_SECRET']
+
+FACEBOOK_EXTENDED_PERMISSIONS = ['email']
+
+LOGIN_URL          = '/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGIN_ERROR_URL    = '/'
+
+SOCIAL_AUTH_USER_MODEL = AUTH_USER_MODEL
+
+
+
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

@@ -3,142 +3,55 @@
 {% block extra_head %}
 	<script type="text/javascript" src="{% static "js/intercambios/index.js" %}"></script>
 	
-    <script src="http://code.angularjs.org/1.1.4/angular.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-resource.js"></script>
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
-    <script type="text/javascript" src="{% static "js/restangular.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/app.js" %}"></script>
-	
 {% endblock %}
 {% block content %}
 
 
 <script>
 	var usuario_actual = {{ user.id }};
-
 </script>
 
-
-
-
-
-
-
-
-
-
-
-<div>
-		<div class="col-lg-6">
-			<div class="jumbotron text-center mis-eventos">
-   <div ng-app="project" >
-			<div><h1 class="titulo-eventos text-center marron Diamond">Mis Eventos <a href="#/new"><span  style="font-size: 40px;"class=" glyphicon glyphicon-plus-sign "></span></a></h1></div>
-			
-			{% if not eventos_participa %}
-			
-				<div>
-					<h2 class="Diamond">No tienes ningun evento registrado :(</h2>
-				</div>
-				<div style="margin-top:70px;">
-					<h2 class="Diamond">Puedes empezar creando un evento con</br>el bot&oacute;n de la derecha -></h2>
-				</div>
-			{% endif %}
-			{% verbatim %}
-
-    
-    <div ng-view></div>
-  
-  
-  
-    <!-- CACHE FILE: list.html -->
-    <script type="text/ng-template" id="list.html">
-      <input style="margin-bottom: 20px" type="text" ng-model="search" class="search-query" placeholder="Buscar">
-      <table style="width: 100%">
-        <thead >
-        <tr>
-          <th><a href="#/new"><i class="icon-plus-sign"></i></a></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="project in projects | filter:search | orderBy:'nombre'">
-          <td><a class="no-title" href="/detalles/evento/{{project.id}}/" target="_blank">
-          <div style="width:100%; height:53px; font-size:30px; font-weight:bold;" class="btn btn-default btn-lg btn-custom glyphicon btn-rosita probando" >
-          <div style="color:black;"class="pull-left">{{project.id}}</div>
-          <span class="nombre-evento" style="width:100%; margin-left:30px; line-height:35px; text-align:center;">
-					 {{project.nombre}}
-					</span>
-         
-          <div style="float:right; margin-top:-5px; margin-left:-40px;">
-						<a style="display: none" ng-click="destroy()" class="cancelar-evento no-title" href="/cancelar/evento/{{ evento_participa.id }}/">
-							<span style="margin-left:20px; margin-right:10px;"class="glyphicon glyphicon-trash">
-               </span>
-						</a>
-						<a class="no-title " href="#/editar/evento/{{project.id}}/">
-						 	<span  class=" glyphicon glyphicon-pencil"></span>
-						</a>
-					</div>
-          </div></a></td>
-          
-         
-        </tr>
-        </tbody>
-      </table>
-    </script>
-  
-  
-  
-   <!-- CACHE FILE: detail.html -->
-    <script type="text/ng-template" id="detail.html">
-    
-      <form name="myForm">
-        <div class="control-group" ng-class="{error: myForm.nombre.$invalid}">
-          <label>Nombre del Evento</label>
-          <input type="text" name="nombre" ng-model="evento.nombre" required>
-          <span ng-show="myForm.nombre.$error.required" class="help-inline">
-              Required</span>
-        </div>
-        
-        <div class="control-group" ng-class="{error: myForm.numero_participantes.$invalid}">
-          <label>Numero de Participantes</label>
-          <input type="text" name="numero_participantes" ng-model="evento.numero_participantes" required>
-          <span ng-show="myForm.numero_participantes.$error.required" class="help-inline">
-              Required</span>
-          
-        </div>
-        
-        <div class="control-group">
-          <label>Fecha del evento</label>
-          <input id="fecha" type="text" name="fecha_evento" ng-model="evento.fecha_evento">
-        
-          
-        </div>
-
-        <div class="control-group" ng-class="{error: myForm.precio.$invalid}">
-          <label>Precio del regalo</label>
-          <input type="text" name="precio" ng-model="evento.precio" required>
-          <span ng-show="myForm.precio.$error.required" class="help-inline">
-              Required</span>
-          
-        </div>
-      
-        <br>
-        <a href="#" class="btn btn-default">Cancel</a>
-        <button ng-click="save()" ng-disabled="isClean() || myForm.$invalid"
-                class="btn btn-primary">Save</button>
-        <button ng-click="destroy()"
-                ng-show="evento.id" class="btn btn-danger">Delete</button>
-      </form>
-    </script>
-  </div>
-
-{% endverbatim %}
-			
+<div class="col-lg-6">
+	<div class="jumbotron text-center mis-eventos">
+		<h1 class="titulo-eventos text-center marron Diamond">Mis Eventos</h1>
+	    {% if not eventos_participa %}
+	        <h2 class="Diamond">No tienes ningun evento registrado :(</h2>
+	        <h2 style="margin-top:70px;" class="Diamond">Puedes empezar creando un evento con</br>el bot&oacute;n de la derecha -></h2>
+	    {% endif %}
+	    <table style="width:100%;">
+		     {% for evento_participa in eventos_participa %}
+		     <tr>
+			     <td style="width:100%;">
+			       <a class="no-title" href="/detalles/evento/{{ evento_participa.id }}/">
+			      	 <div style="width:100%; height:53px; font-size:30px; font-weight:bold;" class="btn btn-default btn-lg btn-custom glyphicon btn-rosita probando" >
+			       	{% if evento_participa.admin_id == user.id %}
+				         <span class="nombre-evento" style="width:100%; margin-left:30px; line-height:35px; text-align:center;">
+				         {{ evento_participa.nombre }}
+				         </span>
+				         <div style="float:right; margin-top:-5px; margin-left:-40px;">
+				           <a class="cancelar-evento no-title" href="/cancelar/evento/{{ evento_participa.id }}/">
+				             <span style="margin-left:20px; margin-right:10px;"class="glyphicon glyphicon-trash"></span>
+				           </a>
+				           <a class="no-title colorbox-link" href="/editar/evento/{{ evento_participa.id }}/">
+				              <span  class=" glyphicon glyphicon-pencil"></span>
+				           </a>
+				         </div>
+			       {% else %}
+				       <span class="nombre-evento" style="width:100%; line-height:35px; text-align:center;">
+				       {{ evento_participa.nombre }}
+				       </span>
+			       {% endif %}
+			        </div>
+			       </a>
+			     </td>
+		     </tr>
+		     {% endfor %}
+	    </table>
 	</div>
 </div>
 		
-		<div class="col-lg-6 text-center">
-		<img class="scaled" src="{% static "img/intercambios/regalos.jpg" %}" alt="intercambios">
-		<a href="/crear/evento/"><div class="btn btn-default btn-blue btn-lg">Crear Nuevo Evento</div></a>
-		</div>
-</div>			
+<div class="col-lg-6 text-center">
+	<img class="scaled" src="{% static "img/intercambios/regalos.jpg" %}" alt="intercambios">
+	<a href="/crear/evento/"><div class="btn btn-default btn-blue btn-lg">Crear Nuevo Evento</div></a>
+</div>
 {% endblock %}

@@ -15,7 +15,18 @@ class Evento(models.Model):
     
     class Meta:
         app_label = 'intercambios'
-        
+
+class InvitacionesPendientes(models.Model):
+    usuario = models.ForeignKey('Usuario', related_name='invitaciones_pendientes')
+    evento = models.ForeignKey('Evento', related_name='invitaciones_pendientes')
+    estado = models.CharField(max_length = 20, choices = (('pendiente', 'pendiente'),('cancelado',' cancelado'),('aceptado',' aceptado')), default='pendiente')
+    
+    def __unicode__(self):
+        return "%s" % self.id
+    
+    class Meta:
+        app_label = 'intercambios'
+                
 class ParticipantesEvento(models.Model):
     fecha = models.DateTimeField(auto_now_add=True)
     usuario = models.ForeignKey('Usuario', related_name='participa_evento')

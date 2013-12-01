@@ -21,12 +21,13 @@ def login_user(request):
         password = request.POST['password']
         try:
             nombre = request.POST['nombre']
-            user = Usuario(nombre=nombre,username=username)
+            email = request.POST['email']
+            user = Usuario(nombre=nombre,username=username,email=email)
             user.set_password(password)
             user.save()
             user = authenticate(username=username, password=password)
             login(request,user)
-            messages.warning(request, '<h1 class="Diamond">%s!! bienvenido al sistema de intercambios navideños :)</br> para iniciar sesi&oacute deberas usar tu e-mail: %s </h1>' % (user.nombre,user.email))
+            messages.warning(request, '<h1 class="Diamond">%s!! bienvenido al sistema de intercambios navideños </h1>' % user.nombre)
             return HttpResponseRedirect(next)
         except:
             user = authenticate(username=username, password=password)

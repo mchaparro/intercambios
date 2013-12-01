@@ -6,6 +6,20 @@
 	<script type="text/javascript" src="{% static "js/intercambios/detalles_evento.js" %}"></script>
 	<script type="text/javascript" src="{% static "js/scratch/wScratchPad.js" %}"></script>
 	<script type="text/javascript" src="{% static "js/countdown/jquery.countdown.js" %}"></script>
+
+	<link rel="stylesheet" type="text/css" href="{% static "js/select2/select2.css" %}" />
+	<script type="text/javascript" src="{% static "js/select2/select2.min.js" %}"></script>
+	<style>
+	.select2-drop-mask {
+    z-index: 10000;
+}
+.select2-drop {
+    z-index: 10001;
+}
+.select2-search {
+    z-index: 10002;
+}
+	</style>
 {% endblock %}
 {% block content %}
 

@@ -200,7 +200,8 @@ LOGIN_ERROR_URL    = '/'
 
 SOCIAL_AUTH_USER_MODEL = AUTH_USER_MODEL
 
-
+SOCIAL_AUTH_UID_LENGTH = 223
+SOCIAL_AUTH_NONCE_SERVER_URL_LENGTH = 40
 
 
 # A sample logging configuration. The only tangible logging

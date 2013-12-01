@@ -20,7 +20,7 @@ urlpatterns = patterns('',
     (r'^logout/$', logout_user, {}, 'user_logout'),
     (r'^admin/', include(admin.site.urls)),
     #crear nuevo evento
-    (r'^crear/evento/$', crear_evento, {}, 'crear_evento'),
+    (r'^perfil/usuario/$', perfil_usuario, {}, 'perfil_usuario'),
     #editar evento
     (r'^editar/evento/(?P<id>\d+)/$', editar_evento, {}, 'editar_evento'),
     #cancelar evento

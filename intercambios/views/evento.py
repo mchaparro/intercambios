@@ -40,6 +40,20 @@ def crear_evento(request):
         
     return render_to_response('crear_evento.html', context_instance=RequestContext(request))
 
+@login_required
+def perfil_usuario(request):
+    if request.method == 'POST':
+        nombre = request.POST['nombre']
+        apodo = request.POST['apodo']
+        
+        user = request.user
+        user.nombre = nombre
+        user.nickname = apodo
+        user.save()
+        return redirect('mis_eventos')
+        
+    return render_to_response('perfil_usuario.html', context_instance=RequestContext(request))
+
 
 def format_fecha_delta(td):
     dias = abs(td.days)

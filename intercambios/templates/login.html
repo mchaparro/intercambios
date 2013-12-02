@@ -10,17 +10,30 @@
 			<div class="col-lg-6">
 			 	<img class="scaled" src="{% static "img/intercambios/regalos.jpg" %}" alt="intercambios">
 			</div>
-		
 			<div class="col-lg-5 col-sm-12">
 			
 			<div class="container">
 				<div class="jumbotron login" style="border-radius:15px;">	
+		<span style="font-size:70px;" class="glyphicon glyphicon-gift">waka!!!!</span>
 				{% for name in social_auth.backends.oauth2 %}
    					 <li><a rel="nofollow" href="{% url "socialauth_begin" name %}">{{ name|title }}</a></li>
  				 {% endfor %}
 				{% for name in social_auth.backends.oauth %}
    					 <li><a rel="nofollow" href="{% url "socialauth_begin" name %}">{{ name|title }}</a></li>
  				 {% endfor %}
+ 				 <table>
+ 				 <tr style="width:60px;">
+ 				 	<td>
+ 				 		<img  style="width:80px; height:80px;" src="{% static "img/facebook.png" %}" alt="facebook">
+ 				 	</td>
+ 				 	<td>
+ 				 		<img class="" style="width:80px; height:80px;" src="{% static "img/google.png" %}" alt="google">
+ 				 	</td>
+ 				 	<td> 
+ 				 		<span style="font-size:70px;" class="glyphicon glyphicon-gift">waka!!!!</span>
+ 				 	</td>
+ 				 </tr>
+ 				 </table>
 				    <form class="form-signin" method="post" action="" id="form-signin">
 				    	{% csrf_token %}
 				    	<div class="login-form">

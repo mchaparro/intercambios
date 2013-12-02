@@ -1,11 +1,16 @@
 from django.db import models
 
-class OpcionRegalo(models.Model):
-    fecha = models.DateTimeField(auto_now_add=True)
-    fecha_mod = models.DateTimeField(auto_now=True)
-    opcion_de_regalo = models.CharField(max_length=100)
-    usuario = models.ForeignKey('Usuario', related_name='opcion_regalo')
-    
+class Regalo(models.Model):
+    OPCIONES=(('Libros','Libros'),
+    ('Chocolates','Chocolates'),
+    ('Bebidas Alcoholicas','Bebidas Alcohoicas'),
+    ('Ropa',' Ropa'),
+    ('Accesorios',' Accesorios'),
+    ('Perfumes',' Perfumes'),
+    ('Electronica',' Electronica'),
+    ('Otros',' Otros'),
+    ('Categoria Libre',' Categoria Libre'))
+    opcion_regalo = models.CharField(max_length = 50, choices = OPCIONES)
     
     def __unicode__(self):
         return "%s" % self.opcion_de_regalo

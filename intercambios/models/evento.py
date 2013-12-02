@@ -31,7 +31,10 @@ class ParticipantesEvento(models.Model):
     fecha = models.DateTimeField(auto_now_add=True)
     usuario = models.ForeignKey('Usuario', related_name='participa_evento')
     intercambio = models.CharField(max_length=100, blank=True, null=True)
+    detalles = models.CharField(max_length=200, blank=True, null=True)
     evento = models.ForeignKey('Evento', related_name='participantes_evento')
+    regalos = models.ManyToManyField('Regalo',through='RegalosParticipante', related_name='participantes_evento')
+    
     
     def __unicode__(self):
         return "%s" % self.id
@@ -39,3 +42,14 @@ class ParticipantesEvento(models.Model):
     class Meta:
         app_label = 'intercambios'
         unique_together = ['usuario','evento']
+        
+class RegalosParticipante(models.Model):
+    participante = models.ForeignKey('ParticipantesEvento', related_name='regalos_participante')
+    regalo = models.ForeignKey('Regalo')
+   
+    
+    def __unicode__(self):
+        return "%s" % self.id
+    
+    class Meta:
+        app_label = 'intercambios'

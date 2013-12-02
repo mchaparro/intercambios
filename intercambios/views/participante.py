@@ -2,7 +2,7 @@ from django.http import *
 from django.shortcuts import render_to_response,redirect
 from django.template import RequestContext
 from django.conf import settings
-from intercambios.models import Evento, ParticipantesEvento, Usuario
+from intercambios.models import Evento, ParticipantesEvento, Usuario, InvitacionesPendientes
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -67,3 +67,14 @@ def elegir_regalo(request,id):
     'evento':evento    
     }
     return render_to_response('elegir_regalo.html' , data , context_instance=RequestContext(request))
+
+@login_required
+def enviar_invitacion(request,id):
+    ids_usuarios_invitar = request.POST['usuarios']
+    evento = Evento.objects.get(id=id)
+    
+    for id_usuario in ids_usuarios_invitar:
+        usuario = Usuario.objects.get(id=id_usuario)
+        InvitacionesPendientes(usuario=usuario,evento=evento)
+
+    return HttpResponseRedirect('/detalles/evento/%s/' % evento.id)

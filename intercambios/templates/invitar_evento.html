@@ -3,13 +3,11 @@
 {% block extra_head %}
 	<script type="text/javascript" src="{% static "js/intercambios/invitar_evento.js" %}"></script>
 	<script>
-	var fecha = "{{ evento.fecha_evento|date:"m/d/Y" }}";
-	
+	var eventoID = "{{ evento.id }}";
 	</script>
 	
 	<link rel="stylesheet" type="text/css" href="{% static "js/select2/select2.css" %}" />
 	<script type="text/javascript" src="{% static "js/select2/select2.min.js" %}"></script>
-	
 {% endblock %}
 <div class="container">
 	<div class="col-lg-12 jumbotron" style="margin-bottom:0px;">
@@ -18,10 +16,14 @@
 		{{ request.get_host }}/participar/evento/{{ evento.id }}/
 		</div>
 		<span class="linea-pekis">Copia y envia este link a las personas que deseas que se unan y participen en tu intercambio de regalos.</span>
-	</div>
-	 <select id="usuarios" multiple="multiple" style="width:90%; height:40px; font-size:20px;">
+	<h2>Invitar Participantes:</h2>
+	 <select id="usuarios" multiple="multiple" style="width:90%; height:30px; font-size:15px;">
 	{% for usuario in usuarios %}
-        <option value="usuario.id">{{ usuario.nombre }}</option>
+		{% ifnotequal usuario user %}
+        <option value="{{usuario.id}}">{{ usuario.nombre }}</option>
+        {% endifnotequal %}
 	{% endfor %}
     </select>
+    <div id="enviar-invitacion" style="margin-top:35px"class="btn btn-blue btn-lg">Enviar Invitaci&oacute;n</div>
+	</div>
 </div>

@@ -55,7 +55,7 @@
 
 <div class="col-lg-6 jumbotron  ">
     <h1 class="titulo-eventos text-center marron Diamond">Crear Evento</h1> 
-    <form action="/crear/evento/" method="post">
+    <form id="form_crear" action="/crear/evento/" method="post">
 		{% csrf_token %}
 	    <table class="table-evento text center">
 	        <tr>
@@ -77,7 +77,7 @@
 	         <tr>
 	         <td></td>
 	            <td class="text-center" text-center">
-	            <input type="submit" id="crear_evento" style="margin-top:15px; width:100%;"class="btn btn-default btn-blue btn-lg" value="Crear Evento"/>
+	            <input type="button" id="crear_evento" style="margin-top:15px; width:100%;"class="btn btn-default btn-blue btn-lg" value="Crear Evento"/>
 	            </td>
 	        </tr>
 	    </table>

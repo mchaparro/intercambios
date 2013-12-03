@@ -41,7 +41,7 @@ def crear_evento(request):
         
         ParticipantesEvento.objects.get_or_create(usuario = request.user, evento = evento)
         messages.success(request, '<h1 class="Diamond">%s!! ahora eres el administrador del evento <b>%s</b></br>debes mandar el link de tu evento a los dem&aacute;s participantes</h1>' % (request.user.nombre,evento.nombre))
-        return HttpResponseRedirect('/detalles/evento/%s/' % evento.id)
+        return HttpResponse('{"evento": "%s"}' % evento.id, content_type='application/json')
         
     return render_to_response('crear_evento.html', context_instance=RequestContext(request))
 

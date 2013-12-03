@@ -33,6 +33,55 @@ $(document).ready(function() {
 		
 		$('.fecha').datepicker({minDate: 0}).attr('readonly', 'readonly');
 	    
+	    $('#crear_evento').click(function(){
+			var evento = $('.nombre_evento').val();
+			if (evento.length < 1){
+					noty({text: '<h1 class="Diamond">Por favor ingresa nombre</h1>' ,
+					 type: 'warning',timeout: 5000,});
+				return;
+				}
+			var fecha = $('.fecha').val();
+			if (fecha.length < 1){
+					noty({text: '<h1 class="Diamond">Por favor ingresa fecha</h1>' ,
+					 type: 'warning',timeout: 5000,});
+				return;
+				}
+			var participantes = $('.participantes').val();
+			if (participantes.length < 1){
+					noty({text: '<h1 class="Diamond">Por favor ingresa un numero</h1>' ,
+					 type: 'warning',timeout: 5000,});
+				return;
+				}
+			var precio = $('.precio').val();
+			if (precio.length < 1){
+					noty({text: '<h1 class="Diamond">Por favor ingresa precio</h1>' ,
+					 type: 'warning',timeout: 5000,});
+				return;
+				}
+					
+					
+					
+				 $.ajax({
+					 type:'POST',
+					 url: '/crear/evento/',
+					 dataType: 'json',
+					 beforeSend: function() {
+						 // $('#loading-gif').show();
+					 },
+					 complete: function(){
+						 //$('#loading-gif').hide();
+					 },
+					 data: $('#form_crear').serialize(),
+					 success: function(response) {
+						 window.location.href = "/detalles/evento/" + response.evento + "/";
+					 },
+					 error: function(XMLHttpRequest, textStatus, errorThrown) {
+						 //TODO Place proper error message 
+						 console.log(XMLHttpRequest);
+					 }  
+				 }); 
+		 
+	 });
 });
 
 

@@ -17,12 +17,11 @@ def login_user(request):
     email = ''
     password = ''
     if request.POST:
-        username = request.POST['username']
         password = request.POST['password']
         try:
             nombre = request.POST['nombre']
             email = request.POST['email']
-            user = Usuario(nombre=nombre,username=username,email=email)
+            user = Usuario(nombre=nombre,username=email,email=email)
             user.set_password(password)
             user.save()
             user = authenticate(username=username, password=password)

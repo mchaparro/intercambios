@@ -12,7 +12,7 @@
 	    <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap-theme.min.css" %}" />
 	    <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}" />
 	    <link rel="stylesheet" type="text/css" href="{% static "css/colorbox.css" %}" />
-	    <link rel="stylesheet" type="text/css" href="{% static "css/datepicker.css" %}" />
+	    <link rel="stylesheet" type="text/css" href="{% static "css/jquery-ui/jquery-ui.css" %}" />
 	    
 	    <script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
 	    <script type="text/javascript" src="{% static "js/bootstrap.min.js" %}"></script>
@@ -24,8 +24,9 @@
         <script type="text/javascript" src="{% static "js/noty/layouts/center.js" %}"></script>
         <script type="text/javascript" src="{% static "js/noty/themes/default.js" %}"></script>
         <script type="text/javascript" src="{% static "js/snow.js" %}"></script>
-        <script type="text/javascript" src="{% static "js/bootstrap-datepicker.js" %}"></script>
         <script type="text/javascript" src="{% static "js/bootbox.min.js" %}"></script>
+        <script type="text/javascript" src="{% static "js/jquery-ui.js" %}"></script>
+        <script type="text/javascript" src="{% static "js/jquery.ui.datepicker.validation.pack.js" %}"></script>
 		
 		{% if messages %}
 			<script type="text/javascript">
@@ -62,14 +63,37 @@
 		    <div class="navbar-header navbar-right">
   			 <ul class="nav navbar-nav">
   			 {% if user.is_authenticated %}
-   				<li class="dropdown">
+  			  
+  			  <li class="dropdown">
   				 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-  				  <span style="font-size:15px;"class="active badge ">{{ user.email }}</span>
-	  				 <span class="badge">{{ user.id }}</span>
-	  				 <span style="color:white;" class="glyphicon glyphicon-user"> </span>  
-	  				  {{ user.nickname }} <b class="caret"></b>
+	  				  <span style="font-size:15px;"class="active badge ">{{ user.invitaciones_pendientes.count }}</span>
+	  				 Invitaci&oacute;nes Pendientes<b class="caret"></b>
   				 </a>
        			 <ul class="dropdown-menu">
+       			 {% for invitacion in user.invitaciones_pendientes.all %}
+       			 
+        		  <li><a href="/participar/evento/{{ invitacion.evento.id }}/">
+        		  {{ invitacion.evento }} - {{ invitacion.evento.admin }}
+        		  </a></li>
+        		  {% endfor %}
+        		  {% if not user.invitaciones_pendientes.count > 0 %}
+	        		   <li><a href="#">
+	        		  No tienes invitaci&oacute;nes pendientes
+	        		  </a></li>
+	        	   {% endif %}
+      		    </ul>
+               </li>
+  			  
+  			  
+   				<li class="dropdown">
+  				 <a title="{{ user.id }}" data-toggle="dropdown" class="dropdown-toggle" href="#">
+  				  
+	  				 <span  style="color:white;" class="glyphicon glyphicon-user"> </span>  
+	  				  {{ user }} <b class="caret"></b>
+  				 </a>
+       			 <ul class="dropdown-menu">
+        		  <li><a href="#">{{ user.email }}</a></li>
+        		  <li><a href="/perfil/usuario/">Editar Perfil</a></li>
         		  <li><a href="/logout/">Cerrar sessi&oacute;n</a></li>
       		    </ul>
                </li>
@@ -79,9 +103,9 @@
 		 </div>
 	    </nav>
 	    <div class="titulo adornos text-center" >
-			<h1 class="titulo-login">Intercambios <span class="red">{% now "Y" %}</span></h1>
+			<h1 id="main-title" class="titulo-login">Intercambios <span class="red">{% now "Y" %}</span></h1>
 		</div>
-	
+		
 		<div class="container ">
 		    {% block content %}
 		    {% endblock %}

@@ -27,8 +27,8 @@ def login_user(request):
             user.save()
             user = authenticate(username=username, password=password)
             login(request,user)
-            messages.warning(request, '<h1 class="Diamond">%s!! bienvenido al sistema de intercambios navideños </h1>' % user.nombre)
-            return HttpResponseRedirect(next)
+            messages.warning(request, '<h1 class="Diamond">%s!! bienvenido al sistema de intercambios </br> porfavor completa tu registro</h1>' % user.nombre)
+            return HttpResponseRedirect('/perfil/usuario/')
         except:
             user = authenticate(username=username, password=password)
             if user is not None:

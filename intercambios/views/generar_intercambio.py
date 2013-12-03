@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 import datetime
 import pytz
+import json
 import random
 
 def generar_intercambio(request, id):
@@ -15,14 +16,14 @@ def generar_intercambio(request, id):
     sorteado = ParticipantesEvento.objects.filter(evento__id = id)[0]
     if not (evento.admin == request.user):
         messages.warning(request, '<h2 class="Diamong">Solo el creador del evento puede generar el intercambio %s</h2>' % evento.nombre)
-        return HttpResponseRedirect('/detalles/evento/%s/' % evento.id) 
+        return HttpResponse('{"error":"Solo el creador del evento puede generar el intercambio"}', content_type='application/json');
     if not (evento.numero_participantes == evento.participantes.all().count()):
         messages.warning(request, '<h2 class="Diamong">No se puede generar el intercambio hasta que esten registrados todos los participantes</h2>')
-        return HttpResponseRedirect('/detalles/evento/%s/' % evento.id) 
+        return HttpResponse('{"error":"No se puede generar el intercambio hasta que esten registrados todos los participantes"}', content_type='application/json');
     if (sorteado.intercambio):
         messages.warning(request, '<h2 class="Diamong">El sorteo ya fue realizado, no puedes cambiar tu destino</h2>')
-        return HttpResponseRedirect('/detalles/evento/%s/' % evento.id) 
-     
+        return HttpResponse('{"error":"El sorteo ya fue realizado, no puedes cambiar tu destino"}', content_type='application/json');
+      
     participantes = list(evento.participantes_evento.all())
     temporal = []
     for participante in participantes:
@@ -39,4 +40,4 @@ def generar_intercambio(request, id):
         temporal.append(intercambio) 
         
         
-    return HttpResponseRedirect('/detalles/evento/%s/' % evento.id) 
+    return HttpResponse('{}', content_type='application/json');

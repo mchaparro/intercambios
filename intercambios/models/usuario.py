@@ -31,7 +31,7 @@ class UsuariosManager(BaseUserManager):
 
 class Usuario(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=50,db_index=True,unique=True)
-    nickname = models.CharField(max_length=100,blank=True,null=True,default=None)
+    apodo = models.CharField(max_length=100,blank=True,null=True,default="")
     email = models.EmailField(max_length=100, blank=True,null=True,default=None,db_index=True)
     nombre = models.CharField(max_length=100)
     
@@ -47,7 +47,10 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     
 
     def __unicode__(self):
-        return self.nombre
+        if (self.apodo):
+            return self.apodo
+        else:
+            return "%s" % (' '.join(self.nombre.split()[0:2]))
 
     @property
     def is_staff(self):

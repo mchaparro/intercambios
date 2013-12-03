@@ -266,6 +266,10 @@ input{
 .fondo-tabla {
 	width: 50%;
 }
+
+.hidden{
+	display:none;
+}
 ul {
 	list-style-type: none;
 }
@@ -296,7 +300,7 @@ color: inherit;
 	color:#4ABDF8;
 }
 .titulo-circular{
-	padding: 15px;
+	padding: -1px 15px 15px 0px;
     background-color: white;
     border-radius: 25px;
     font-size: 35px;
@@ -322,3 +326,35 @@ margin-top: -3px;
     width: 15px ; 
     height:20px !important;                      
 }                                   
+
+/* detalles evento */
+
+ #counter-container{
+ 	min-height:140px;
+  	font-family:Secrets;
+	font-weight:bold;
+   font-size:50px;
+}
+  #counter{
+  margin-top:-20px;
+  }
+  br { clear: both; }
+  .cntSeparator {
+    font-size: 71px;
+    margin: -43px 7px;
+    color: #000;
+  }
+  .desc { margin: 7px 3px; text-align:center;}
+  .desc div {
+  	float:left;
+  	margin-top:-18px;
+  	margin-left:0px;
+    width: 70px;
+    margin-right: 65px;
+    font-size:30px;
+    font-weight: bold;
+    color: #000;
+    font-family:Diamond;
+  }
+      
+      

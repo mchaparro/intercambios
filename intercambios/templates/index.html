@@ -2,7 +2,7 @@
 {% load static %}
 {% block extra_head %}
 	<script type="text/javascript" src="{% static "js/intercambios/index.js" %}"></script>
-	<script type="text/javascript" src="{% static "js/intercambios/crear_evento.js" %}"></script>
+		<script type="text/javascript" src="{% static "js/intercambios/crear_evento.js" %}"></script>
 	<script type="text/javascript" src="{% static "js/jquery.formatCurrency.js" %}"></script>
 	
 {% endblock %}
@@ -32,7 +32,7 @@
 				         </span>
 				         <div style="float:right; margin-top:-5px; margin-left:-40px;">
 				           <a class="cancelar-evento no-title" href="/cancelar/evento/{{ evento_participa.id }}/">
-				             <span style="margin-left:20px; margin-right:10px;"class="glyphicon glyphicon-trash"></span>
+				             <span style="margin-left:-29px; margin-right:3px;"class="glyphicon glyphicon-trash"></span>
 				           </a>
 				           <a class="no-title colorbox-link" href="/editar/evento/{{ evento_participa.id }}/">
 				              <span  class=" glyphicon glyphicon-pencil"></span>
@@ -60,24 +60,24 @@
 	    <table class="table-evento text center">
 	        <tr>
 	            <td style="width: 30px;"> <span class="glyphicon glyphicon-gift"></span></td>
-	            <td> <input id="nombre_evento" name="nombre_evento" type="text" placeholder="Nombre del Evento"/></td>
+	            <td> <input class="nombre_evento" name="nombre_evento" type="text" placeholder="Nombre del Evento"/></td>
 	        </tr>
 	        <tr>
 	            <td><span class="glyphicon glyphicon-calendar"></span></td>
-	            <td><input id="fecha" name="fecha" type="text" placeholder="Fecha del Intercambio"/></td>
+	            <td><input class="fecha" name="fecha" type="text" placeholder="Fecha del Intercambio"/></td>
 	        </tr>
 	        <tr>
 	            <td><span class="glyphicon glyphicon-user"></span></td>
-	            <td> <input id="participantes" name="participantes" type="text" placeholder="Numero de Participantes"/></td>
+	            <td> <input class="participantes" name="participantes" type="text" placeholder="Numero de Participantes"/></td>
 	        </tr>
 	        <tr>
 	            <td><span class="glyphicon glyphicon-usd"></span></td>
-	            <td><input id="precio" name="precio" type="text" placeholder="Precio del Regalo"/></td>
+	            <td><input class="precio" name="precio" type="text" placeholder="Precio del Regalo"/></td>
 	        </tr>
 	         <tr>
 	         <td></td>
 	            <td class="text-center" text-center">
-	            <input type="submit" id="crear_evento" style="margin-top:15px; width:100%;"class="btn btn-default btn-primary btn-lg" value="Crear Evento"/>
+	            <input type="submit" id="crear_evento" style="margin-top:15px; width:100%;"class="btn btn-default btn-blue btn-lg" value="Crear Evento"/>
 	            </td>
 	        </tr>
 	    </table>

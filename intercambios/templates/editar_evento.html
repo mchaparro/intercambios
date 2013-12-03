@@ -19,19 +19,19 @@
 	    <table class="table-evento text center">
 	        <tr>
 	            <td style="width: 30px;"> <span class="glyphicon glyphicon-gift"></span></td>
-	            <td> <input id="nombre_evento" name="nombre_evento" type="text" value="{{ evento.nombre }}" placeholder="Nombre del Evento"/></td>
+	            <td> <input class="nombre_evento" name="nombre_evento" type="text" value="{{ evento.nombre }}" placeholder="Nombre del Evento"/></td>
 	        </tr>
 	        <tr>
 	            <td><span class="glyphicon glyphicon-calendar"></span></td>
-	            <td><input id="fecha" name="fecha" type="text" value="{{ evento.fecha_evento|date:"m/d/Y" }}" placeholder="Fecha del Intercambio"/></td>
+	            <td><input class="fecha" name="fecha" type="text" value="{{ evento.fecha_evento|date:"m/d/Y" }}" placeholder="Fecha del Intercambio"/></td>
 	        </tr>
 	        <tr>
 	            <td><span class="glyphicon glyphicon-user"></span></td>
-	            <td> <input id="participantes" name="participantes" value={{ evento.numero_participantes }} type="text" placeholder="Numero de Participantes"/></td>
+	            <td> <input class="participantes" name="participantes" value={{ evento.numero_participantes }} type="text" placeholder="Numero de Participantes"/></td>
 	        </tr>
 	        <tr>
 	            <td><span class="glyphicon glyphicon-usd"></span></td>
-	            <td><input id="precio" name="precio" type="text" value={{ evento.precio }} placeholder="Precio del Regalo"/></td>
+	            <td><input class="precio" name="precio" type="text" value={{ evento.precio }} placeholder="Precio del Regalo"/></td>
 	        </tr>
 	         <tr>
 	         <td></td>

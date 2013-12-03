@@ -1,0 +1,194 @@
+h1 {
+    text-align: center;
+    font-size: 30px;
+    color: black;
+    font-family: 'Helvetica' Helvetica;
+}
+
+#textadj {
+    position: relative;
+    top: -125px;
+}
+
+body {
+    font-family: 'Helvetica' Helvetica;
+    font-size: 12px;
+  }
+
+  #stage {
+    margin: 150px auto;
+    width: 600px;
+    height: 200px;
+
+    -webkit-perspective: 800;
+  }
+
+  #rotate1 {
+      position: relative;
+      width: 200px;
+      height: 400px;
+      float: left;
+      margin: auto;
+  }
+
+  #rotate2 {
+      position: relative;
+      left: -200px;
+      width: 200px;
+      height: 400px;
+      float: left;
+      margin: auto;
+  }
+
+  #rotate3 {
+      position: relative;
+      left: -400px;
+      width: 200px;
+      height: 400px;
+      float: left;
+      margin: auto;
+  }
+
+  #rotate {
+    margin: 200px auto 0 auto;
+    width: 600px;
+    height: 400px;
+
+    /*-webkit-transform-style: preserve-3d;
+
+    -webkit-animation-name: x-spin;
+    -webkit-animation-duration: 7s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: linear;*/
+  }
+
+  .ring {
+    margin: 0 auto;
+    height: 110px;
+    width: 600px;
+    -webkit-transform-style: preserve-3d;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: linear;
+
+  }
+  
+  .ring > :nth-child(odd) {
+    background-color: #FC1724;
+    color:#F5EEEE;
+  }
+
+  .ring > :nth-child(even) {
+    background-color: #0D0911;
+    color:#F5EEEE;
+  }
+
+  .tile1 {
+      -webkit-box-shadow: 5px 5px 3px #000;
+      -moz-box-shadow: 5px 5px 3px #000;
+      -o-box-shadow: 5px 5px 3px #000;
+      box-shadow: 5px 5px 3px #000;
+    position: absolute;
+    left: 75px;
+    width: 125px;
+      height: 100px;
+    color: rgba(0,0,0,0.9);
+    -webkit-border-radius: 10px;
+  }
+
+  .tile2 {
+     -webkit-box-shadow: 0 5px 3px #000;
+      -moz-box-shadow: 0 5px 3px #000;
+      -o-box-shadow: 0 5px 3px #000;
+      box-shadow: 0 5px 3px #000;
+    position: absolute;
+    left: 250px;
+     width: 125px;
+      height: 100px;
+    color: rgba(0,0,0,0.9);
+    -webkit-border-radius: 10px;
+  }
+
+  .tile3 {
+     -webkit-box-shadow: -5px 5px 3px #000;
+      -moz-box-shadow: -5px 5px 3px #000;
+      -o-box-shadow: -5px 5px 3px #000;
+      box-shadow: -5px 5px 3px #000;
+    position: absolute;
+    left: 424px;
+    width: 125px;
+     height: 100px;
+    color: rgba(0,0,0,0.9);
+    -webkit-border-radius: 10px;
+  }
+  
+  .tile1 > p {
+    font-family: 'Helvetica' Helvetica;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 28px;
+  }
+
+   .tile2 > p {
+    font-family: 'Helvetica' Helvetica;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 28px;
+  }
+
+   .tile3 > p {
+    font-family: 'Helvetica' Helvetica;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 28px;
+  }
+
+  #ring-1 {
+    -webkit-animation-name: x-spin;
+    -webkit-animation-duration: 1s;
+  }
+
+
+  #ring-2 {
+    -webkit-animation-name: x-spin-2;
+    -webkit-animation-duration: 2s;
+  }
+
+  #ring-3 {
+    -webkit-animation-name: x-spin-3;
+    -webkit-animation-duration: 3s;
+  }
+
+
+  @-webkit-keyframes x-spin {
+    0%    { -webkit-transform: rotateX(360deg); }
+    50%   { -webkit-transform: rotateX(180deg); }
+    100%  { -webkit-transform: rotateX(0deg); }
+  }
+
+   @-webkit-keyframes x-spin-2 {
+    0%    { -webkit-transform: rotateX(720deg); }
+    50%   { -webkit-transform: rotateX(360deg); }
+    100%  { -webkit-transform: rotateX(0deg); }
+  }
+
+   @-webkit-keyframes x-spin-3 {
+    0%    { -webkit-transform: rotateX(1080deg); }
+    50%   { -webkit-transform: rotateX(540deg); }
+    100%  { -webkit-transform: rotateX(0deg); }
+  }
+
+  @-webkit-keyframes back-y-spin {
+    0%    { -webkit-transform: rotateY(360deg); }
+    50%   { -webkit-transform: rotateY(180deg); }
+    100%  { -webkit-transform: rotateY(0deg); }
+  }
+
+	#sorteo{
+		font-size:70px;
+	color:#000000;
+text-shadow: -1px 2px 30px #FFFFFF;
+
+	}

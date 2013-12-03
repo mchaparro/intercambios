@@ -25,15 +25,16 @@ class InvitacionesPendientes(models.Model):
         return "%s" % self.id
     
     class Meta:
+        unique_together = ['usuario','evento']
         app_label = 'intercambios'
                 
 class ParticipantesEvento(models.Model):
     fecha = models.DateTimeField(auto_now_add=True)
     usuario = models.ForeignKey('Usuario', related_name='participa_evento')
     intercambio = models.CharField(max_length=100, blank=True, null=True)
-    detalles = models.CharField(max_length=200, blank=True, null=True)
     evento = models.ForeignKey('Evento', related_name='participantes_evento')
     regalos = models.ManyToManyField('Regalo',through='RegalosParticipante', related_name='participantes_evento')
+    detalle_regalo = models.CharField(max_length=200, blank=True, null=True)
     
     
     def __unicode__(self):

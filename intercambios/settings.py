@@ -140,6 +140,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'intercambios.custom_middleware.NombreMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social_auth.middleware.SocialAuthExceptionMiddleware',
@@ -197,6 +198,8 @@ FACEBOOK_EXTENDED_PERMISSIONS = ['email']
 LOGIN_URL          = '/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGIN_ERROR_URL    = '/'
+
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/perfil/usuario/'
 
 SOCIAL_AUTH_USER_MODEL = AUTH_USER_MODEL
 

@@ -16,7 +16,7 @@
 		{{ request.get_host }}/participar/evento/{{ evento.id }}/
 		</div>
 		<span class="linea-pekis">Copia y envia este link a las personas que deseas que se unan y participen en tu intercambio de regalos.</span>
-	<h2>Invitar Participantes:</h2>
+	<h2>Invitar participantes que ya esten registrados:</h2>
 	 <select id="usuarios" multiple="multiple" style="width:90%; height:30px; font-size:15px;">
 	{% for usuario in usuarios %}
 		{% ifnotequal usuario user %}
@@ -25,5 +25,6 @@
 	{% endfor %}
     </select>
     <div id="enviar-invitacion" style="margin-top:35px"class="btn btn-blue btn-lg">Enviar Invitaci&oacute;n</div>
+    <div style="margin-top:45px; float:right;" class="red" id="enviado"></div>
 	</div>
 </div>

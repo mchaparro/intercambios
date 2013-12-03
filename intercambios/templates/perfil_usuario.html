@@ -15,17 +15,19 @@
 	    <table class="table-evento text center">
 	        <tr>
 	            <td style="width: 30px;"></td>
-	            <td> <input id="nombre" name="nombre" type="text" placeholder="Nombre Completo"/></td>
+	            <td class="text-center"> 
+	            <input id="nombre" name="nombre" value="{{ user.nombre }}" type="text" placeholder="Nombre Completo"/></td>
 	        </tr>
 	        <tr>
 	            <td style="width: 30px;"></td>
-	            <td> <input id="apodo" name="apodo" type="text" placeholder="Apodo"/></td>
+	            <td class="text-center">
+	             <input id="apodo" name="apodo" value="{{ user.apodo }}" type="text" placeholder="Apodo"/></td>
 	        </tr>
 	       
 	         <tr>
 	         <td></td>
 	            <td class="text-center" text-center">
-	            <input type="submit" id="guardar_datos" style="margin-top:15px; width:100%;"class="btn btn-default btn-primary btn-lg" value="Guardar"/>
+	            <input type="submit" id="guardar_datos" style="margin-top:15px; width:100%;"class="btn btn-default btn-blue btn-lg" value="Guardar"/>
 	            </td>
 	        </tr>
 	    </table>

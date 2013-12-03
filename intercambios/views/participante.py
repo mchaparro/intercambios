@@ -7,7 +7,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 import datetime
+import json
 import pytz
+
+def _json_object_hook(d): return namedtuple('object', d.keys())(*d.values())
+def json2obj(data): return json.loads(data, object_hook=_json_object_hook)
 
 def agregar_participante(request, id):
     if request.method == 'POST':
@@ -39,26 +43,35 @@ def participar_evento(request,id):
     evento = Evento.objects.get(id=id)
     participantes_max = evento.numero_participantes
     participantes_actuales = evento.participantes.all().count()
+    try:
+        invitacion = InvitacionesPendientes.objects.get(usuario=request.user,evento=evento)
+        invitacion.delete()
+    except:
+        pass
+    if request.user in evento.participantes.all():
+        messages.info(request, '<h1 class="Diamond">%s!! tu ya formas parte del evento %s </h1>' % (request.user,evento.nombre))
+        return HttpResponseRedirect('/detalles/evento/%s/' % evento.id)
     disponibles = participantes_max-participantes_actuales
     if(disponibles>0):
         ParticipantesEvento.objects.get_or_create(usuario = request.user, evento = evento)
-        messages.success(request, '<h1 class="Diamond">%s!! ahora ya eres parte del evento %s :)</h1>' % (request.user.nombre,evento.nombre))
+        messages.success(request, '<h1 class="Diamond">%s!! ahora ya eres parte del evento %s </h1>' % (request.user,evento.nombre))
         return HttpResponseRedirect('/detalles/evento/%s/' % evento.id)
     else:
-        messages.error(request, '<h1 class="Diamond">%s!! El numero maximo de participantes del evento ha llegado a su limite :( </h1>' % (request.user.nombre))
+        messages.error(request, '<h1 class="Diamond">%s!! El numero maximo de participantes del evento ha llegado a su limite </h1>' % (request.user.nombre))
         return HttpResponseRedirect('/' )
         
 @login_required
 def invitar_evento(request,id):
     evento = Evento.objects.get(id=id)
     ParticipantesEvento.objects.get_or_create(usuario = request.user, evento = evento)
-    usuarios = Usuario.objects.all()
+    usuarios = Usuario.objects.exclude(id__in = evento.participantes.all().values_list('id', flat=True))
     data={
     'evento':evento,
     'usuarios':usuarios    
     }
     return render_to_response('invitar_evento.html' , data , context_instance=RequestContext(request))
-@login_required
+
+
 def elegir_regalo(request,id):
     evento = Evento.objects.get(id=id)
     ParticipantesEvento.objects.get_or_create(usuario = request.user, evento = evento)
@@ -68,13 +81,20 @@ def elegir_regalo(request,id):
     }
     return render_to_response('elegir_regalo.html' , data , context_instance=RequestContext(request))
 
-@login_required
-def enviar_invitacion(request,id):
-    ids_usuarios_invitar = request.POST['usuarios']
-    evento = Evento.objects.get(id=id)
-    
-    for id_usuario in ids_usuarios_invitar:
-        usuario = Usuario.objects.get(id=id_usuario)
-        InvitacionesPendientes(usuario=usuario,evento=evento)
 
-    return HttpResponseRedirect('/detalles/evento/%s/' % evento.id)
+def enviar_invitacion(request,id):
+    evento = Evento.objects.get(id=id)
+    try:
+        ids_usuarios_invitar = json2obj(request.POST['usuarios'])
+        
+        for id_usuario in ids_usuarios_invitar:
+            usuario = Usuario.objects.get(id=id_usuario)
+            if not usuario in evento.participantes.all():
+                invitacion = InvitacionesPendientes.objects.get_or_create(usuario=usuario,evento=evento)
+                invitacion = InvitacionesPendientes.objects.get(usuario=usuario,evento=evento)
+                invitacion.estado = 'pendiente'
+                invitacion.save()
+        
+    except:
+        pass
+    return HttpResponse('{}', content_type='application/json')

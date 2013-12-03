@@ -8,322 +8,24 @@
 	<script type="text/javascript" src="{% static "js/countdown/jquery.countdown.js" %}"></script>
 
 	<link rel="stylesheet" type="text/css" href="{% static "js/select2/select2.css" %}" />
+	<link rel="stylesheet" type="text/css" href="{% static "css/ruleta.css" %}" />
 	<script type="text/javascript" src="{% static "js/select2/select2.min.js" %}"></script>
-	<style>
-	.select2-drop-mask {
-    z-index: 10000;
-}
-.select2-drop {
-    z-index: 10001;
-}
-.select2-search {
-    z-index: 10002;
-}
-	</style>
+    <script>
+     var dias = '{{ fecha_delta.dias }}'
+     var horas = '{{ fecha_delta.horas }}'
+     var minutos = '{{ fecha_delta.minutos }}'
+     var segundos = '{{ fecha_delta.segundos }}'
+     var eventoID = '{{ nuevo_evento.id }}'
+     var adminID = '{{ nuevo_evento.admin.id }}'
+     var userID = '{{ user.id }}'
+    </script>
 {% endblock %}
 {% block content %}
 
-<style>
-h1 {
-    text-align: center;
-    font-size: 30px;
-    color: black;
-    font-family: 'Helvetica' Helvetica;
-}
-
-#textadj {
-    position: relative;
-    top: -125px;
-}
-
-body {
-    font-family: 'Helvetica' Helvetica;
-    font-size: 12px;
-  }
-
-  #stage {
-    margin: 150px auto;
-    width: 600px;
-    height: 200px;
-
-    -webkit-perspective: 800;
-  }
-
-  #rotate1 {
-      position: relative;
-      width: 200px;
-      height: 400px;
-      float: left;
-      margin: auto;
-  }
-
-  #rotate2 {
-      position: relative;
-      left: -200px;
-      width: 200px;
-      height: 400px;
-      float: left;
-      margin: auto;
-  }
-
-  #rotate3 {
-      position: relative;
-      left: -400px;
-      width: 200px;
-      height: 400px;
-      float: left;
-      margin: auto;
-  }
-
-  #rotate {
-    margin: 200px auto 0 auto;
-    width: 600px;
-    height: 400px;
-
-    /*-webkit-transform-style: preserve-3d;
-
-    -webkit-animation-name: x-spin;
-    -webkit-animation-duration: 7s;
-    -webkit-animation-iteration-count: 1;
-    -webkit-animation-timing-function: linear;*/
-  }
-
-  .ring {
-    margin: 0 auto;
-    height: 110px;
-    width: 600px;
-    -webkit-transform-style: preserve-3d;
-    -webkit-animation-iteration-count: 1;
-    -webkit-animation-timing-function: linear;
-
-  }
-  
-  .ring > :nth-child(odd) {
-    background-color: #FC1724;
-    color:#F5EEEE;
-  }
-
-  .ring > :nth-child(even) {
-    background-color: #0D0911;
-    color:#F5EEEE;
-  }
-
-  .tile1 {
-      -webkit-box-shadow: 5px 5px 3px #000;
-      -moz-box-shadow: 5px 5px 3px #000;
-      -o-box-shadow: 5px 5px 3px #000;
-      box-shadow: 5px 5px 3px #000;
-    position: absolute;
-    left: 100px;
-    width: 100px;
-    height: 100px;
-    color: rgba(0,0,0,0.9);
-    -webkit-border-radius: 10px;
-  }
-
-  .tile2 {
-     -webkit-box-shadow: 0 5px 3px #000;
-      -moz-box-shadow: 0 5px 3px #000;
-      -o-box-shadow: 0 5px 3px #000;
-      box-shadow: 0 5px 3px #000;
-    position: absolute;
-    left: 250px;
-    width: 100px;
-    height: 100px;
-    color: rgba(0,0,0,0.9);
-    -webkit-border-radius: 10px;
-  }
-
-  .tile3 {
-     -webkit-box-shadow: -5px 5px 3px #000;
-      -moz-box-shadow: -5px 5px 3px #000;
-      -o-box-shadow: -5px 5px 3px #000;
-      box-shadow: -5px 5px 3px #000;
-    position: absolute;
-    left: 400px;
-    width: 100px;
-    height: 100px;
-    color: rgba(0,0,0,0.9);
-    -webkit-border-radius: 10px;
-  }
-  
-  .tile1 > p {
-    font-family: 'Helvetica' Helvetica;
-    font-size: 36px;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 28px;
-  }
-
-   .tile2 > p {
-    font-family: 'Helvetica' Helvetica;
-    font-size: 36px;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 28px;
-  }
-
-   .tile3 > p {
-    font-family: 'Helvetica' Helvetica;
-    font-size: 36px;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 28px;
-  }
-
-  #ring-1 {
-    -webkit-animation-name: x-spin;
-    -webkit-animation-duration: 1s;
-  }
-
-
-  #ring-2 {
-    -webkit-animation-name: x-spin-2;
-    -webkit-animation-duration: 2s;
-  }
-
-  #ring-3 {
-    -webkit-animation-name: x-spin-3;
-    -webkit-animation-duration: 3s;
-  }
-
-
-  @-webkit-keyframes x-spin {
-    0%    { -webkit-transform: rotateX(360deg); }
-    50%   { -webkit-transform: rotateX(180deg); }
-    100%  { -webkit-transform: rotateX(0deg); }
-  }
-
-   @-webkit-keyframes x-spin-2 {
-    0%    { -webkit-transform: rotateX(720deg); }
-    50%   { -webkit-transform: rotateX(360deg); }
-    100%  { -webkit-transform: rotateX(0deg); }
-  }
-
-   @-webkit-keyframes x-spin-3 {
-    0%    { -webkit-transform: rotateX(1080deg); }
-    50%   { -webkit-transform: rotateX(540deg); }
-    100%  { -webkit-transform: rotateX(0deg); }
-  }
-
-  @-webkit-keyframes back-y-spin {
-    0%    { -webkit-transform: rotateY(360deg); }
-    50%   { -webkit-transform: rotateY(180deg); }
-    100%  { -webkit-transform: rotateY(0deg); }
-  }
-
-	#sorteo{
-		font-size: 48px;
-margin: 0 0 30px 0;
-color: white;
-text-shadow: -3px -3px 0 #000, 1px -3px 0 #000, -3px 3px 0 #000, 3px 3px 0 #000;
-
-
-	}
-</style>
-    <div id="stage" style=" display:none; opacity:1; position:fixed; z-index:99999; top: 0%; left: 33%;" >
-    <h1 id="sorteo">Generando el sorteo...</h1>
-        <div id="rotate">
-        <div id="rotate1">
-            <div id="ring-1" class="ring">
-                <div class="tile1" style="-webkit-transform: rotateX(0deg) translateZ(200px); "><p>Fred</p></div>
-                <div class="tile1" style="-webkit-transform: rotateX(30deg) translateZ(200px); "><p>Loser</p></div>
-                <div class="tile1" style="-webkit-transform: rotateX(60deg) translateZ(200px); "><p>Loser</p></div>
-                <div class="tile1" style="-webkit-transform: rotateX(90deg) translateZ(200px); "><p>Loser</p></div>
-                <div class="tile1" style="-webkit-transform: rotateX(120deg) translateZ(200px); "><p>Loser</p></div>
-                <div class="tile1" style="-webkit-transform: rotateX(150deg) translateZ(200px); "><p>Loser</p></div>
-                <div class="tile1" style="-webkit-transform: rotateX(180deg) translateZ(200px); "><p>Loser</p></div>
-                <div class="tile1" style="-webkit-transform: rotateX(210deg) translateZ(200px); "><p>Loser</p></div>
-                <div class="tile1" style="-webkit-transform: rotateX(240deg) translateZ(200px); "><p>Loser</p></div>
-                <div class="tile1" style="-webkit-transform: rotateX(270deg) translateZ(200px); "><p>Loser</p></div>
-                <div class="tile1" style="-webkit-transform: rotateX(300deg) translateZ(200px); "><p>Loser</p></div>
-                <div class="tile1" style="-webkit-transform: rotateX(330deg) translateZ(200px); "><p>Loser</p></div>
-            </div>
-        </div>
-        <div id="rotate2">
-            <div id="ring-2" class="ring">
-                <div class="tile2" style="-webkit-transform: rotateX(0deg) translateZ(200px); "><p>Fred</p></div>
-                <div class="tile2" style="-webkit-transform: rotateX(30deg) translateZ(200px); "><p>Loser</p></div>
-                <div class="tile2" style="-webkit-transform: rotateX(60deg) translateZ(200px); "><p>Loser</p></div>
-                <div class="tile2" style="-webkit-transform: rotateX(90deg) translateZ(200px); "><p>Loser</p></div>
-                <div class="tile2" style="-webkit-transform: rotateX(120deg) translateZ(200px); "><p>Loser</p></div>
-                <div class="tile2" style="-webkit-transform: rotateX(150deg) translateZ(200px); "><p>Loser</p></div>
-                <div class="tile2" style="-webkit-transform: rotateX(180deg) translateZ(200px); "><p>Loser</p></div>
-                <div class="tile2" style="-webkit-transform: rotateX(210deg) translateZ(200px); "><p>Loser</p></div>
-                <div class="tile2" style="-webkit-transform: rotateX(240deg) translateZ(200px); "><p>Loser</p></div>
-                <div class="tile2" style="-webkit-transform: rotateX(270deg) translateZ(200px); "><p>Loser</p></div>
-                <div class="tile2" style="-webkit-transform: rotateX(300deg) translateZ(200px); "><p>Loser</p></div>
-                <div class="tile2" style="-webkit-transform: rotateX(330deg) translateZ(200px); "><p>Loser</p></div>
-            </div>
-        </div>
-        <div id="rotate3">
-            <div id="ring-3" class="ring">
-                <div class="tile3" style="-webkit-transform: rotateX(0deg) translateZ(200px); "><p>Fred</p></div>
-                <div class="tile3" style="-webkit-transform: rotateX(30deg) translateZ(200px); "><p>Loser</p></div>
-                <div class="tile3" style="-webkit-transform: rotateX(60deg) translateZ(200px); "><p>Loser</p></div>
-                <div class="tile3" style="-webkit-transform: rotateX(90deg) translateZ(200px); "><p>Loser</p></div>
-                <div class="tile3" style="-webkit-transform: rotateX(120deg) translateZ(200px); "><p>Loser</p></div>
-                <div class="tile3" style="-webkit-transform: rotateX(150deg) translateZ(200px); "><p>Loser</p></div>
-                <div class="tile3" style="-webkit-transform: rotateX(180deg) translateZ(200px); "><p>Loser</p></div>
-                <div class="tile3" style="-webkit-transform: rotateX(210deg) translateZ(200px); "><p>Loser</p></div>
-                <div class="tile3" style="-webkit-transform: rotateX(240deg) translateZ(200px); "><p>Loser</p></div>
-                <div class="tile3" style="-webkit-transform: rotateX(270deg) translateZ(200px); "><p>Loser</p></div>
-                <div class="tile3" style="-webkit-transform: rotateX(300deg) translateZ(200px); "><p>Loser</p></div>
-                <div class="tile3" style="-webkit-transform: rotateX(330deg) translateZ(200px); "><p>Loser</p></div>
-            </div>
-        </div>
-        </div>
-       
-    </div>
-    
-       
-<div class="col-lg-12 jumbotron " style="padding-left: 10px; border-radius:30px !important; padding-right: 10px;">
-    
-    
-    <script>
-      $(function(){
-     
-    $('#counter').countdown({
-          image: '{% static 'js/countdown/digits.png' %}',
-          startTime: '{{ fecha_delta.dias }}:{{ fecha_delta.horas }}:{{ fecha_delta.minutos }}:{{ fecha_delta.segundos }}'
-          
-        });
-      });
-    </script>
-    
-     <style type="text/css">
-      #counter-container{
-     min-height:145px;
-      font-family:Secrets;
-    font-weight:bold;
-       font-size:50px;
-      }
-      #counter{
-      margin-top:-20px;
-      }
-      br { clear: both; }
-      .cntSeparator {
-        font-size: 71px;
-        margin: -43px 7px;
-        color: #000;
-      }
-      .desc { margin: 7px 3px; text-align:center;}
-      .desc div {
-      	float:left;
-      	margin-top:-18px;
-      	margin-left:0px;
-        width: 70px;
-        margin-right: 65px;
-        font-size:30px;
-        font-weight: bold;
-        color: #000;
-        font-family:Diamond;
-      }
-    </style>
-    
-   
-	<h1 style="padding:8px; border-radius:29px; background-color:white;"  class="titulo-eventos text-center marron titulo-evento">Bienvenido al Evento</br><span class="rojo" > {{nuevo_evento.nombre}}</span></h1>
-	<div style="background-color:white; padding: 5px 30px 5px 30px; border-radius:30px; min-height: 380px;">
+<div id="detalle-evento" class="col-lg-12 jumbotron " style="padding-left: 10px; border-radius:30px !important; padding-right: 10px; padding-bottom:40px;">
+	<h1 id="detalle-title" style="padding:8px; border-radius:29px; background-color:white;"  class="titulo-eventos text-center marron titulo-evento">Bienvenido al Evento</br><span class="rojo" > {{nuevo_evento.nombre}}</span></h1>
+	<div style="background-color:white; padding: 5px 30px 40px 30px; border-radius:30px; min-height:870px;">
+		  
 		<div class="col-lg-6">
 		<h3><span class="Diamond color-esperanza" style="font-size: 40px">Detalles del Evento:</span></h3>
 		   <ul style="margin-top:0px;"class="list-group  detalle-evento Diamond ">
@@ -355,8 +57,10 @@ text-shadow: -3px -3px 0 #000, 1px -3px 0 #000, -3px 3px 0 #000, 3px 3px 0 #000;
 			    </div>
 			    {% endif %}
 		    </li>
-		    <li class="list-group-item ">Faltan: <span class="rojo" > {{ participantes_faltantes }} </span>participantes por confirmar</li><br>
-	    	<a class="no-title colorbox-link " href = "/invitar/evento/{{ nuevo_evento.id }}/ " ><div class=" btn btn-default btn-lg btn-custom glyphicon btn-rosita Secrets " style="width:100%; font-size:30px; font-weight:bold;" > Invitar Participantes</div></a><br>
+		    <li class="list-group-item ">Faltan: <span id="faltan" class="rojo" > {{ participantes_faltantes }} </span>participantes por confirmar</li><br>
+	    	{% if not regala_as %}
+	    	<a id="invitar-participantes" class="no-title colorbox-link " href = "/invitar/evento/{{ nuevo_evento.id }}/ " ><div class=" btn btn-default btn-lg btn-custom glyphicon btn-rosita Secrets " style="width:100%; font-size:30px; font-weight:bold;" > Invitar Participantes</div></a><br>
+		    {% endif %}
 		    <a class="no-title colorbox-link " href = "/elegir/regalo/{{ nuevo_evento.id }}/ " ><div class=" btn btn-default btn-lg btn-custom glyphicon btn-rosita Secrets " style="width:100%; font-size:30px; font-weight:bold;" > Elegir Regalo</div></a>
 		   </ul>
   	</div> 
@@ -369,7 +73,7 @@ text-shadow: -3px -3px 0 #000, 1px -3px 0 #000, -3px 3px 0 #000, 3px 3px 0 #000;
 	   	<tr class="fondo-tabla">
 	   	{% for participante in participante_tupla %}
 	   		<td style="border-left:3px solid black;"><span class="glyphicon glyphicon-ok " text="Ver Regalos" style="color: #D11D59"> </span></td>
-	   		<td><span class="Secrets" style="color: #333333;">{{ participante.nickname }}</span></td>
+	   		<td><span class="Secrets" style="color: #333333;">{{ participante }}</span></td>
 	   		<td><span class="glyphicon glyphicon-gift  rojo"></span></td>
 	   		<td><span class="glyphicon glyphicon-trash  rojo"></span></td>
 	   		<td style="border-right:3px solid black;"></td>
@@ -377,30 +81,35 @@ text-shadow: -3px -3px 0 #000, 1px -3px 0 #000, -3px 3px 0 #000, 3px 3px 0 #000;
 	   	</tr>
 	   	{% endfor %}
 	    </table>
-	    {% if regala_a %}
-	    Te toco regalarle a:   {{ regala_a }}
 	    
-	 	{% endif %}
     </div>
     
-	   <a  class="no-title" href="/generar/intercambio/evento/{{ nuevo_evento.id }}/">
-	   	<h1 style="padding:8px; border-radius:29px; background-color:white;"  class="titulo-eventos text-center marron titulo-evento">
-	   		<span class="btn btn-default btn-lg btn-esperanza2 Secrets" style="padding-left: 5px; border-radius:13px !important; padding-right: 10px; width:100%; font-size:40px; font-weight:bold;">
-	   			Iniciar sorteo del Intercambio
-	   		</span>
-	   	</h1>
-	   </a> 
-	   
-   <div id="counter-container" class="col-lg-12 col-lg-offset-3">
-		Faltan <div id="counter"></div>
+    
+     <div id="counter-container" style="margin-top:25px;"class="col-lg-7 col-lg-offset-3">
+		<!--<div class="text-center">Faltan</div>-->
+		 <div id="counter"></div>
 		  	<div class="desc">
 			    <div>Días</div>
 			    <div>Horas</div>
 			    <div>Minutos</div>
 			    <div>Segundos</div>
 	  		</div>
-<div style="margin-right:-70px">kujh</div>
-	  	</div>
+<!--<div style="margin-right:-70px">kujh</div>-->
+	</div>
+	  		{% if not regala_a %}
+	   		<span id="generar-intercambio" class="btn btn-default btn-lg btn-esperanza2 Secrets" style="padding-left: 5px; border-radius:13px !important; padding-right: 10px; width:100%; font-size:40px; font-weight:bold;">
+	   			Iniciar sorteo del Intercambio
+	   		</span>
+	   		{% endif %}
+	   		{% if regala_a %}
+			<div class="col-lg-8 col-lg-offset-2 Diamond text-center" id="intercambio" style="line-height:80px; font-size:40px; margin-top:-20px;">
+	    	<div class="">Te toco regalarle a:</div>
+	    	<div id="regala-a" style="line-height:30px; padding:30px 140px; border-radius:20px; display:inline;background-color:#DFC569; color:#DFC569; font-size:35px;"> 
+	    	{{ regala_a }}</div>
+	    	</div>
+	 		{% endif %}
+	  	
+			
   	</div>
    </div>
 

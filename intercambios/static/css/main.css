@@ -356,5 +356,8 @@ margin-top: -3px;
     color: #000;
     font-family:Diamond;
   }
-      
+
+#nombre, .nombre_evento{
+	text-transform: capitalize;
+}
       

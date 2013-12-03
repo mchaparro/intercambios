@@ -29,7 +29,7 @@
 		<div class="col-lg-6">
 		<h3><span class="Diamond color-esperanza" style="font-size: 40px">Detalles del Evento:</span></h3>
 		   <ul style="margin-top:0px;"class="list-group  detalle-evento Diamond ">
-		    <li class="list-group-item ">Creado por: <span class="rojo" > {{ nuevo_evento.admin }}</span></li>
+		    <li class="list-group-item ">Creado por: <span class="rojo" > {{ nuevo_evento.admin.nombre }}</span></li>
 		    <li class="list-group-item ">Fecha: <span class="rojo" > {{ nuevo_evento.fecha_evento }}</span>
 			    {% if nuevo_evento.admin == user %}
 			    <div class="pull-right">
@@ -58,7 +58,7 @@
 			    {% endif %}
 		    </li>
 		    <li class="list-group-item ">Faltan: <span id="faltan" class="rojo" > {{ participantes_faltantes }} </span>participantes por confirmar</li><br>
-	    	{% if not regala_as %}
+	    	{% if not regala_a %}
 	    	<a id="invitar-participantes" class="no-title colorbox-link " href = "/invitar/evento/{{ nuevo_evento.id }}/ " ><div class=" btn btn-default btn-lg btn-custom glyphicon btn-rosita Secrets " style="width:100%; font-size:30px; font-weight:bold;" > Invitar Participantes</div></a><br>
 		    {% endif %}
 		    <a class="no-title colorbox-link " href = "/elegir/regalo/{{ nuevo_evento.id }}/ " ><div class=" btn btn-default btn-lg btn-custom glyphicon btn-rosita Secrets " style="width:100%; font-size:30px; font-weight:bold;" > Elegir Regalo</div></a>

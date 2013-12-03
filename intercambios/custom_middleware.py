@@ -5,7 +5,7 @@ from django.contrib import messages
 class NombreMiddleware(object):
     
     def process_request(self, request):
-       if request.user.is_anonymous:
+       if request.user.is_anonymous():
            pass 
        elif request.path == '/perfil/usuario/':
            pass

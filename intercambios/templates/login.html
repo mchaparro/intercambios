@@ -14,37 +14,29 @@
 			
 			<div class="container">
 				<div class="jumbotron login" style="border-radius:15px;">	
-		<span style="font-size:70px;" class="glyphicon glyphicon-gift">waka!!!!</span>
-				{% for name in social_auth.backends.oauth2 %}
-   					 <li><a rel="nofollow" href="{% url "socialauth_begin" name %}">{{ name|title }}</a></li>
- 				 {% endfor %}
-				{% for name in social_auth.backends.oauth %}
-   					 <li><a rel="nofollow" href="{% url "socialauth_begin" name %}">{{ name|title }}</a></li>
- 				 {% endfor %}
- 				 <table>
- 				 <tr style="width:60px;">
- 				 	<td>
- 				 		<img  style="width:80px; height:80px;" src="{% static "img/facebook.png" %}" alt="facebook">
- 				 	</td>
- 				 	<td>
- 				 		<img class="" style="width:80px; height:80px;" src="{% static "img/google.png" %}" alt="google">
- 				 	</td>
- 				 	<td> 
- 				 		<span style="font-size:70px;" class="glyphicon glyphicon-gift">waka!!!!</span>
- 				 	</td>
- 				 </tr>
- 				 </table>
+				
 				    <form class="form-signin" method="post" action="" id="form-signin">
 				    	{% csrf_token %}
 				    	<div class="login-form">
 					         	<h2>Inicia sesi&oacute;n</h2>
+							<div  style="text-align:center; margin-top:5px !important;"id="crear-cuenta">&oacute;<br> <a class="no-title" href="#">Registrate</a></div>
 					         	<input name="username" type="text" style="" class="form-control " placeholder="Usuario" value="">  
 					         	<input name="password" type="password" class="form-control" placeholder="Clave" value="">  
 					        	<button name="submit" id="submit" value="" type="submit" class="btn btn-large btn-danger">Ingresar</button>
 						    	</form>
-						</div>
+						</div><br>
+				<table>
+ 				 <tr style="width:60px;">
+ 				 	<td>
+ 				 		<a href="/login/facebook/"><img  style="width:60px; height:60px;" src="{% static "img/facebook.png" %}" alt="facebook"></a>
+ 				 	</td>
+ 				 	<td>
+ 				 		<a href="/login/google-oauth2/"><img class="" style="width:63px; height:63px;" src="{% static "img/google.png" %}" alt="google"></a>
+ 				 	</td>
+ 				 	
+ 				 </tr>
+ 				 </table>
 			        	</div>
-							<h3 style="text-align:left"id="crear-cuenta"><a href="#">Crear Cuenta</a></h3>
 			</div>
 		</div>
 	</div>

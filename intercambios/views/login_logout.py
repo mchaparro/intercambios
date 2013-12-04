@@ -36,7 +36,7 @@ def login_user(request):
                 user.save()
                 user = authenticate(email=email, password=password)
                 login(request,user)
-                messages.warning(request, '<h1 class="Diamond">%s!! bienvenido al sistema de intercambios </br> porfavor completa tu registro</h1>' % user.nombre)
+                messages.success(request, '<h1 class="Diamond">%s!! Bienvenido al sistema de intercambios</h1>' % user.nombre)
                 return HttpResponseRedirect('/')
                 
         except:

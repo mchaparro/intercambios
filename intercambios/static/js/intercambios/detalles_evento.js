@@ -42,10 +42,10 @@ $(document).ready(function() {
 						 }); 
 					  }
 					  else
-						  noty({text: '<h1 class="Diamond">No puedes eliminarte a ti mismo del intercambio </h1>' , type: 'warning',timeout: 5000,});
+						  noty({text: '<h1 class="Diamond">No puedes eliminarte a ti mismo del intercambio </h1>' , type: 'error',timeout: 5000,});
 				  }
 				  else{
-					  noty({text: '<h1 class="Diamond">Solo el creador del evento puede eliminar participantes </h1>' , type: 'warning',timeout: 5000,});
+					  noty({text: '<h1 class="Diamond">Solo el creador del evento puede eliminar participantes </h1>' , type: 'error',timeout: 5000,});
 				  }
 				  
 			  }
@@ -62,10 +62,10 @@ $(document).ready(function() {
 			 if (faltan == 0)
 				 window.location = '/generar/intercambio/evento/'+eventoID+'/';
 			 else
-				 noty({text: '<h1 class="Diamond">No se puede generar el intercambio hasta que esten registrados todos los participantes</h1>' , type: 'warning',timeout: 10000,});
+				 noty({text: '<h1 class="Diamond">No se puede generar el intercambio hasta que esten registrados todos los participantes</h1>' , type: 'error',timeout: 10000,});
 		 }
 		 else{
-			 noty({text: '<h1 class="Diamond">Solo el creador del evento puede generar el intercambio </h1>' , type: 'warning',timeout: 10000,});
+			 noty({text: '<h1 class="Diamond">Solo el creador del evento puede generar el intercambio </h1>' , type: 'error',timeout: 10000,});
 		 }
 	 });
 });

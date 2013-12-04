@@ -22,20 +22,20 @@
 	    {% endif %}
 	    <table style="width:100%;">
 		     {% for evento_participa in eventos_participa %}
-		     <tr>
+		     <tr id="evento-{{ evento_participa.id }}">
 			     <td style="width:100%;">
 			       <a class="no-title" href="/detalles/evento/{{ evento_participa.id }}/">
 			      	 <div style="width:100%; height:53px; font-size:30px; font-weight:bold;" class="btn btn-default btn-lg btn-custom glyphicon btn-rosita probando" >
 			       	{% if evento_participa.admin_id == user.id %}
-				         <span class="nombre-evento" style="width:100%; margin-left:30px; line-height:35px; text-align:center;">
+				         <span class="nombre-evento" style="width:100%; margin-left:-70px; line-height:35px; text-align:center;">
 				         {{ evento_participa.nombre }}
 				         </span>
 				         <div style="float:right; margin-top:-5px; margin-left:-40px;">
-				           <a class="cancelar-evento no-title" href="/cancelar/evento/{{ evento_participa.id }}/">
-				             <span style="margin-left:-29px; margin-right:3px;"class="glyphicon glyphicon-trash"></span>
-				           </a>
+				         <a class="no-title">
+				             <span name="{{ evento_participa.nombre }}" id="{{ evento_participa.id }}" title="borrar evento {{ evento_participa.nombre }}" style="margin-left:-29px; margin-right:3px;"class="borrar-evento glyphicon glyphicon-trash"></span>
+				          </a> 
 				           <a class="no-title colorbox-link" href="/editar/evento/{{ evento_participa.id }}/">
-				              <span  class=" glyphicon glyphicon-pencil"></span>
+				              <span  title="editar evento {{ evento_participa.nombre }}" class=" glyphicon glyphicon-pencil"></span>
 				           </a>
 				         </div>
 			       {% else %}
@@ -60,19 +60,19 @@
 	    <table class="table-evento text center">
 	        <tr>
 	            <td style="width: 30px;"> <span class="glyphicon glyphicon-gift"></span></td>
-	            <td> <input class="nombre_evento" name="nombre_evento" type="text" placeholder="Nombre del Evento"/></td>
+	            <td> <input autocomplete="off"  class="nombre_evento" name="nombre_evento" type="text" placeholder="Nombre del Evento"/></td>
 	        </tr>
 	        <tr>
 	            <td><span class="glyphicon glyphicon-calendar"></span></td>
-	            <td><input class="fecha" name="fecha" type="text" placeholder="Fecha del Intercambio"/></td>
+	            <td><input autocomplete="off"  class="fecha" name="fecha" type="text" placeholder="Fecha del Intercambio"/></td>
 	        </tr>
 	        <tr>
 	            <td><span class="glyphicon glyphicon-user"></span></td>
-	            <td> <input class="participantes" name="participantes" type="text" placeholder="Numero de Participantes"/></td>
+	            <td> <input autocomplete="off"  class="participantes" name="participantes" type="text" placeholder="Numero de Participantes"/></td>
 	        </tr>
 	        <tr>
 	            <td><span class="glyphicon glyphicon-usd"></span></td>
-	            <td><input class="precio" name="precio" type="text" placeholder="Precio del Regalo"/></td>
+	            <td><input autocomplete="off"  class="precio" name="precio" type="text" placeholder="Precio del Regalo"/></td>
 	        </tr>
 	         <tr>
 	         <td></td>

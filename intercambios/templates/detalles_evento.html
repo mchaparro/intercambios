@@ -16,6 +16,7 @@
      var minutos = '{{ fecha_delta.minutos }}'
      var segundos = '{{ fecha_delta.segundos }}'
      var eventoID = '{{ nuevo_evento.id }}'
+     var participanteadminID = '{{ participante_admin.id }}'
      var adminID = '{{ nuevo_evento.admin.id }}'
      var userID = '{{ user.id }}'
     </script>
@@ -57,14 +58,14 @@
 			    </div>
 			    {% endif %}
 		    </li>
-		    <li class="list-group-item ">Faltan: <span id="faltan" class="rojo" > {{ participantes_faltantes }} </span>participantes por confirmar</li><br>
+		    <li class="list-group-item ">Faltan: <span id="faltan" class="rojo" >{{ participantes_faltantes }}</span> participantes por confirmar</li><br>
 	    	{% if not regala_a %}
 	    	<a id="invitar-participantes" class="no-title colorbox-link " href = "/invitar/evento/{{ nuevo_evento.id }}/ " ><div class=" btn btn-default btn-lg btn-custom glyphicon btn-rosita Secrets " style="width:100%; font-size:30px; font-weight:bold;" > Invitar Participantes</div></a><br>
 		    {% endif %}
 		    <a class="no-title colorbox-link " href = "/elegir/regalo/{{ nuevo_evento.id }}/ " ><div class=" btn btn-default btn-lg btn-custom glyphicon btn-rosita Secrets " style="width:100%; font-size:30px; font-weight:bold;" > Elegir Regalo</div></a>
 		   </ul>
   	</div> 
-   	<h3><span class="Diamond color-esperanza" style="font-size: 40px">Participantes Registrados:  <span class="rojo">{{ participantes.count }}</span></span></h3>
+   	<h3><span class="Diamond color-esperanza" style="font-size: 40px">Participantes Registrados:  <span id="total-participantes" class="rojo">{{ participantes.count }}</span></span></h3>
    	<div class="col-lg-6">
 	   	<table style="width:100%; font-size:20px;" class="table fondo-tabla  ">
 	   	
@@ -72,11 +73,15 @@
 	   	{% for participante_tupla in participantes|columns:2 %}
 	   	<tr class="fondo-tabla">
 	   	{% for participante in participante_tupla %}
-	   		<td style="border-left:3px solid black;"><span class="glyphicon glyphicon-ok " text="Ver Regalos" style="color: #D11D59"> </span></td>
-	   		<td><span class="Secrets" style="color: #333333;">{{ participante }}</span></td>
-	   		<td><span class="glyphicon glyphicon-gift  rojo"></span></td>
-	   		<td><span class="glyphicon glyphicon-trash  rojo"></span></td>
-	   		<td style="border-right:3px solid black;"></td>
+	   		<td class="participante-{{ participante.id }}" style="border-left:3px solid black;"><span class="glyphicon glyphicon-ok " text="Ver Regalos" style="color: #D11D59"> </span></td>
+	   		<td class="participante-{{ participante.id }}" style="cursor:pointer;" title="{{ participante.usuario.nombre }}"><span class="Secrets" style="color: #333333;">{{ participante.usuario }}</span></td>
+	   		<td class="participante-{{ participante.id }}"><span class="glyphicon glyphicon-gift  rojo"></span></td>
+	   		<td style="cursor:pointer;"title="Eliminar a {{ participante.usuario }} del intercambio" name="{{ participante.usuario }}" id="{{ participante.id }}" class="borrar-participante participante-{{ participante.id }}">
+	   		
+	   		<span class="glyphicon glyphicon-trash  rojo"></span>
+	   		
+	   		</td>
+	   		<td class="participante-{{ participante.id }}"style="border-right:3px solid black;"></td>
 	   	{% endfor %}
 	   	</tr>
 	   	{% endfor %}

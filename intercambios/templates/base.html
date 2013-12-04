@@ -83,8 +83,23 @@
        			 {% for invitacion in user.invitaciones_pendientes.all %}
        			 
         		  <li><a href="/participar/evento/{{ invitacion.evento.id }}/">
-        		  {{ invitacion.evento }} - {{ invitacion.evento.admin }}
+        		  <table>
+	        		  <tr>
+		        		  <td rowspan=3><span style="margin-right:5px;"class="rojo glyphicon glyphicon-gift"></span> </td>
+		        		  <td>Evento: <b>{{ invitacion.evento }}</b></td>
+	        		  </tr>
+	        		  <tr>
+	        		  	   <td>Organiza: <b>{{ invitacion.evento.admin }}</b></td>
+	        		  </tr>
+	        		  <tr>
+	        		  	   <td>Fecha: <b>{{ invitacion.evento.fecha_evento }}</b></td>
+	        		  </tr>
+        		  </table>
+        		  
+        		 
+        		 
         		  </a></li>
+        		  <li><hr><li>
         		  {% endfor %}
         		  {% if not user.invitaciones_pendientes.count > 0 %}
 	        		   <li><a href="#">
@@ -103,7 +118,7 @@
   				 </a>
        			 <ul class="dropdown-menu">
         		  <li><a href="#">{{ user.email }}</a></li>
-        		  <li><a href="/perfil/usuario/">Editar Perfil</a></li>
+        		  <li><a class="colorbox-link" title="Editar Perfil" href="/perfil/usuario/modal/">Editar Perfil</a></li>
         		  <li><a href="/logout/">Cerrar sessi&oacute;n</a></li>
       		    </ul>
                </li>

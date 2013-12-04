@@ -60,6 +60,19 @@ def perfil_usuario(request):
         
     return render_to_response('perfil_usuario.html', context_instance=RequestContext(request))
 
+def perfil_usuario_modal(request):
+    if request.method == 'POST':
+        nombre = request.POST['nombre']
+        apodo = request.POST['apodo']
+        if nombre:
+            user = request.user
+            user.nombre = ' '.join(nombre.split())
+            user.apodo = ' '.join(apodo.split())
+            user.save()
+            messages.success(request, '<h1 class="Diamond">%s!! Se edito tu perfil con exito</h1>' % (request.user.nombre))
+            return redirect('mis_eventos')
+        
+    return render_to_response('perfil_usuario_modal.html', context_instance=RequestContext(request))
 
 def format_fecha_delta(td):
     dias = abs(td.days)
@@ -78,11 +91,11 @@ def format_fecha_delta(td):
 @login_required
 def detalles_evento(request, id):
     try:
-        evento = Evento.objects.get(id=id)
+        evento = Evento.objects.get(id=id, estado='activo')
     except:
-        messages.warning(request, '<h2 class="Diamond">No existe el evento seleccionado :(</h2>')
+        messages.warning(request, '<h2 class="Diamond">No existe el evento seleccionado</h2>')
         return HttpResponseRedirect('/')
-    participantes = evento.participantes.all()
+    participantes = evento.participantes_evento.all()
     try:
         regala_a = ParticipantesEvento.objects.get(evento_id=id,usuario=request.user)
         regala_a = regala_a.intercambio
@@ -93,11 +106,16 @@ def detalles_evento(request, id):
     fecha_evento = datetime.datetime.combine(evento.fecha_evento, datetime.time.min)
     fecha_delta = fecha_evento - datetime.datetime.today() 
     fecha_delta = format_fecha_delta(fecha_delta)
-    
+    if datetime.datetime.today().date() == evento.fecha_evento:
+        fecha_delta['dias'] = '00'
+        fecha_delta['horas'] = '00'
+        fecha_delta['minutos'] = '00'
+        fecha_delta['segundos'] = '00'
     data={
           'fecha_delta' : fecha_delta,
           'nuevo_evento':evento,
           'participantes':participantes,
+          'participante_admin': participantes.get(usuario=request.user),
           'participantes_faltantes':evento.numero_participantes-participantes.count(),
           'regala_a': regala_a
           }
@@ -120,7 +138,11 @@ def mis_eventos(request):
     
 @login_required
 def editar_evento(request, id):
-    evento = Evento.objects.get(id=id)
+    try:
+        evento = Evento.objects.get(id=id,estado='activo')
+    except:
+        messages.warning(request, '<h2 class="Diamond">No existe ese evento</h2>')
+        return HttpResponseRedirect('/') 
     if not evento.admin == request.user:
          return HttpResponseRedirect('/')
     if request.method == 'POST':
@@ -137,6 +159,9 @@ def editar_evento(request, id):
         precio = precio.replace("$", "")
         precio = precio.replace(",", "")
         
+        if int(evento.participantes.count()) > int(participantes):
+            messages.warning(request, '<h2 class="Diamond">La cantidad de participantes es menor a los participantes actuales</h2>')
+            return HttpResponseRedirect('/detalles/evento/%s/' % evento.id) 
         fecha_evento = datetime.datetime.strptime(fecha, '%m/%d/%Y').date()
         evento.nombre=nombre_evento
         evento.precio=precio
@@ -152,9 +177,22 @@ def editar_evento(request, id):
     return render_to_response('editar_evento.html',data, context_instance=RequestContext(request))
 
 
-def cancelar_evento(request, id):
-    evento = Evento.objects.get(id=id)
-    messages.warning(request, '<h2 class="Diamond">El elimino el evento %s</h2>' % evento.nombre)
-    evento.delete()
-    return redirect('mis_eventos')
+def cancelar_evento(request):
+    eventoID = request.POST['evento']
+    evento = Evento.objects.get(id=eventoID)
+    
+    if request.user == evento.admin:
+        evento.estado='cancelado'
+        evento.save()
+    
+    return HttpResponse('{}', content_type='application/json')
 
+def borrar_participante(request):
+    participanteID = request.POST['participante']
+    eventoID = request.POST['evento']
+    evento = Evento.objects.get(id=eventoID)
+    participante = ParticipantesEvento.objects.get(id=participanteID)
+    if request.user == evento.admin:
+        participante.delete()
+    
+    return HttpResponse('{}', content_type='application/json')

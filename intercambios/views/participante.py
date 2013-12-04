@@ -40,7 +40,11 @@ def agregar_participante(request, id):
 
 @login_required
 def participar_evento(request,id):
-    evento = Evento.objects.get(id=id)
+    try:
+        evento =  Evento.objects.get(id=id,estado='activo')
+    except:
+        messages.warning(request, '<h2 class="Diamong">No existe el evento seleccionado</h2>')
+        return HttpResponseRedirect('/') 
     participantes_max = evento.numero_participantes
     participantes_actuales = evento.participantes.all().count()
     try:
@@ -62,7 +66,11 @@ def participar_evento(request,id):
         
 @login_required
 def invitar_evento(request,id):
-    evento = Evento.objects.get(id=id)
+    try:
+        evento =  Evento.objects.get(id=id,estado='activo')
+    except:
+        messages.warning(request, '<h2 class="Diamond">No existe el evento seleccionado</h2>')
+        return HttpResponseRedirect('/') 
     ParticipantesEvento.objects.get_or_create(usuario = request.user, evento = evento)
     usuarios = Usuario.objects.exclude(id__in = evento.participantes.all().values_list('id', flat=True))
     data={
@@ -73,7 +81,11 @@ def invitar_evento(request,id):
 
 
 def elegir_regalo(request,id):
-    evento = Evento.objects.get(id=id)
+    try:
+        evento =  Evento.objects.get(id=id,estado='activo')
+    except:
+        messages.warning(request, '<h2 class="Diamong">No existe el evento seleccionado</h2>')
+        return HttpResponseRedirect('/') 
     ParticipantesEvento.objects.get_or_create(usuario = request.user, evento = evento)
     
     data={

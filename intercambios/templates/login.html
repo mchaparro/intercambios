@@ -6,26 +6,30 @@
 {% endblock %}
 
 {% block content %}
-	<div class="text-center">
+	<div class="text-center" style="min-height:750px">
 		<div class="row-nomargin row" >    
 			<div class="col-lg-6">
-			 	<img class="scaled" src="{% static "img/intercambios/regalos.jpg" %}" alt="intercambios">
+			 	<img style="margin-top:-10px; margin-left: -90px; width:600px; height:550px;" src="{% static "img/intercambios/regalos.png" %}" alt="intercambios">
+				<div class="fb-like" data-href="http://intercambios.herokuapp.com/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true">
 			</div>
-			<div class="col-lg-5 col-sm-12">
-			
-			<div class="container">
-				<div class="jumbotron login" style="border-radius:15px;">	
-				
-				    <form class="form-signin" method="post" action="" id="form-signin">
-				    	{% csrf_token %}
-				    	<div class="login-form">
-					         	<h2>Inicia sesi&oacute;n</h2>
-							<div  style="text-align:center; margin-top:5px !important;"id="crear-cuenta">&oacute;<br> <a class="no-title" href="#">Registrate</a></div>
-					         	<input name="username" type="text" style="" class="form-control " placeholder="Usuario" value="">  
-					         	<input name="password" type="password" class="form-control" placeholder="Clave" value="">  
-					        	<button name="submit" id="submit" value="" type="submit" class="btn btn-large btn-danger">Ingresar</button>
-						    	</form>
-						</div><br>
+			</div>
+			<div class="col-lg-6 col-sm-12" >
+			<div class="jumbotron login" style="border-radius:15px;">	
+				<ul class="nav nav-tabs">
+				  <li class="tab1"><a>Inicia Sesi&oacute;n</a></li>
+				  <li class="tab2"><a>Crear Cuenta</a></li>
+				</ul>
+			</br>
+			<div id="tab1">
+				<h2> Inicia Sesi&oacute;n</h2>
+			    <form class="form-signin" method="post" action="" id="form-signin">
+			    	{% csrf_token %}
+			    	<div class="login-form">
+				         	<input title="E-mail" name="email" type="text" style="" class="form-control " placeholder="E-mail" value="">  
+				         	<input autocomplete="off"  title="Contrase&ntilde;a" name="password" type="password" class="form-control" placeholder="Contrase&ntilde;a" value="">  
+				        	<button name="submit" id="submit" value="" type="submit" class="btn btn-large btn-danger">Ingresar</button>
+					    	</form>
+					</div><br>
 				<table>
  				 <tr style="width:60px;">
  				 	<td>
@@ -37,10 +41,21 @@
  				 	
  				 </tr>
  				 </table>
-			        	</div>
-
-			        				<div style="float: right"class="fb-like" data-href="http://intercambios.herokuapp.com/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true">
-			</div>
+			</div>	
+				<div id="tab2" style="display:none;">
+					<h2> Crear Cuenta</h2>
+				    <form class="form-signin" method="post" action="" id="form-signin">
+				    	{% csrf_token %}
+				    	<div class="login-form">
+			         	<input autocomplete="off" title="E-mail" name="email" type="text" style="" class="form-control " placeholder="E-mail" value="">  
+			         	<input autocomplete="off" title="Nombre Completo" name="nombre" type="text" style="" class="form-control " placeholder="Nombre Completo" value="">  
+			         	<input autocomplete="off" title="Contrase&ntilde;a"name="password" type="password" class="form-control" placeholder="Contraseña" value="">  
+			         	<input autocomplete="off" title="Confirmar Contrase&ntilde;a"name="password2" type="password" class="form-control" placeholder="Confirmar Contraseña" value="">  
+			        	<button name="submit" id="submit2" value="" type="submit" class="btn btn-large btn-danger">Crear Cuenta</button>
+			    	</form>
+						</div>
+						<br>
+				</div>
 		</div>
 	</div>
 {% endblock %}

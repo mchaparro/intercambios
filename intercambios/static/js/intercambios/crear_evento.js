@@ -47,8 +47,9 @@ $(document).ready(function() {
 				return;
 				}
 			var participantes = $('.participantes').val();
-			if (participantes.length < 1){
-					noty({text: '<h1 class="Diamond">Por favor ingresa un numero</h1>' ,
+			
+			if (parseInt(participantes) < 2){
+					noty({text: '<h1 class="Diamond">Tu evento debe tener por lo menos 2 participantes</h1>' ,
 					 type: 'warning',timeout: 5000,});
 				return;
 				}
@@ -65,19 +66,12 @@ $(document).ready(function() {
 					 type:'POST',
 					 url: '/crear/evento/',
 					 dataType: 'json',
-					 beforeSend: function() {
-						 // $('#loading-gif').show();
-					 },
-					 complete: function(){
-						 //$('#loading-gif').hide();
-					 },
 					 data: $('#form_crear').serialize(),
 					 success: function(response) {
 						 window.location.href = "/detalles/evento/" + response.evento + "/";
 					 },
 					 error: function(XMLHttpRequest, textStatus, errorThrown) {
-						 //TODO Place proper error message 
-						 console.log(XMLHttpRequest);
+						 noty({text: '<h1 class="Diamond">Error al momento de generar el evento porfavor intentalo de nuevo </h1>' , type: 'error',timeout: 5000,});
 					 }  
 				 }); 
 		 

@@ -6,6 +6,7 @@ from intercambios.models import *
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import UpdateView, CreateView
 from django.contrib import messages
+from django.core.validators import validate_email
 
 def login_user(request):
     try:
@@ -18,22 +19,43 @@ def login_user(request):
     password = ''
     if request.POST:
         password = request.POST['password']
+        email = request.POST['email']
         try:
-            nombre = request.POST['nombre']
-            email = request.POST['email']
-            user = Usuario(nombre=nombre,username=email,email=email)
-            user.set_password(password)
-            user.save()
-            user = authenticate(username=username, password=password)
-            login(request,user)
-            messages.warning(request, '<h1 class="Diamond">%s!! bienvenido al sistema de intercambios </br> porfavor completa tu registro</h1>' % user.nombre)
-            return HttpResponseRedirect('/perfil/usuario/')
+            validate_email(email)
         except:
-            user = authenticate(username=username, password=password)
+            messages.warning(request, '<h1 class="Diamond">El correo que indicaste no es valido</h1>')
+            return HttpResponseRedirect('/')
+        try:
+                nombre = request.POST['nombre']
+                password2 = request.POST['password2']
+                if password != password2:
+                    messages.warning(request, '<h1 class="Diamond">Las contraseñas no coinciden</h1>')
+                    return HttpResponseRedirect('/')
+                user = Usuario(nombre=nombre,username=email,email=email)
+                user.set_password(password)
+                user.save()
+                user = authenticate(email=email, password=password)
+                login(request,user)
+                messages.warning(request, '<h1 class="Diamond">%s!! bienvenido al sistema de intercambios </br> porfavor completa tu registro</h1>' % user.nombre)
+                return HttpResponseRedirect('/')
+                
+        except:
+            if not password or not email:
+                messages.warning(request, '<h1 class="Diamond">Debes completar todos los campos</h1>')
+                return HttpResponseRedirect('/')
+            try:
+                usuario = Usuario.objects.get(email=email)
+            except:
+                messages.warning(request, '<h1 class="Diamond">No existe ningun usuario registrado con ese correo</h1>')
+                return HttpResponseRedirect('/')
+            user = authenticate(email=email, password=password)
+            
             if user is not None:
                 if user.is_active:
                     login(request, user)
                 return HttpResponseRedirect(next)
+            else:
+                messages.warning(request, '<h1 class="Diamond">Verifica tu contrase&ntilde;a</h1>')
         
     return render_to_response('login.html', context_instance=RequestContext(request))
 

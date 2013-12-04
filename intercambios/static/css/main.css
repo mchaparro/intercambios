@@ -360,4 +360,10 @@ margin-top: -3px;
 #nombre, .nombre_evento{
 	text-transform: capitalize;
 }
-      
+
+.nav.nav-tabs li a{
+	cursor:pointer;
+	font-size: 30px;
+	font-weight: bold;
+	
+}

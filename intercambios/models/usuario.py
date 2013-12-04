@@ -4,13 +4,13 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, Permis
 from django.utils import timezone
 
 class UsuariosManager(BaseUserManager):
-    def create_user(self, username, email="",password="", nombre=""):
+    def create_user(self, username="", email="",password="", nombre=""):
         """
         Creates and saves user with the given username and password.
         """
-        if not username:
-            raise ValueError('Favor de proporcionar un nombre de usuario valido')
-
+       # if not username:
+       #     raise ValueError('Favor de proporcionar un nombre de usuario valido')
+        
         usuario = self.model(
             email=UserManager.normalize_email(email),username=username,nombre=nombre
         )
@@ -30,9 +30,9 @@ class UsuariosManager(BaseUserManager):
         return usuario
 
 class Usuario(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField(max_length=50,db_index=True,unique=True)
+    username = models.CharField(max_length=50,blank=True,null=True,default="")
     apodo = models.CharField(max_length=100,blank=True,null=True,default="")
-    email = models.EmailField(max_length=100, blank=True,null=True,default=None,db_index=True)
+    email = models.EmailField(max_length=100, unique=True,db_index=True)
     nombre = models.CharField(max_length=100)
     
     fecha = models.DateTimeField(auto_now_add=True)
@@ -42,7 +42,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     
     objects = UsuariosManager()
 
-    USERNAME_FIELD = 'username'
+    USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['nombre']
     
 

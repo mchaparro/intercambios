@@ -1,14 +1,20 @@
 $(document).ready(function() {
-		
-$('#crear-cuenta').click(function(){
-		$('.login-form').html(''+
-				'<h2>Crear Cuenta</h2>'+
-				'<input name="email" type="text" style="" class="form-control " placeholder="E-mail" value="">'+
-				'<input name="nombre" type="text" style="" class="form-control " placeholder="Nombre" value="">'+
-				'<input name="password" type="password" class="form-control" placeholder="Contrase&ntilde;a" value="">'+
-				'<button name="submit" id="submit" value="" type="submit" class="btn btn-large btn-danger">Crear Cuenta</button></form>');
-	});
-
+    $('.tab1').click(function(){
+	    $('#tab2').hide();
+	    $('.tab1 a').css({'color':'#D5405B'});
+	    $('.tab2 a').css({'color':'#428bca'});
+	    $('#tab1').fadeIn();
+	    document.getElementById('submit').scrollIntoView();
+    });
+    
+	color:
+     $('.tab2').click(function(){
+	    $('#tab1').hide();
+	    $('#tab2').fadeIn();
+	    $('.tab2 a').css({'color':'#D5405B'});
+	    $('.tab1 a').css({'color':'#428bca'});
+	    document.getElementById('submit2').scrollIntoView();
+    });
 });
 
 

@@ -71,7 +71,7 @@ $(document).ready(function() {
 						 window.location.href = "/detalles/evento/" + response.evento + "/";
 					 },
 					 error: function(XMLHttpRequest, textStatus, errorThrown) {
-						 noty({text: '<h1 class="Diamond">Error al momento de generar el evento porfavor intentalo de nuevo </h1>' , type: 'error',timeout: 5000,});
+					
 					 }  
 				 }); 
 		 

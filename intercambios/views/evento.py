@@ -23,6 +23,7 @@ def crear_evento(request):
         local_TZ = pytz.timezone(settings.TIME_ZONE)
         
         nombre_evento = request.POST['nombre_evento']
+        nombre_evento = ' '.join(nombre_evento.split())
         fecha = request.POST['fecha']
         participantes = request.POST['participantes']
         
@@ -61,6 +62,8 @@ def perfil_usuario(request):
     return render_to_response('perfil_usuario.html', context_instance=RequestContext(request))
 
 def perfil_usuario_modal(request):
+    if not request.user.is_authenticated():
+        return HttpResponse('Es necesario que vuelvas a iniciar sesion')
     if request.method == 'POST':
         nombre = request.POST['nombre']
         apodo = request.POST['apodo']
@@ -136,8 +139,9 @@ def mis_eventos(request):
         }
     return render_to_response('index.html',data, context_instance=RequestContext(request))
     
-@login_required
 def editar_evento(request, id):
+    if not request.user.is_authenticated():
+        return HttpResponse('Es necesario que vuelvas a iniciar sesion')
     try:
         evento = Evento.objects.get(id=id,estado='activo')
     except:

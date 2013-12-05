@@ -64,8 +64,10 @@ def participar_evento(request,id):
         messages.error(request, '<h1 class="Diamond">%s!! El numero maximo de participantes del evento ha llegado a su limite </h1>' % (request.user.nombre))
         return HttpResponseRedirect('/' )
         
-@login_required
+
 def invitar_evento(request,id):
+    if not request.user.is_authenticated():
+        return HttpResponse('Es necesario que vuelvas a iniciar sesion')
     try:
         evento =  Evento.objects.get(id=id,estado='activo')
     except:

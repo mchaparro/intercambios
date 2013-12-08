@@ -279,8 +279,7 @@ if(os.environ.get('DATABASE_URL')):
     except:
         pass
     
-    from django.core.mail import send_mail
-    send_mail('Subject here', 'Test test email', 'intercambios@intercambios.com', ['m_mik3@hotmail.com'], fail_silently=False)
+    
 
 
 

@@ -3,8 +3,6 @@ import os
 import json
 from django.contrib.messages import constants as messages
 
-from django.core.mail import send_mail
-send_mail('Subject here', 'jijijijijij ojo jojo :D', 'intercambios@intercambios.com', ['m_mik3@hotmail.com'], fail_silently=False)
 
 #cambiar el nombre de messages.info a que sea message.information
 #de esta forma los mensajes son compatibles con el API que trae por default noty.js
@@ -22,7 +20,7 @@ PROJECT_PATH = os.path.dirname(__file__)
 
 LOGIN_URL = '/login/'
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -280,5 +278,9 @@ if(os.environ.get('DATABASE_URL')):
         EMAIL_HOST_PASSWORD = os.environ['SENDGRID_PASSWORD']
     except:
         pass
+    
+    from django.core.mail import send_mail
+    send_mail('Subject here', 'Test test email', 'intercambios@intercambios.com', ['m_mik3@hotmail.com'], fail_silently=False)
+
 
 

@@ -269,10 +269,13 @@ if(os.environ.get('DATABASE_URL')):
         os.path.join(BASE_DIR, 'static'),
     )
     
-    EMAIL_HOST_USER = os.environ['SENDGRID_USERNAME']
-    EMAIL_HOST= 'smtp.sendgrid.net'
-    EMAIL_PORT = 587
-    EMAIL_USE_TLS = True
-    EMAIL_HOST_PASSWORD = os.environ['SENDGRID_PASSWORD']
+    try:
+        EMAIL_HOST_USER = os.environ['SENDGRID_USERNAME']
+        EMAIL_HOST= 'smtp.sendgrid.net'
+        EMAIL_PORT = 587
+        EMAIL_USE_TLS = True
+        EMAIL_HOST_PASSWORD = os.environ['SENDGRID_PASSWORD']
+    except:
+        pass
 
 

@@ -10,6 +10,8 @@ import datetime
 import pytz
 import json
 import random
+from django.core.mail import send_mail
+
 
 def generar_intercambio(request, id):
     try:
@@ -30,6 +32,10 @@ def generar_intercambio(request, id):
       
     participantes = list(evento.participantes_evento.all())
     temporal = []
+    
+    #***************
+    # GENERAR SORTEO 
+    #***************
     for participante in participantes:
         tempo = list(evento.participantes_evento.all())
         tempo.remove(participante)
@@ -43,6 +49,20 @@ def generar_intercambio(request, id):
         participante.save()
         temporal.append(intercambio) 
     
+    #***************************
+    #enviar correo de resultados
+    #***************************
+    
+    for participante in participantes:
+        correo =  participante.usuario.email
+        intercambio = participante.intercambio
+        
+        send_mail('Sorteo Intercambios 2013',\
+                 'El sorteo del evento "%s" se realizo con exito! te toco regalarle a: %s' % (evento.nombre,intercambio),\
+                  'resultados@intercambios.com',\
+                   ['%s' % correo], \
+                   fail_silently=False)
+        
     messages.success(request, '<h1 class="Diamond">El sorteo del intercambio se completo con exito ! <br> Podras encontrar el nombre de la persona que te toco regalarle en la parte inferior de esta p&aacute;gina</h1>')
         
     return HttpResponseRedirect('/detalles/evento/%s' % evento.id) 

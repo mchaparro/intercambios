@@ -8,8 +8,8 @@
 {% block content %}
 <div class="col-lg-8 jumbotron  col-lg-offset-2">
     <h1 class="titulo-eventos text-center marron Diamond">Completa tu Registro</h1> 
-    <form action="" method="post">
-		{% csrf_token %}
+    <form action="/perfil/usuario/" method="post">
+		<input id="csrf" type="hidden" name="csrfmiddlewaretoken" value="">
 	    <table class="table-evento text  center">
 	        <tr>
 	            <td class="text-center"> 
@@ -24,6 +24,7 @@
 	       
 	         <tr>
 	            <td class="text-center" text-center">
+	            <input name="next" type="hidden" readonly  value="{{ next }}"/>
 	            <input type="submit" id="guardar_datos" style="margin-top:15px; width:100%;"class="btn btn-default btn-blue btn-lg" value="Guardar"/>
 	            </td>
 	        </tr>

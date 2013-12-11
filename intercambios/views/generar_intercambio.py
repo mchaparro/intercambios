@@ -43,6 +43,6 @@ def generar_intercambio(request, id):
         participante.save()
         temporal.append(intercambio) 
     
-    messages.success(request, '<h1 class="Diamond">El sorteo del intercambio se completo con exito ! <br> Podras encontrar el nombre de la perosona que te toco regalarle en la parte inferior de esta p&aacute;gina</h1>')
+    messages.success(request, '<h1 class="Diamond">El sorteo del intercambio se completo con exito ! <br> Podras encontrar el nombre de la persona que te toco regalarle en la parte inferior de esta p&aacute;gina</h1>')
         
     return HttpResponseRedirect('/detalles/evento/%s' % evento.id) 

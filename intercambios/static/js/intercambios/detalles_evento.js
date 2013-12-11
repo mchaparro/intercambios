@@ -1,6 +1,11 @@
 $(document).ready(function() {
 	$("#regalo").wScratchPad();		
-
+	
+	$('#regala-a').click(function(){
+			$('#secret').toggle();
+	        $('#show-secret').toggle();
+	});
+	
 	 $('#counter').countdown({
          image: '/static/js/countdown/digits.png',
          startTime: dias+':'+horas+':'+minutos+':'+segundos

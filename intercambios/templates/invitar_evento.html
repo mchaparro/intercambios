@@ -20,7 +20,7 @@
 	 <select id="usuarios" multiple="multiple" style="width:90%; height:30px; font-size:15px;">
 	{% for usuario in usuarios %}
 		{% ifnotequal usuario user %}
-        <option value="{{usuario.id}}">{{ usuario.nombre }}</option>
+        <option value="{{usuario.id}}">{{ usuario.nombre|default:usuario.email }}</option>
         {% endifnotequal %}
 	{% endfor %}
     </select>

@@ -1,5 +1,6 @@
 $(document).ready(function() {
-
+	
+	$('#csrf').val(getCookie('csrftoken'));
 	
 	
 	//Make table links use colorbox plugin to display admin features

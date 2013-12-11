@@ -20,7 +20,7 @@ PROJECT_PATH = os.path.dirname(__file__)
 
 LOGIN_URL = '/login/'
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (

@@ -51,13 +51,14 @@ def perfil_usuario(request):
     if request.method == 'POST':
         nombre = request.POST['nombre']
         apodo = request.POST['apodo']
+        next = request.POST['next']
         if nombre:
             user = request.user
             user.nombre = ' '.join(nombre.split())
             user.apodo = ' '.join(apodo.split())
             user.save()
             messages.success(request, '<h1 class="Diamond">%s!! Se edito tu perfil con exito</h1>' % (request.user.nombre))
-        return redirect('mis_eventos')
+        return HttpResponseRedirect(next) 
         
     return render_to_response('perfil_usuario.html', context_instance=RequestContext(request))
 

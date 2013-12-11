@@ -6,6 +6,8 @@
 	"DEFAULT_DATABASE_HOST" : "localhost",
 	"DEFAULT_DATABASE_PORT" : "3306",
 	
+	"DEBUG" : false,
+	
 	"GOOGLE_OAUTH2_CLIENT_ID"      : "",
 	"GOOGLE_OAUTH2_CLIENT_SECRET"  : "",
 

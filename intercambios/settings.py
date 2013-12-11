@@ -20,8 +20,8 @@ PROJECT_PATH = os.path.dirname(__file__)
 
 LOGIN_URL = '/login/'
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+
+
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -52,6 +52,9 @@ DATABASES = {
         'PORT': SETTINGS['DEFAULT_DATABASE_PORT'],
     }
 }
+
+DEBUG = SETTINGS['DEBUG']
+TEMPLATE_DEBUG = DEBUG
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts

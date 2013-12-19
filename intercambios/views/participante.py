@@ -2,7 +2,7 @@ from django.http import *
 from django.shortcuts import render_to_response,redirect
 from django.template import RequestContext
 from django.conf import settings
-from intercambios.models import Evento, ParticipantesEvento, Usuario, InvitacionesPendientes
+from intercambios.models import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -82,18 +82,20 @@ def invitar_evento(request,id):
     return render_to_response('invitar_evento.html' , data , context_instance=RequestContext(request))
 
 
-def elegir_regalo(request,id):
-    try:
-        evento =  Evento.objects.get(id=id,estado='activo')
-    except:
-        messages.warning(request, '<h2 class="Diamong">No existe el evento seleccionado</h2>')
-        return HttpResponseRedirect('/') 
-    ParticipantesEvento.objects.get_or_create(usuario = request.user, evento = evento)
+def elegir_regalo(request, id):
+    evento = Evento.objects.get(pk=id)
+    if request.method == 'POST':
+        regalos = request.POST.getlist(u'regalo')
+        detalles = request.POST['comentarios']
     
-    data={
-    'evento':evento    
-    }
-    return render_to_response('elegir_regalo.html' , data , context_instance=RequestContext(request))
+        usuario = request.user
+    
+        participante = ParticipantesEvento.objects.get(usuario=usuario, evento=evento)
+    
+        for regalo in regalos:
+#             opcion_regalo = RegalosParticipante(participante=participante,)
+         return HttpResponseRedirect('/detalles/evento/%s/' % evento.id )
+    return render_to_response('elegir_regalo.html' , {'evento':evento} , context_instance=RequestContext(request))
 
 
 def enviar_invitacion(request,id):

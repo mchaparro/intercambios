@@ -36,7 +36,7 @@ class ParticipantesEvento(models.Model):
     regalos = models.ManyToManyField('Regalo',through='RegalosParticipante', related_name='participantes_evento')
     detalle_regalo = models.CharField(max_length=200, blank=True, null=True)
     
-    
+   
     def __unicode__(self):
         return "%s" % self.id
     

@@ -95,7 +95,7 @@ def elegir_regalo(request, id):
         for regalo in regalos:
             try:
                 regalo = Regalo.objects.get(opcion_regalo=regalo)
-                RegalosParticipante.objects.create(regalo=regalo,participante=participante)
+                RegalosParticipante.objects.get_or_create(regalo=regalo,participante=participante)
             except:
                 pass
             
@@ -103,7 +103,11 @@ def elegir_regalo(request, id):
         participante.save()  
 #             opcion_regalo = RegalosParticipante(participante=participante,)
         return HttpResponseRedirect('/detalles/evento/%s/' % evento.id )
-    return render_to_response('elegir_regalo.html' , {'evento':evento} , context_instance=RequestContext(request))
+    participante = ParticipantesEvento.objects.get(usuario=request.user, evento=evento)
+    regalos = participante.regalos.values_list('opcion_regalo', flat=True)
+    
+    return render_to_response('elegir_regalo.html' , {'evento':evento, 'participante':participante , 'regalos':regalos} , context_instance=RequestContext(request))
+
 
 
 def enviar_invitacion(request,id):

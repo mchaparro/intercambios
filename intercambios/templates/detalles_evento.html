@@ -87,7 +87,7 @@
 	   	{% for participante in participante_tupla %}
 	   		<td class="participante-{{ participante.id }}" style="border-left:3px solid black;"><span class="glyphicon glyphicon-ok " text="Ver Regalos" style="color: #D11D59"> </span></td>
 	   		<td class="participante-{{ participante.id }}" style="cursor:pointer;" title="{{ participante.usuario.nombre }}"><span class="Secrets" style="color: #333333;">{{ participante.usuario }}</span></td>
-	   		<td class="participante-{{ participante.id }}"><span class="glyphicon glyphicon-gift  rojo"></span></td>
+	   		<td class="participante-{{ participante.id }}"> <a class="no-title colorbox-link " href = "/elegir/regalo/{{ nuevo_evento.id }}/" > <span class="glyphicon glyphicon-gift  rojo"></span></a></td>
 	   		<td style="cursor:pointer;"title="Eliminar a {{ participante.usuario }} del intercambio" name="{{ participante.usuario }}" id="{{ participante.id }}" class="borrar-participante participante-{{ participante.id }}">
 	   		
 	   		<span class="glyphicon glyphicon-trash  rojo"></span>

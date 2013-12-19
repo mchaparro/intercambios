@@ -93,8 +93,16 @@ def elegir_regalo(request, id):
         participante = ParticipantesEvento.objects.get(usuario=usuario, evento=evento)
     
         for regalo in regalos:
+            try:
+                regalo = Regalo.objects.get(opcion_regalo=regalo)
+                RegalosParticipante.objects.create(regalo=regalo,participante=participante)
+            except:
+                pass
+            
+        participante.detalle_regalo = detalles
+        participante.save()  
 #             opcion_regalo = RegalosParticipante(participante=participante,)
-         return HttpResponseRedirect('/detalles/evento/%s/' % evento.id )
+        return HttpResponseRedirect('/detalles/evento/%s/' % evento.id )
     return render_to_response('elegir_regalo.html' , {'evento':evento} , context_instance=RequestContext(request))
 
 

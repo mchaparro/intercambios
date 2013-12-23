@@ -16,19 +16,19 @@
 		{% csrf_token %}
 		<table style="width: 100% ; margin-botton:40px;">
 			<td >
-				<div><input style="height:20px !important;" type="checkbox" name="regalo" value="Libros"  {% if "Libros" in regalos %}checked{% endif %}>   Libros</div>
-				<div><input style="height:20px !important;" type="checkbox" name="regalo" value="Chocolates"  {% if "Chocolates" in regalos %}checked{% endif %}>   Chocolates</div>
-				<div><input style="height:20px !important;" type="checkbox" name="regalo" value="Bebidas Alcoholicas" {% if "Bebidas Alcoholicas" in regalos %}checked{% endif %}>   Bebidas Alcoholicas</div>
+				<div><input id="libros" style="height:20px !important;" type="checkbox" name="regalo" value="Libros"  {% if "Libros" in regalos %}checked{% endif %}> <label class="manita" for ="libros">  Libros</label></div>
+				<div><input id="chocolates" style="height:20px !important;" type="checkbox" name="regalo" value="Chocolates"  {% if "Chocolates" in regalos %}checked{% endif %}><label class="manita" for ="chocolates">   Chocolates</label></div>
+				<div><input id="bebidas" style="height:20px !important;" type="checkbox" name="regalo" value="Bebidas Alcoholicas" {% if "Bebidas Alcoholicas" in regalos %}checked{% endif %}> <label class="manita" for="bebidas" > Bebidas Alcoholicas</label></div>
 			</td>
 			<td >
-				<div><input style="height:20px !important;" type="checkbox" name="regalo" value="Bolsas/Accesorios"{% if "Bolsas/Accesorios" in regalos %}checked{% endif %}>   Bolsas/Accesorios</div>
-				<div><input style="height:20px !important;" type="checkbox" name="regalo" value="Ropa" {% if "Ropa" in regalos %}checked{% endif %}>   Ropa</div>
-				<div><input style="height:20px !important;" type="checkbox" name="regalo" value="Perfumes" {% if "Perfumes" in regalos %}checked{% endif %}>   Perfumes</div>
+				<div><input id="accesorios" style="height:20px !important;" type="checkbox" name="regalo" value="Bolsas/Accesorios"{% if "Bolsas/Accesorios" in regalos %}checked{% endif %}> <label class="manita" for ="accesorios">  Bolsas/Accesorios</label></div>
+				<div><input id="ropa" style="height:20px !important;" type="checkbox" name="regalo" value="Ropa" {% if "Ropa" in regalos %}checked{% endif %}><label class="manita" for="ropa">   Ropa</label></div>
+				<div><input id="perfumes" style="height:20px !important;" type="checkbox" name="regalo" value="Perfumes" {% if "Perfumes" in regalos %}checked{% endif %}><label class="manita" for ="perfumes">   Perfumes</label></div>
 			</td>
 			<td >
-				<div><input style="height:20px !important;" type="checkbox" name="regalo" value="Electronica" {% if "Electronica" in regalos %}checked{% endif %}>   Electronica</div>
-				<div><input style="height:20px !important;" type="checkbox" name="regalo" value="CD/DVD" {% if "CD/DVD" in regalos %}checked{% endif %}>  CD/DVD</div>
-				<div><input style="height:20px !important;" type="checkbox" name="regalo" value="Otro" {% if "Otro" in regalos %}checked{% endif %}>  Otro</div>
+				<div><input id="electronica" style="height:20px !important;" type="checkbox" name="regalo" value="Electronica" {% if "Electronica" in regalos %}checked{% endif %}><label class="manita" for ="electronica">   Electronica </label></div>
+				<div><input id="cd" style="height:20px !important;" type="checkbox" name="regalo" value="CD/DVD" {% if "CD/DVD" in regalos %}checked{% endif %}><label class="manita" for ="cd">  CD/DVD </label></div>
+				<div><input id="otro" style="height:20px !important;" type="checkbox" name="regalo" value="Otro" {% if "Otro" in regalos %}checked{% endif %}> <label class="manita" for ="otro"> Otro </label></div>
 			</td>
 		
 		

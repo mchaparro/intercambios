@@ -96,8 +96,8 @@ def elegir_regalo(request, id):
             regalito.delete()
         for regalo in regalos:
             try:
-                regalo = Regalo.objects.get(opcion_regalo=regalo)
-                RegalosParticipante.objects.get_or_create(regalo=regalo,participante=participante)
+                regalo = Regalo.objects.get_or_create(opcion_regalo=regalo)
+                RegalosParticipante.objects.get_or_create(regalo=regalo[0],participante=participante)
             except:
                 pass
             

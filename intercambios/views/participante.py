@@ -91,7 +91,9 @@ def elegir_regalo(request, id):
         usuario = request.user
     
         participante = ParticipantesEvento.objects.get(usuario=usuario, evento=evento)
-    
+        regalitos = participante.regalos.all()
+        for regalito in regalitos:
+            regalito.delete()
         for regalo in regalos:
             try:
                 regalo = Regalo.objects.get(opcion_regalo=regalo)
@@ -103,9 +105,12 @@ def elegir_regalo(request, id):
         participante.save()  
 #             opcion_regalo = RegalosParticipante(participante=participante,)
         return HttpResponseRedirect('/detalles/evento/%s/' % evento.id )
+    if regalos or detalles:
+            messages.success(request, '<h1 class="Diamond"><b>%s</b>!! Se editaron correctamente tus opciones de regalo</h1>' % (request.user))
     participante = ParticipantesEvento.objects.get(usuario=request.user, evento=evento)
     regalos = participante.regalos.values_list('opcion_regalo', flat=True)
-    
+    if not regalos:
+        regalos = ['l','l']
     return render_to_response('elegir_regalo.html' , {'evento':evento, 'participante':participante , 'regalos':regalos} , context_instance=RequestContext(request))
 
 

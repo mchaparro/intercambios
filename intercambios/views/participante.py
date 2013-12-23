@@ -106,15 +106,18 @@ def elegir_regalo(request, idEvento, idParticipante=None):
         participante.detalle_regalo = detalles
         participante.save()  
 #             opcion_regalo = RegalosParticipante(participante=participante,)
-        return HttpResponseRedirect('/detalles/evento/%s/' % evento.idEvento )
+        return HttpResponseRedirect('/detalles/evento/%s/' % evento.id )
     
     participante = ParticipantesEvento.objects.get(usuario=request.user, evento=evento)
     
     if idParticipante:
         participante = ParticipantesEvento.objects.get(id=idParticipante, evento=evento)
-        
+    
+    editable = False
+    if participante.usuario == request.user:
+        editable = True    
     regalos = participante.regalos.values_list('opcion_regalo', flat=True)
-    return render_to_response('elegir_regalo.html' , {'evento':evento, 'participante':participante , 'regalos':regalos} , context_instance=RequestContext(request))
+    return render_to_response('elegir_regalo.html' , {'editable': editable, 'evento':evento, 'participante':participante , 'regalos':regalos} , context_instance=RequestContext(request))
 
 
 

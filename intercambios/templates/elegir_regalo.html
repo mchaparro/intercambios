@@ -9,7 +9,7 @@
 {% endblock %}
 <div class="container">
 	<div class="col-lg-12 jumbotron" style="margin-bottom:0px;">
-	<h2>Tipo de Regalo que te gustaria recibir:</h2>
+	<h2>Regalos ideales para{% if participante.usuario.apodo %} {{participante.usuario.apodo}} {% else %} {{participante.usuario.nombre}}{% endif %}:</h2>
 	
 		<div class="titulo-circular" style="font-size: 20px">
 		<form enctype="multipart/form-data"  action="/elegir/regalo/{{ evento.id }}/" method="post">
@@ -39,7 +39,12 @@
 		
 	</div>
 			<td class="text-center" text-center">
+	            {% if editable %}
+	            
 	            <input type="submit" id="guardar" style="margin-top:15px; width:100%;"class="btn btn-default btn-primary btn-lg" value="Guardar"/>
+	           	{% else  %}
+	           		<script>$(':checkbox').attr('disabled','disabled');</script>
+	            {% endif %}
 	        </td>
 	        </form>
 </div>

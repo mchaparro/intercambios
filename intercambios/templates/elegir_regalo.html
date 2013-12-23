@@ -8,9 +8,9 @@
 	</script>
 {% endblock %}
 <div class="container">
-<h3>{{ regalos }}</h3>
 	<div class="col-lg-12 jumbotron" style="margin-bottom:0px;">
 	<h2>Tipo de Regalo que te gustaria recibir:</h2>
+	
 		<div class="titulo-circular" style="font-size: 20px">
 		<form enctype="multipart/form-data"  action="/elegir/regalo/{{ evento.id }}/" method="post">
 		{% csrf_token %}

@@ -38,7 +38,8 @@ urlpatterns = patterns('',
     #pop-invitar participantes
     (r'^invitar/evento/(?P<id>\d+)/$', invitar_evento, {}, 'invitar_evento'),
     #pop-elegir regalo
-    (r'^elegir/regalo/(?P<id>\d+)/$', elegir_regalo, {}, 'elegir_regalo'),
+    (r'^elegir/regalo/(?P<idEvento>\d+)/participante/(?P<idParticipante>\d+)/$', elegir_regalo, {}, 'elegir_regalo'),
+    (r'^elegir/regalo/(?P<idEvento>\d+)/$', elegir_regalo, {}, 'elegir_regalo'),
     #random
     (r'^generar/intercambio/evento/(?P<id>\d+)/$', generar_intercambio, {}, 'generar_intercambio'),
     url(r'', include('social_auth.urls')),

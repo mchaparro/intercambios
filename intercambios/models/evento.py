@@ -34,7 +34,7 @@ class ParticipantesEvento(models.Model):
     intercambio = models.CharField(max_length=100, blank=True, null=True)
     evento = models.ForeignKey('Evento', related_name='participantes_evento')
     regalos = models.ManyToManyField('Regalo',through='RegalosParticipante', related_name='participantes_evento')
-    detalle_regalo = models.CharField(max_length=200, blank=True, null=True, default=None)
+    detalle_regalo = models.CharField(max_length=200, blank=True, null=True, default='')
     
    
     def __unicode__(self):

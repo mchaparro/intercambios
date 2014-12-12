@@ -31,6 +31,12 @@ def login_user(request):
                 if password != password2:
                     messages.warning(request, '<h1 class="Diamond">Las contraseñas no coinciden</h1>')
                     return HttpResponseRedirect('/')
+                try:
+                    usuario_registrado = Usuario.objects.get(username=email)
+                    messages.warning(request, '<h1 class="Diamond">El correo "%s" ya se encuentra registrado en la aplicacion</br></h1>' % email)
+                    return HttpResponseRedirect('/')
+                except:
+                    pass    
                 user = Usuario(nombre=nombre,username=email,email=email)
                 user.set_password(password)
                 user.save()

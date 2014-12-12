@@ -6,6 +6,7 @@ from views import *
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
+from django.views.generic import TemplateView
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -13,7 +14,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
                        
-      
+    (r'^terms_conditions/$', TemplateView.as_view(template_name='terms.html')),  
     (r'^$',mis_eventos ,{} , 'mis_eventos'),
     #url(r'^$', login_required(TemplateView.as_view(template_name='index.html')), name="index"),
     (r'^login/$', login_user, {}, 'user_login'),
